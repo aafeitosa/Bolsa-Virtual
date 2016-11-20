@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+			<p:dialog header="#{msgs.password_alteracao}" widgetVar="alteraSenha" closable="false" resizable="false" modal="true">
+			
+				<h:form id="usuarioSenhaForm">
+			
+					<p:messages id="messages" showDetail="true" closable="true" />
+			
+					
+								<p:outputLabel class="control-label" for="empresa" value="#{msgs.empresa}:" />
+								<h:outputLabel class="form-control input-sm input-medium" id="empresa" value="#{dialogSenhaBack.usuarioLogado.empresa.nome}" />
+								<p:message for="empresa" />
+					
+								<p:outputLabel class="control-label" for="nome" value="#{msgs.nome}:" />
+								<p:outputLabel class="form-control input-sm input-medium" id="nome" value="#{dialogSenhaBack.usuarioLogado.nome}" />
+								<p:message for="nome" />
+					
+								<p:outputLabel class="control-label" for="login" value="#{msgs.login}:" />
+								<p:outputLabel class="form-control input-sm input-medium" id="login" value="#{dialogSenhaBack.usuarioLogado.login}" />
+								<p:message for="login" />
+					
+								<p:outputLabel class="control-label" for="pwd0" value="#{msgs.password_atual}:" />
+								<p:inputText id="pwd0" value="#{dialogSenhaBack.senhaAtual}" label="#{msgs.password_atual}" class="form-control placeholder-no-fix input-sm" type="password" autocomplete="off" name="password"/>
+								<p:message for="pwd0" />
+
+								<p:outputLabel class="control-label" for="pwd1" value="#{msgs.password_nova}:" />
+								<p:inputText id="pwd1" value="#{dialogSenhaBack.novaSenha}" match="pwd2" label="#{msgs.password}" class="form-control placeholder-no-fix input-sm" type="password" autocomplete="off" name="password"/>
+								<p:message for="pwd1" />
+
+								<p:outputLabel class="control-label" for="pwd2" value="#{msgs.password_confirm}:" />
+								<p:inputText id="pwd2" value="#{dialogSenhaBack.novaSenha}" label="#{msgs.password_confirm}" class="form-control placeholder-no-fix input-sm" type="password" autocomplete="off" name="password"/>
+								<p:message for="pwd2" />
+
+								<p:commandButton value="#{msgs.salvar}" actionListener="#{dialogSenhaBack.alteraSenha}" ajax="true" update="@form" />
+								<p:commandButton value="#{msgs.cancelar}" oncomplete="PF('alteraSenha').hide();" />
+			
+				</h:form>
+			
+			</p:dialog>
+	
+			<p:dialog header="#{msgs.password_alterada}" widgetVar="senhaAlterada" closable="false" resizable="false" modal="true">
+				<p:button value="#{msgs.ok}" outcome="/secured/home.xhtml"/>
+			</p:dialog>
+	
+</html>

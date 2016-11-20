@@ -1,0 +1,286 @@
+#main {
+    position: relative;
+    width: 100%;
+    min-width: 1000px;
+    min-height: 100%;
+}
+
+#layoutHeader #layoutFooter{
+    background-color: #dfe4e6;
+}
+
+#header {
+    position: relative;
+    width: 100%;
+    height: 92px;
+    background-color: #dfe4e6;
+}
+
+#header .logo {
+    float: left;
+    width: 20%;
+    margin: 20px 5% 0 2%;
+}
+
+#header .detail {
+    float: left;
+    width: 30%;
+    height: 92px;
+    /* background-color: #333; */
+}
+
+#header .user {
+    float: right;
+    text-align: right;
+    width: 40%;
+    margin: 30px 2% 0 0;
+}
+
+#header .user li {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    display: inline-block;
+    vertical-align: bottom;
+    line-height: 25px;
+    font-size: 18px;
+    height: 25px;
+    margin-left: 6px;
+}
+
+#header .user li a {
+    color: #000;
+    text-decoration: none;
+}
+
+#header .user li img {
+    display: block;
+    border: 0px;
+    margin-top: -10px;
+    margin-left: 20px;
+}
+
+#header .user .arrow {
+    display: inline-block;
+    width: 9px;
+    height: 5px;
+}
+
+#content {
+    width: 100%;
+    padding-bottom: 100px;
+}
+
+#content .login-background {
+    width: 100%;
+    background-color: #eff3f6;
+    border-top: 1px solid #bcc7cf;
+    border-bottom: 1px solid #bcc7cf;
+}
+
+#content .center {
+    padding: 25px 0 20px 0;
+    display: table;
+}
+
+#content-left {
+    position: relative;
+    width: 250px;
+    padding: 0 20px;
+    display: table-cell;
+    min-height: 300px;
+    vertical-align: top;
+}
+
+#menu {
+    width: 100%;
+}
+
+#content-right {
+	position: relative;
+    display: table-cell;
+    padding-right: 20px;
+    min-height: 300px;
+}
+
+#footer {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    position: absolute;
+    color: #555555;
+    background-color : #dfe4e6;
+    font-size: 14px;
+    text-align: center;
+    width: 100%;
+    /*
+    bottom: 0;
+    height: 80px;
+    */
+    padding-top: 20px;
+}
+
+/* Forms de Cadastro */
+
+.form-cadastro .form-description {
+    margin-bottom: 40px;
+}
+
+.form-cadastro .section {
+    margin-bottom: 40px;
+}
+
+h2 {
+    font-family: 'MyriadProCondensed', Arial, sans-serif;
+    font-size: 18px;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    color: #1d467d;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #cfcfcf;
+}
+
+.form-cadastro label {
+    text-align: right;
+    display: block;
+    width: 100%;
+}
+
+.form-cadastro .radio {
+    vertical-align: bottom;
+}
+
+.form-cadastro .radio label {
+    text-align: left;
+    display: inline-block;
+    width: auto;
+    height: 18px;
+    margin-right: 5px;
+}
+
+.form-cadastro input[type="text"], .form-cadastro input[type="password"] {
+    width: 100%;
+}
+
+.form-cadastro .image-fullBackground {
+    height: 250px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.form-cadastro .image-fullBackground img {
+    width: 100%;
+}
+
+.form-cadastro .buttons {
+    text-align: right;
+}
+
+/* Grids */
+
+.onepcssgrid-1000, .onepcssgrid-1200 {
+    margin: 0 auto;
+    padding: 0 0 0 1%;
+}
+
+.onepcssgrid-1200 {
+    max-width: 1220px;
+}
+
+.onepcssgrid-1000 {
+    max-width: 1020px;
+}
+
+.onerow {
+    clear: both;
+    padding: 0 0;
+    margin-bottom: 10px;
+}
+
+.onerow:before, .onerow:after { content: ""; display: table; }
+.onerow:after { clear: both; }
+.onerow { *zoom: 1; }
+
+.col1, .col2, .col3, .col4, .col5, .col6, .col7, .col8, .col9, .col10, .col11, .col12 {
+    float: left;
+    margin: 0 3% 0 0;
+}
+
+.col1.last, .col2.last, .col3.last, .col4.last, .col5.last, .col6.last, .col7.last, .col8.last, .col9.last, .col10.last, .col11.last, .col12 {
+    margin: 0;
+}
+
+.col1 { width: 5.5%; }
+.col2 { width: 14%; }
+.col3 { width: 22.5%; }
+.col4 { width: 31%; }
+.col5 { width: 39.5%; }
+.col6 { width: 48%; }
+.col7 { width: 56.5%; }
+.col8 { width: 65%; }
+.col9 { width: 73.5%; }
+.col10 { width: 82%; }
+.col11 { width: 90.5%; }
+.col12 { width: 99%; margin: 0; }
+
+.col1 img, .col2 img, .col3 img, .col4 img, .col5 img, .col6 img, .col7 img, .col8 img, .col9 img, .col10 img, .col11 img, .col12 img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Override Tabs Layout */
+
+.default-tabs {
+    position: static;
+    border: none;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+}
+
+.default-tabs .pui-tabview-nav {
+    background: none;
+    border: 0;
+    border-bottom: 1px solid #bcc7cf;
+    border-radius: 0;
+}
+
+.default-tabs .pui-tabview-nav li {
+    font-family: 'MyriadProCondensed', Arial, sans-serif;
+    font-size: 18px;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    margin: 0 4px 0 0;
+    background: #dfe4e6;
+    box-shadow: none;
+}
+
+.default-tabs .pui-tabview-nav li a {
+    color: #939598;
+    text-shadow: none;
+    padding: 8px 40px 8px 20px;
+}
+
+.default-tabs .pui-tabview-nav .ui-state-default {
+    border: 1px solid #bcc7cf;
+}
+
+.default-tabs .pui-tabview-nav .ui-state-active {
+    background: #eff3f6;
+    border: 1px solid #bcc7cf;
+}
+
+.default-tabs .pui-tabview-nav .ui-state-hover {
+    border: 1px solid #bcc7cf;
+}
+
+.default-tabs .pui-tabview-panel {
+    padding: 30px 10px;
+}
+
+.button-form {
+	margin-top: 8px;
+	margin-right: 2px;
+}
+
+.h3 {
+	color: #FF0000;
+}

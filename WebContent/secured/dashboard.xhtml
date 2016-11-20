@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/templateComMenu.xhtml">
+
+	<ui:define name="content">
+
+		<p:fieldset legend="#{msgs.dashboard} : #{dashboardBack.empresa.nome}"
+			class="dashboard">
+
+			<h:form id="dashboardForm" prependId="false">
+
+				<p:growl id="msgs" showDetail="true" sticky="true" />
+				<p:panelGrid columns="2">
+
+					<p:fieldset legend="#{msgs.informacoes}" style="margin-bottom:20px">
+						<p:panelGrid columns="2">
+
+							<p:outputLabel for="nome" value="#{msgs.nome}:" />
+							<h:outputText id="nome" value="#{dashboardBack.empresa.nome}"
+								style="color:red;font-weight: bold;" />
+
+							<p:outputLabel for="acronimo" value="#{msgs.acronimo}:" />
+							<h:outputText id="acronimo"
+								value="#{dashboardBack.empresa.acronimo}"
+								style="color:red;font-weight: bold;" />
+
+							<p:outputLabel for="descricao" value="#{msgs.descricao}:" />
+							<h:inputTextarea id="descricao" cols="50" rows="2"
+								readonly="true" value="#{dashboardBack.empresa.descricao}" />
+
+							<p:outputLabel for="ramoAtividade" value="#{msgs.ramoAtividade}:" />
+							<h:outputText id="ramoAtividade"
+								value="#{dashboardBack.empresa.ramoAtividade.nome}" />
+
+						</p:panelGrid>
+
+						<p:fieldset legend="#{msgs.situacao_atual}"
+							style="margin-bottom:20px">
+
+							<p:panelGrid columns="3">
+
+								<p:panelGrid columns="2">
+
+									<p:outputLabel for="resultado" value="#{msgs.resultado}:"
+										style="color:red;font-size: 18px;font-weight: bold;" />
+									<h:outputText id="resultado" value="#{dashboardBack.resultado}"
+										style="color:red;font-size: 18px;font-weight: bold;">
+										<f:convertNumber type="currency" currencySymbol="R$" />
+									</h:outputText>
+
+									<p:outputLabel for="posicao" value="#{msgs.posicao}:"
+										style="color:red;font-size: 18px;font-weight: bold;" />
+									<h:outputText id="posicao" value="#{dashboardBack.posicao}"
+										style="color:red;font-size: 18px;font-weight: bold;" />
+
+									<p:outputLabel for="participacao" value="#{msgs.participacao}:" />
+									<h:outputText id="participacao"
+										value="#{dashboardBack.participacao} %" />
+								</p:panelGrid>
+								<h:outputText value="                " />
+								<p:commandButton value="#{msgs.atualizar}"
+									style="color:green;font-size: 18px;font-weight: bold;"
+									action="/secured/dashboard" ajax="false" />
+							</p:panelGrid>
+						</p:fieldset>
+
+						<p:dataList value="#{dashboardBack.alunos}" var="aluno"
+							type="ordered">
+							<f:facet name="header">
+            #{msgs.alunos}
+        </f:facet>
+        #{aluno.login}, #{aluno.nome}
+    </p:dataList>
+					</p:fieldset>
+
+					<p:fieldset legend="#{msgs.evolucao_da_empresa}"
+						style="margin-bottom:20px">
+						<p:chart type="line" model="#{dashboardBack.chartModelEvolucao}"
+							style="width:550px;height:300px;" />
+					</p:fieldset>
+					<p:fieldset legend="#{msgs.posicao_da_empresa}"
+						style="margin-bottom:20px">
+						<p:chart type="line" model="#{dashboardBack.chartModelPosicao}"
+							style="width:550px;height:300px;" />
+					</p:fieldset>
+					<p:fieldset legend="#{msgs.participacao_da_empresa}"
+						style="margin-bottom:20px">
+
+						<p:chart type="line"
+							model="#{dashboardBack.chartModelParticipacao}"
+							style="width:550px;height:300px;" />
+					</p:fieldset>
+
+				</p:panelGrid>
+			</h:form>
+
+
+		</p:fieldset>
+
+
+
+	</ui:define>
+
+</ui:composition>

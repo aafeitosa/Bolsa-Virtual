@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/templateComMenu.xhtml">
+
+	<ui:define name="content">
+
+		<p:fieldset
+			legend="#{msgs.mantem} #{msgs.grupos} : #{grupoFormBack.grupo.nome}"
+			style="margin-bottom:20px">
+
+
+			<h:form id="gruposForm">
+
+				<p:panelGrid columns="3">
+
+					<p:outputLabel for="periodo" value="#{msgs.periodo}:" />
+					<h:outputText id="periodo"
+						value="#{grupoFormBack.grupo.periodo.nome}"
+						rendered="#{not grupoFormBack.isEmpresaPrincipal()}" />
+					<h:selectOneMenu value="#{grupoFormBack.grupo.periodo}"
+						rendered="#{grupoFormBack.isEmpresaPrincipal()}"
+						style="width:100%" converter="omnifaces.SelectItemsConverter">
+						<f:selectItem noSelectionOption="true"
+							itemLabel="#{msgs.selecione}" />
+						<f:selectItems value="#{periodosBack.todosPeriodos}" var="periodo"
+							itemLabel="#{periodo.nome}" itemValue="#{periodo}" />
+					</h:selectOneMenu>
+					<p:message for="periodo" />
+
+					<p:outputLabel for="nome" value="#{msgs.nome}:" />
+					<p:inputText id="nome" value="#{grupoFormBack.grupo.nome}"
+						maxlength="30" />
+					<p:message for="nome" />
+
+					<p:outputLabel for="descricao" value="#{msgs.descricao}:" />
+					<p:inputTextarea id="descricao"
+						value="#{grupoFormBack.grupo.descricao}" maxlength="255" />
+					<p:message for="descricao" />
+
+
+				</p:panelGrid>
+
+				<p:tabView id="tab-view-grupo" activeIndex="0" dynamic="false"
+					cache="false">
+
+					<p:tab id="tab0-empresa" title="#{msgs.empresas}"
+						disabled="#{permissao.disabled('GRUPO_EDITAR_ABA_EMPRESA')}">
+
+						<p:pickList id="empresaPickList"
+							disabled="#{permissao.disabled('GRUPO_EDITAR_ABA_EMPRESA')}"
+							value="#{grupoFormBack.empresaDualList}" var="empresa"
+							itemLabel="#{empresa.nome}" itemValue="#{empresa}"
+							converter="entityConverter" showSourceFilter="true"
+							showTargetFilter="true" filterMatchMode="contains">
+							<f:facet name="sourceCaption">#{msgs.disponiveis}</f:facet>
+							<f:facet name="targetCaption">#{msgs.selecionados}</f:facet>
+						</p:pickList>
+
+					</p:tab>
+					<p:tab id="tab0-usuario" title="#{msgs.professores}"
+						disabled="#{permissao.disabled('GRUPO_EDITAR_ABA_USUARIO')}">
+
+						<p:pickList id="professoresPickList"
+							disabled="#{permissao.disabled('GRUPO_EDITAR_ABA_USUARIO')}"
+							value="#{grupoFormBack.professorDualList}" var="professor"
+							itemLabel="#{professor.nome}" itemValue="#{professor}"
+							converter="entityConverter" showSourceFilter="true"
+							showTargetFilter="true" filterMatchMode="contains">
+							<f:facet name="sourceCaption">#{msgs.disponiveis}</f:facet>
+							<f:facet name="targetCaption">#{msgs.selecionados}</f:facet>
+						</p:pickList>
+					</p:tab>
+				</p:tabView>
+
+				<p:commandButton value="#{msgs.salvar}"
+					rendered="#{permissao.rendered('GRUPO_EDITAR_SALVAR')}"
+					action="#{grupoFormBack.salva}" ajax="false">
+					<f:param name="first" value="#{grupoFormBack.first}" />
+					<f:param name="nro" value="#{grupoFormBack.nroRegistrosPorPagina}" />
+				</p:commandButton>
+
+				<p:commandButton value="#{msgs.voltar}"
+					action="#{grupoFormBack.listagem}" ajax="false">
+					<f:param name="first" value="#{grupoFormBack.first}" />
+					<f:param name="nro" value="#{grupoFormBack.nroRegistrosPorPagina}" />
+				</p:commandButton>
+
+
+			</h:form>
+		</p:fieldset>
+	</ui:define>
+
+</ui:composition>

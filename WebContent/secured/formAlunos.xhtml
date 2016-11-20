@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/templateComMenu.xhtml">
+
+	<ui:define name="content">
+
+		<p:fieldset
+			legend="#{msgs.mantem} #{msgs.alunos} : #{alunoFormBack.aluno.nome}"
+			style="margin-bottom:20px">
+
+			<h:form id="alunosForm">
+
+				<p:growl id="msgs" showDetail="true" sticky="true" />
+
+				<p:panelGrid columns="3">
+
+					<p:outputLabel for="grupo" value="#{msgs.grupo}:" />
+					<h:selectOneMenu value="#{alunoFormBack.grupo}" id="grupo"
+						style="width:100%" converter="omnifaces.SelectItemsConverter"
+						disabled="#{alunoFormBack.grupoUnico}">
+						<p:ajax listener="#{alunoFormBack.onGrupoChange}" update="empresa" />
+						<f:selectItem noSelectionOption="true"
+							itemLabel="#{msgs.selecione}" />
+						<f:selectItems value="#{alunoFormBack.grupos}" var="grupo"
+							itemLabel="#{grupo.nome}" itemValue="#{grupo}">
+						</f:selectItems>
+					</h:selectOneMenu>
+					<p:message for="grupo" />
+
+					<p:outputLabel for="empresa" value="#{msgs.empresa}:" />
+					<h:selectOneMenu id="empresa"
+						value="#{alunoFormBack.aluno.empresa}" style="width:100%"
+						converter="omnifaces.SelectItemsConverter">
+						<!-- 						<f:selectItem noSelectionOption="true" -->
+						<!-- 							itemLabel="#{msgs.selecione}" /> -->
+						<f:selectItems value="#{alunoFormBack.empresas}" var="empresa"
+							itemLabel="#{empresa.acronimo} - #{empresa.nome}"
+							itemValue="#{empresa}" />
+					</h:selectOneMenu>
+					<p:message for="empresa" />
+
+					<p:outputLabel for="nome" value="#{msgs.nome}:" />
+					<p:inputText id="nome" value="#{alunoFormBack.aluno.nome}"
+						required="true" maxlength="60" />
+					<p:message for="nome" />
+
+					<p:outputLabel for="login" value="#{msgs.login}:" />
+					<p:inputText id="login" value="#{alunoFormBack.aluno.login}"
+						required="true" maxlength="60" />
+					<p:message for="login" />
+
+					<p:outputLabel for="pwd1" value="#{msgs.password}:"
+						rendered="#{alunoFormBack.insercao}" />
+					<p:password id="pwd1" value="#{alunoFormBack.aluno.password}"
+						match="pwd2" label="#{msgs.password}"
+						required="#{alunoFormBack.insercao}"
+						rendered="#{alunoFormBack.insercao}" />
+					<p:message for="pwd1" rendered="#{alunoFormBack.insercao}" />
+
+					<p:outputLabel for="pwd2" value="#{msgs.password_confirm}:"
+						rendered="#{alunoFormBack.insercao}" />
+					<p:password id="pwd2" value="#{alunoFormBack.aluno.password}"
+						label="#{msgs.password_confirm}"
+						required="#{alunoFormBack.insercao}"
+						rendered="#{alunoFormBack.insercao}" />
+					<p:message for="pwd2" rendered="#{alunoFormBack.insercao}" />
+
+					<p:outputLabel for="email" value="#{msgs.email}:" />
+					<p:inputText id="email" value="#{alunoFormBack.aluno.email}"
+						maxlength="60" />
+					<p:message for="email" />
+
+					<p:outputLabel for="ativo" value="#{msgs.ativo}:" />
+					<p:selectBooleanCheckbox id="ativo"
+						value="#{alunoFormBack.aluno.ativo}"
+						disabled="#{not alunoFormBack.empresaPrincipal}" />
+					<p:message for="ativo" />
+				</p:panelGrid>
+
+				<p:commandButton value="#{msgs.salvar}"
+					action="#{alunoFormBack.salva}"
+					rendered="#{permissao.rendered('ALUNO_EDITAR_SALVAR')}"
+					ajax="false">
+					<f:param name="first" value="#{alunoFormBack.first}" />
+					<f:param name="nro" value="#{alunoFormBack.nroRegistrosPorPagina}" />
+				</p:commandButton>
+
+				<p:commandButton value="#{msgs.voltar}"
+					action="#{alunoFormBack.listagem}" ajax="false" immediate="true">
+					<f:param name="first" value="#{alunoFormBack.first}" />
+					<f:param name="nro" value="#{alunoFormBack.nroRegistrosPorPagina}" />
+				</p:commandButton>
+
+			</h:form>
+
+		</p:fieldset>
+
+	</ui:define>
+</ui:composition>

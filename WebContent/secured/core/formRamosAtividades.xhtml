@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/templateComMenu.xhtml">
+
+	<ui:define name="content">
+
+		<p:fieldset
+			legend="#{msgs.mantem} #{msgs.ramosAtividades} : #{ramoAtividadeFormBack.ramoAtividade.nome}"
+			style="margin-bottom:20px">
+
+
+			<h:form id="ramosAtividadesForm">
+
+				<p:growl id="msgs" showDetail="true" sticky="true" />
+
+				<p:panelGrid columns="3">
+
+					<p:outputLabel for="nome" value="#{msgs.nome}:" />
+					<p:inputText id="nome" value="#{ramoAtividadeFormBack.ramoAtividade.nome}"
+						maxlength="60" />
+					<p:message for="nome" />
+
+					<p:outputLabel for="descricao" value="#{msgs.descricao}:" />
+					<p:inputTextarea id="descricao" cols="50" rows="4"
+						value="#{ramoAtividadeFormBack.ramoAtividade.descricao}" maxlength="255" />
+					<p:message for="descricao" />
+
+<!-- 					<p:outputLabel for="indice" value="#{msgs.atratividade}:" /> -->
+<!-- 					<p:inputText id="indice" -->
+<!-- 						value="#{ramoAtividadeFormBack.ramoAtividade.indice}" maxlength="10" validatorMessage="#{msgs.indice_fora_dos_limites}"> -->
+<!-- 					</p:inputText> -->
+<!-- 					<p:message for="indice"  /> -->
+
+				</p:panelGrid>
+
+				<p:commandButton value="#{msgs.salvar}"
+					rendered="#{permissao.rendered('RAMO_ATIVIDADE_EDITAR_SALVAR')}"
+					action="#{ramoAtividadeFormBack.salva}" ajax="false">
+					<f:param name="first" value="#{ramoAtividadeFormBack.first}" />
+					<f:param name="nro"
+						value="#{ramoAtividadeFormBack.nroRegistrosPorPagina}" />
+				</p:commandButton>
+
+				<p:commandButton value="#{msgs.voltar}"
+					action="#{ramoAtividadeFormBack.listagem}" ajax="false">
+					<f:param name="first" value="#{ramoAtividadeFormBack.first}" />
+					<f:param name="nro"
+						value="#{ramoAtividadeFormBack.nroRegistrosPorPagina}" />
+				</p:commandButton>
+
+			</h:form>
+		</p:fieldset>
+	</ui:define>
+
+</ui:composition>

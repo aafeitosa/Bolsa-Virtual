@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/templateComMenu.xhtml">
+
+	<ui:define name="content">
+
+		<p:fieldset legend="#{msgs.investimentos} : #{msgs.rodadas}" style="margin-bottom:20px">
+
+			<p:messages showDetail="true" closable="true" />
+
+			<h:form id="listaInvestimentosForm">
+
+				<p:panelGrid columns="3"
+					rendered="#{investimentoListaBack.trocaGrupo}">
+
+					<p:outputLabel for="grupo1" value="#{msgs.grupo}:" />
+					<h:selectOneMenu value="#{investimentoListaBack.grupo}" id="grupo1"
+						style="width:100%" converter="omnifaces.SelectItemsConverter">
+						<f:selectItem noSelectionOption="true"
+							itemLabel="#{msgs.selecione}" />
+						<f:selectItems value="#{investimentoListaBack.grupos}" var="grupo"
+							itemLabel="#{grupo.nome}" itemValue="#{grupo}">
+						</f:selectItems>
+						<p:ajax update="rodadasTable"
+							listener="#{investimentoListaBack.onGrupoSelect}" process="@this" />
+					</h:selectOneMenu>
+					<p:message for="grupo1" />
+				</p:panelGrid>
+
+				<p:panelGrid columns="3" rendered="#{not investimentoListaBack.trocaGrupo}">
+
+					<p:outputLabel for="grupo" value="#{msgs.grupo}:" />
+					<h:outputText id="grupo"
+						value="#{investimentoListaBack.grupo.nome}" />
+					<p:message for="grupo" />
+
+					<p:outputLabel for="empresa" value="#{msgs.empresa}:" />
+					<h:outputText id="empresa"
+						value="#{investimentoListaBack.empresa.nome}" />
+					<p:message for="empresa" />
+
+				</p:panelGrid>
+
+				<p:commandButton value="#{msgs.pesquisar}"
+					actionListener="#{investimentoListaBack.pesquisar}" ajax="true"
+					update="@form" />
+
+				<p:dataTable var="rodada" value="#{investimentoListaBack.dataModel}"
+					border="1" cellpadding="2" cellspacing="0" paginator="true"
+					rows="#{investimentoListaBack.nroRegistrosPorPagina}"
+					paginatorPosition="bottom"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+					currentPageReportTemplate="({startRecord} - {endRecord} de {totalRecords})"
+					rowsPerPageTemplate="#{investimentoListaBack.opcoesRegistrosPorPagina}"
+					id="rodadasTable" lazy="true"
+					first="#{investimentoListaBack.first}">
+
+					<p:column rendered="#{investimentoListaBack.trocaGrupo}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.grupo}" />
+						</f:facet>
+						<h:outputText value="#{rodada.grupo.nome}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.dataInicio}" />
+						</f:facet>
+						<h:outputText value="#{rodada.dataInicio}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+								timeZone="#{investimentoListaBack.timeZone}" />
+						</h:outputText>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.numero}" />
+						</f:facet>
+						<h:outputText value="#{rodada.numero}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.encerrada}" />
+						</f:facet>
+						<p:selectBooleanCheckbox id="encerrada" disabled="true"
+							value="#{rodada.encerrada}" />
+						<h:outputText value="   " rendered="#{rodada.encerrada}" />
+						<h:outputText value="#{rodada.dataFim}"
+							rendered="#{rodada.encerrada}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+								timeZone="#{investimentoListaBack.timeZone}" />
+						</h:outputText>
+					</p:column>
+
+
+					<p:column style="width:5%;text-align:center"
+						rendered="#{permissao.rendered('INVESTIMENTO_LISTAR_INVESTIR')}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.acoes}" />
+						</f:facet>
+
+						<h:commandLink action="#{investimentoListaBack.novo}"
+							id="investir"
+							rendered="#{permissao.rendered('INVESTIMENTO_LISTAR_INVESTIR') and not rodada.encerrada}">
+							<p:graphicImage library="imagens" name="money.png"
+								alt="#{msgs.investir}" />
+							<f:param name="id" value="#{rodada.id}" />
+							<f:param name="grupo_id" value="#{investimentoListaBack.grupo.id}" />
+							<f:param name="first" value="#{investimentoListaBack.first}" />
+							<f:param name="nro"
+								value="#{investimentoListaBack.nroRegistrosPorPagina}" />
+						</h:commandLink>
+						<p:tooltip id="investirToolTip" for="investir"
+							value="#{msgs.investir}" trackMouse="true" />
+						<h:commandLink action="#{investimentoListaBack.novo}"
+							id="visualizar"
+							rendered="#{permissao.rendered('INVESTIMENTO_LISTAR_INVESTIR') and rodada.encerrada}">
+							<p:graphicImage library="imagens" name="ver.png"
+								alt="#{msgs.visualizar}" />
+							<f:param name="id" value="#{rodada.id}" />
+							<f:param name="grupo_id" value="#{investimentoListaBack.grupo.id}" />
+							<f:param name="first" value="#{investimentoListaBack.first}" />
+							<f:param name="nro"
+								value="#{investimentoListaBack.nroRegistrosPorPagina}" />
+						</h:commandLink>
+						<p:tooltip id="visualizarToolTip" for="visualizar"
+							value="#{msgs.visualizar}" trackMouse="true" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</p:fieldset>
+	</ui:define>
+</ui:composition>

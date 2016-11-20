@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/templateComMenu.xhtml">
+
+	<ui:define name="content">
+
+		<p:fieldset
+			legend="#{msgs.rodada} #{investimentoFormBack.rodada.numero} : #{msgs.investimentos}"
+			style="margin-bottom:20px">
+
+			<h:form id="rodadasForm">
+
+				<p:growl id="msgs" showDetail="true" sticky="true" />
+
+				<p:panelGrid columns="3"
+					rendered="#{investimentoFormBack.trocaEmpresas}">
+
+					<p:outputLabel for="grupo1" value="#{msgs.grupo}:" />
+					<h:selectOneMenu value="#{investimentoFormBack.grupo}" id="grupo1"
+						style="width:100%" converter="omnifaces.SelectItemsConverter">
+						<f:selectItem noSelectionOption="true"
+							itemLabel="#{msgs.selecione}" />
+						<f:selectItems value="#{investimentoFormBack.grupos}" var="grupo"
+							itemLabel="#{grupo.nome}" itemValue="#{grupo}">
+						</f:selectItems>
+						<p:ajax
+							update="empresas investimentosTable resultadoAnterior valor1 valor3"
+							listener="#{investimentoFormBack.onGrupoSelect}" process="@this" />
+					</h:selectOneMenu>
+					<p:message for="grupo1" />
+
+					<p:outputLabel for="empresas" value="#{msgs.empresa}:" />
+					<h:selectOneMenu id="empresas"
+						value="#{investimentoFormBack.empresa}" style="width:100%"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItem noSelectionOption="true"
+							itemLabel="#{msgs.selecione}" />
+						<f:selectItems value="#{investimentoFormBack.empresas}"
+							var="empresa" itemLabel="#{empresa.nome}" itemValue="#{empresa}" />
+						<p:ajax update="investimentosTable resultadoAnterior valor1 valor3"
+							listener="#{investimentoFormBack.onEmpresaSelect}"
+							process="@this" />
+					</h:selectOneMenu>
+					<p:message for="empresas" />
+
+				</p:panelGrid>
+
+				<p:panelGrid columns="3"
+					rendered="#{not investimentoFormBack.trocaEmpresas}">
+
+					<p:outputLabel for="grupo" value="#{msgs.grupo}:" />
+					<h:outputText id="grupo"
+						value="#{investimentoFormBack.rodada.grupo.nome}" />
+
+					<p:message for="grupo" />
+
+					<p:outputLabel for="empresa" value="#{msgs.empresa}:" />
+					<h:outputText id="empresa"
+						value="#{investimentoFormBack.empresa.nome}" />
+					<p:message for="empresa" />
+
+				</p:panelGrid>
+
+				<p:panelGrid columns="3">
+
+					<p:outputLabel for="numero" value="#{msgs.rodada}:" />
+					<h:outputText id="numero"
+						value="#{investimentoFormBack.rodada.numero}" />
+					<p:message for="numero" />
+
+					<p:outputLabel for="valor1" value="#{msgs.valor}:" />
+					<p:panelGrid columns="4">
+					<h:outputText id="valor1"
+						value="#{investimentoFormBack.valorInvestido}">
+						<f:convertNumber type="currency" currencySymbol="R$" />
+					</h:outputText>
+					<h:outputText id="valor2" value=" de " />
+					<h:outputText id="valor3" value="#{investimentoFormBack.valor}">
+						<f:convertNumber type="currency" currencySymbol="R$" />
+					</h:outputText>
+					</p:panelGrid>
+					<p:message for="valor1" />
+
+
+					<p:outputLabel for="numeroMaximoInvestimentos"
+						value="#{msgs.investimentos}:" />
+					<h:outputText id="numeroMaximoInvestimentos"
+						value="#{investimentoFormBack.nroInvestimentos} de #{investimentoFormBack.rodada.numeroMaximoInvestimentos}" />
+					<p:message for="numeroMaximoInvestimentos" />
+
+					<p:outputLabel for="valorRodada" value="#{msgs.valorRodada}:" />
+					<h:outputText id="valorRodada"
+						value="#{investimentoFormBack.valorRodada}">
+						<f:convertNumber type="currency" currencySymbol="R$" />
+					</h:outputText>
+					<p:message for="valorRodada" />
+
+					<p:outputLabel for="resultadoAnterior"
+						value="#{msgs.resultado_anterior}:" />
+					<h:outputText id="resultadoAnterior"
+						value="#{investimentoFormBack.resultadoAnterior}">
+						<f:convertNumber type="currency" currencySymbol="R$" />
+					</h:outputText>
+					<p:message for="resultadoAnterior" />
+
+
+				</p:panelGrid>
+
+				<p:remoteCommand name="onCellEdit"
+					update=":rodadasForm:investimentosTable :rodadasForm:msgs" />
+				<p:dataTable var="investimento"
+					editable="#{not investimentoFormBack.rodada.encerrada}"
+					editMode="cell" widgetVar="cellInvests"
+					value="#{investimentoFormBack.investimentos}" border="1"
+					cellpadding="2" cellspacing="0" id="investimentosTable">
+
+					<p:ajax event="cellEdit"
+						listener="#{investimentoFormBack.onCellEdit}"
+						update=":rodadasForm:msgs :rodadasForm:valor1 :rodadasForm:valor3 :rodadasForm:numeroMaximoInvestimentos" />
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.empresa}" />
+						</f:facet>
+						<h:outputText value="#{investimento.investida.nome}" />
+					</p:column>
+
+					<p:column id="editar_valor">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.valor}" />
+						</f:facet>
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{investimento.valor}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="modelInput" value="#{investimento.valor}"
+									style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:tooltip id="valorToolTip" for="editar_valor"
+						value="#{msgs.clique_para_editar}" trackMouse="true" />
+
+				</p:dataTable>
+
+				<p:commandButton value="#{msgs.salvar}"
+					rendered="#{permissao.rendered('INVESTIMENTO_EDITAR_SALVAR') and not investimentoFormBack.rodada.encerrada}"
+					action="#{investimentoFormBack.salva}" ajax="false">
+					<f:param name="grupo_id" value="#{investimentoFormBack.grupo.id}" />
+					<f:param name="first" value="#{investimentoFormBack.first}" />
+					<f:param name="nro"
+						value="#{investimentoFormBack.nroRegistrosPorPagina}" />
+				</p:commandButton>
+
+				<p:commandButton value="#{msgs.voltar}"
+					action="#{investimentoFormBack.listagem}" ajax="false">
+					<f:param name="grupo_id" value="#{investimentoFormBack.grupo.id}" />
+					<f:param name="first" value="#{investimentoFormBack.first}" />
+					<f:param name="nro"
+						value="#{investimentoFormBack.nroRegistrosPorPagina}" />
+				</p:commandButton>
+			</h:form>
+		</p:fieldset>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+    
+    <h:head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+        <title>#{msgs.nome_software}</title>
+        
+        <h:outputStylesheet library="css" name="login.css"/>
+
+    </h:head>
+    
+    <h:body>
+        <div id="main">
+            <div id="header">
+                <div class="center-fixed clearfix">
+                    <div class="logo">
+                        <p:graphicImage library="imagens" name="sumig.png" alt="#{msgs.nome_cliente_software}" width="223"/>
+                    </div>
+                    <div class="detail"></div>
+                </div>
+            </div>
+            <div id="content">
+                <div class="login-background">
+                    <div class="center-fixed">
+                        <div class="login-title">
+                            <p>#{msgs.login_error}</p>
+                        </div>
+                        <div style="width: 600px; margin: 80px auto 0; text-align: center;">
+                        	<h3>#{msgs.login_error_msg}</h3>
+                        	<h:form>
+	                       		<p:commandLink style="float:right; margin-top: 30px;" action="loginPage">#{msgs.login_error_voltar}</p:commandLink>
+                        	</h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="footer">
+                <div class="center-fixed">
+                    <p>#{msgs.copyrights}</p>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>

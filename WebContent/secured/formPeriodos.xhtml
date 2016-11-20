@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/templateComMenu.xhtml">
+
+	<ui:define name="content">
+
+		<p:fieldset
+			legend="#{msgs.mantem} #{msgs.periodos} : #{periodoFormBack.periodo.nome}"
+			style="margin-bottom:20px">
+
+			<h:form id="periodosForm">
+
+				<p:panelGrid columns="3">
+
+					<p:outputLabel for="nome" value="#{msgs.nome}:" />
+					<p:inputText id="nome" value="#{periodoFormBack.periodo.nome}"
+						maxlength="30" />
+					<p:message for="nome" />
+
+					<p:outputLabel for="descricao" value="#{msgs.descricao}:" />
+					<p:inputTextarea id="descricao"
+						value="#{periodoFormBack.periodo.descricao}" maxlength="255" />
+					<p:message for="descricao" />
+
+					<p:outputLabel for="dataInicio" value="#{msgs.dataInicio}:" />
+					<p:calendar id="dataInicio"
+						value="#{periodoFormBack.periodo.dataInicio}" pattern="dd/MM/yyyy">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</p:calendar>
+					<p:message for="dataInicio" />
+
+					<p:outputLabel for="dataFim" value="#{msgs.dataFom}:" />
+					<p:calendar id="dataFim" value="#{periodoFormBack.periodo.dataFim}" pattern="dd/MM/yyyy">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</p:calendar>
+					<p:message for="dataFim" />
+
+				</p:panelGrid>
+
+				<p:commandButton value="#{msgs.salvar}"
+					rendered="#{permissao.rendered('PERIODO_EDITAR_SALVAR')}"
+					action="#{periodoFormBack.salva}" ajax="false">
+					<f:param name="first" value="#{periodoFormBack.first}" />
+					<f:param name="nro"
+						value="#{periodoFormBack.nroRegistrosPorPagina}" />
+				</p:commandButton>
+
+				<p:commandButton value="#{msgs.voltar}"
+					action="#{periodoFormBack.listagem}" ajax="false">
+					<f:param name="first" value="#{periodoFormBack.first}" />
+					<f:param name="nro"
+						value="#{periodoFormBack.nroRegistrosPorPagina}" />
+				</p:commandButton>
+
+			</h:form>
+		</p:fieldset>
+	</ui:define>
+
+</ui:composition>

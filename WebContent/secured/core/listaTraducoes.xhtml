@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	template="/WEB-INF/templates/templateComMenu.xhtml">
+
+	<ui:define name="metadata">
+		<f:metadata>
+			<o:viewParam name="jaTraduzido"
+				value="#{traducaoListaBack.jaTraduzido}" />
+			<o:viewParam name="codigo" value="#{traducaoListaBack.codigo}" />
+			<o:viewParam name="idiomaId" value="#{traducaoListaBack.idiomaId}" />
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="content">
+
+		<p:fieldset legend="#{msgs.traducoes}" style="margin-bottom:20px">
+
+			<p:messages showDetail="true" closable="true" />
+
+			<h:form id="listaTraducoesForm">
+				<p:growl id="msgs" showDetail="true" />
+
+				<p:panelGrid columns="3">
+
+					<p:outputLabel class="control-label" for="idioma"
+						value="#{msgs.idioma}:" />
+					<h:selectOneMenu class="form-control input-sm input-xlarge"
+						id="idioma" value="#{traducaoListaBack.idioma}"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItem itemLabel="#{msgs.selecione}"
+							noSelectionOption="true" />
+						<f:selectItems value="#{traducaoListaBack.idiomas}" var="idioma"
+							itemLabel="#{idioma.nome}" itemValue="#{idioma}" />
+					</h:selectOneMenu>
+					<p:message for="idioma" />
+
+
+					<p:outputLabel class="control-label" for="nome"
+						value="#{msgs.nome}:" />
+					<p:inputText class="form-control input-sm input-xlarge" id="nome"
+						value="#{traducaoListaBack.codigo}" maxlength="60" />
+					<p:message for="nome" />
+
+					<p:outputLabel class="control-label" for="traduzido"
+						value="#{msgs.traduzido}:" />
+					<p:selectBooleanCheckbox id="traduzido"
+						value="#{traducaoListaBack.jaTraduzido}" />
+					<p:message for="traduzido" />
+
+				</p:panelGrid>
+
+				<p:commandButton value="#{msgs.pesquisar}"
+					actionListener="#{traducaoListaBack.pesquisar}" ajax="true"
+					update="@form" />
+				<p:commandButton value="#{msgs.imprimir}"
+					action="#{traducaoListaBack.print}"
+					onclick="this.form.target='_blank'" ajax="false" />
+
+				<p:dataTable var="traducao" value="#{traducaoListaBack.dataModel}"
+					editable="true" border="1" cellpadding="2" cellspacing="0"
+					paginator="true" rows="#{traducaoListaBack.nroRegistrosPorPagina}"
+					paginatorPosition="bottom"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+					currentPageReportTemplate="({startRecord} - {endRecord} de {totalRecords})"
+					rowsPerPageTemplate="#{traducaoListaBack.opcoesRegistrosPorPagina}"
+					id="traducoesTable" lazy="true" first="#{traducaoListaBack.first}">
+
+					<p:ajax event="rowEdit" listener="#{traducaoListaBack.onRowEdit}"
+						update=":listaTraducoesForm:msgs" />
+					<p:ajax event="rowEditCancel"
+						listener="#{traducaoListaBack.onRowCancel}"
+						update=":listaTraducoesForm:msgs" />
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.codigo}" />
+						</f:facet>
+						<h:outputText value="#{traducao.codigo}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.idioma}" />
+						</f:facet>
+						<h:outputText value="#{traducao.idioma.nome}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.descricao}" />
+						</f:facet>
+						<h:outputText value="#{traducao.descricao}" />
+					</p:column>
+
+					<p:column style="width:6%;text-align:center">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.traduzido}" />
+						</f:facet>
+						<h:selectBooleanCheckbox value="#{traducao.jaTraduzido}"
+							disabled="true" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.traducao}" />
+						</f:facet>
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{traducao.traducao}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="modelInput" value="#{traducao.traducao}"
+									style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column style="width:3%;text-align:center">
+						<p:rowEditor />
+					</p:column>
+
+				</p:dataTable>
+			</h:form>
+		</p:fieldset>
+
+	</ui:define>
+</ui:composition>

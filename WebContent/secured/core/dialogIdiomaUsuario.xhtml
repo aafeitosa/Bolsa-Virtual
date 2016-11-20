@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+<!-- 	manter combo formatado -->
+	<style>
+		.ui-selectonemenu-trigger{
+			width: 22px !important;
+		}
+	</style>
+
+	<p:dialog header="#{msgs.trocar_idioma}" widgetVar="alteraIdioma" closable="false" resizable="false" modal="true">
+	
+		<h:form id="usuarioIdiomaForm">
+	
+			<p:messages id="messages" showDetail="true" closable="true" />
+	
+			<div class="row">
+				<div class="col-md-12">
+					<div class="col-md-2">
+						<p:outputLabel class="control-label" for="idioma" value="#{msgs.idioma}:" />
+					</div>
+					<div class="col-md-10">
+						<p:selectOneMenu style="width:100%" id="idioma" value="#{loginBack.idioma}" converter="omnifaces.SelectItemsConverter" var="i">
+							<f:selectItems value="#{dialogIdiomaBack.idiomas}" var="idioma" itemLabel="#{idioma.nome}" itemValue="#{idioma}" />
+							<p:column>
+								<p:graphicImage value="/images/#{i.arquivo.nomeInterno}" width="48" height="48" />
+							</p:column>
+							<p:column>  
+			               		 #{i.nome}  
+			            	</p:column>
+						</p:selectOneMenu>
+						<p:message for="idioma" />
+					</div>
+				</div>
+			</div>
+	
+			<div style="padding: 5px 0px" class="row" />
+			
+			<div class="row">
+				<div class="col-md-12" >
+					<div style="padding: 0px 30px; float:right">
+						<p:commandButton value="#{msgs.ok}" action="#{loginBack.home()}" ajax="false" oncomplete="PF('alteraIdioma').hide();" />
+						<p:commandButton value="#{msgs.cancelar}" oncomplete="PF('alteraIdioma').hide();" />
+					</div>
+				</div>
+			</div>
+	
+		</h:form>
+	
+	</p:dialog>
+
+</html>

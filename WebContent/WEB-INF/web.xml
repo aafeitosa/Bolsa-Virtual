@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+	<distributable />
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
+	<context-param>
+		<param-name>com.sun.faces.verifyObjects</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+		<param-name>com.sun.faces.validateXml</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+		<param-value>.xhtml</param-value>
+	</context-param>
+	<context-param>
+		<param-name>facelets.DEVELOPMENT</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
+		<param-value>0</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>client</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>afternoon</param-value>
+		<!-- <param-value>bootstrap</param-value> -->
+	</context-param>
+
+	<context-param>
+		<param-name>BootsFaces_USETHEME</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>primefaces.UPLOADER</param-name>
+		<param-value>auto</param-value>
+	</context-param>
+
+	<filter>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+		<init-param>
+			<param-name>uploadDirectory</param-name>
+			<param-value>c:/upload</param-value>
+		</init-param>
+	</filter>
+
+	<!-- <filter> -->
+	<!-- <filter-name>RendererFilter</filter-name> -->
+	<!-- <filter-class>br.ucs.lasis.core.view.filter.RendererFilter</filter-class> -->
+	<!-- </filter> -->
+
+	<filter-mapping>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<servlet-name>Faces Servlet</servlet-name>
+	</filter-mapping>
+
+	<!-- <filter-mapping> -->
+	<!-- <filter-name>RendererFilter</filter-name> -->
+	<!-- <url-pattern>*.jsf</url-pattern> -->
+	<!-- <url-pattern>*.xhtml</url-pattern> -->
+	<!-- </filter-mapping> -->
+
+	<!-- Authorization filter -->
+	<filter>
+		<filter-name>AuthorizationFilter</filter-name>
+		<filter-class>br.ucs.lasis.core.view.filter.AuthorizationFilter</filter-class>
+	</filter>
+	<!-- Set the Authorization filter to secure all the pages in the /secured/* 
+		path of the application -->
+	<filter-mapping>
+		<filter-name>AuthorizationFilter</filter-name>
+		<url-pattern>/secured/*</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.jsf</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>/javax.faces.resource/*</url-pattern>
+	</servlet-mapping>
+
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+	<mime-mapping>
+		<extension>eot</extension>
+		<mime-type>application/vnd.ms-fontobject</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>otf</extension>
+		<mime-type>font/opentype</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>ttf</extension>
+		<mime-type>application/x-font-ttf</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>woff</extension>
+		<mime-type>application/x-font-woff</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>svg</extension>
+		<mime-type>image/svg+xml</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>ico</extension>
+		<mime-type>image/x-icon</mime-type>
+	</mime-mapping>
+
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Lasis1</web-resource-name>
+			<url-pattern>/secured/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>users</role-name>
+		</auth-constraint>
+<!-- 		<user-data-constraint> -->
+<!-- 			<transport-guarantee>CONFIDENTIAL</transport-guarantee> -->
+<!-- 		</user-data-constraint> -->
+	</security-constraint>
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<realm-name>Lasis1_Realm</realm-name>
+		<form-login-config>
+			<form-login-page>/public/login.xhtml</form-login-page>
+			<form-error-page>/public/loginError.jsf</form-error-page>
+		</form-login-config>
+	</login-config>
+	<security-role>
+		<description>Usuários autorizados</description>
+		<role-name>users</role-name>
+	</security-role>
+
+	<welcome-file-list>
+		<welcome-file>/public/login.xhtml</welcome-file>
+	</welcome-file-list>
+</web-app>

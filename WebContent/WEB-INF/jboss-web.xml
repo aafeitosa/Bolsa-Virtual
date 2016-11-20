@@ -1,0 +1,4 @@
+<jboss-web>
+	<context-root>bolsa-virtual</context-root>
+	<security-domain>Lasis1_Realm</security-domain>
+</jboss-web>

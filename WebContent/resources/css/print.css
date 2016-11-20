@@ -1,0 +1,66 @@
+@page { size: A4 portrait;
+    padding: 9pt;
+    margin: 18pt 18pt 18pt 18pt;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    @top-left {
+       font-style: bolditalic;
+              }
+    @top {
+       content: string(doctitle);
+         }
+    @bottom-left {
+       content: '#{msgs.copyrights}';
+       font-style: bold;
+                  }
+    @top-right {
+       content: "#{msgs.pagina} " counter(page) " #{msgs._de} " counter(pages);
+       font-style: bold;
+                  }
+    @bottom {
+       content: string(paratitle);
+            }
+  }	
+	
+h1 {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 18px;
+}	
+	
+.order-table {
+	width: 100%;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	border-collapse: collapse;
+}
+
+.order-table-header {
+	text-align: center;
+	background: none repeat scroll 0 0 #E5E5E5;
+	border-bottom: 1px solid #BBBBBB;
+	padding: 16px;
+}
+
+.order-table-odd-row {
+	text-align: center;
+	background: none repeat scroll 0 0 #FFFFFFF;
+	border-top: 1px solid #BBBBBB;
+}
+
+.order-table-even-row {
+	text-align: center;
+	background: none repeat scroll 0 0 #F9F9F9;
+	border-top: 1px solid #BBBBBB; footer { position : fixed;
+	bottom: 0;
+	left: 0;
+}
+
+
+body {
+	counter-reset: page_number;
+}
+
+#page-number:after {
+	counter-increment: page_number;
+	content: "Page " counter(page_number);
+}
+}

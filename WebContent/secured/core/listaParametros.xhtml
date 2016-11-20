@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/templateComMenu.xhtml">
+
+	<ui:define name="content">
+
+		<p:fieldset legend="#{msgs.parametros}" style="margin-bottom:20px">
+
+			<h:form id="listaParametrosForm">
+
+				<p:growl id="msgs" showDetail="true" sticky="true" />
+
+				<p:dataTable var="parametro" editable="true"
+					value="#{parametroListaBack.parametros}" border="1"
+					id="parametrosTable">
+
+					<p:ajax event="rowEdit" listener="#{parametroListaBack.onRowEdit}"
+						update=":listaParametrosForm:msgs" />
+					<p:ajax event="rowEditCancel"
+						listener="#{parametroListaBack.onRowCancel}"
+						update=":listaParametrosForm:msgs" />
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.modulo}" />
+						</f:facet>
+						<h:outputText value="#{parametro.modulo}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.parametro}" />
+						</f:facet>
+						<h:outputText value="#{parametro.tipo}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.tipo_dado}" />
+						</f:facet>
+						<h:outputText value="#{parametro.tipoDado}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.valor}" />
+						</f:facet>
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{parametro.valor}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="modelInput" value="#{parametro.valor}"
+									style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column style="width:3%;text-align:center">
+						<p:rowEditor />
+					</p:column>
+
+				</p:dataTable>
+
+			</h:form>
+		</p:fieldset>
+	</ui:define>
+
+</ui:composition>

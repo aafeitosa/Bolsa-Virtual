@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/layout3/basicTemplate.xhtml">
+
+	<ui:define name="content">
+
+		<p:messages showDetail="true" closable="true" />
+
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="portlet box red">
+								<div class="portlet-title" style="background-color: #B32929">
+									<div class="caption">
+										<i class="icon-bubbles"></i>#{msgs.idiomas}
+									</div>
+								</div>
+								<div class="portlet-body">
+									<h:form id="listaidiomasForm">
+
+										<div class="row">
+											<div class="col-md-12">
+												<div class="col-md-1">
+													<p:outputLabel class="control-label" for="nome" value="#{msgs.nome}:" />
+												</div>
+												<div class="col-md-11">
+													<p:inputText class="form-control input-sm input-xlarge" id="nome" value="#{idiomaListaBack.nome}"  maxlength="60" />
+													<p:message for="nome" />
+												</div>
+											</div>
+										</div>
+										
+										<div class="row">
+											<div class="col-md-12" >
+												<div style="padding: 0px 30px; float:right">
+													<p:commandButton value="#{msgs.pesquisar}" actionListener="#{idiomaListaBack.pesquisar}" ajax="true" update="@form" />
+												</div>
+											</div>
+										</div>
+										
+										<p:separator style="margin: 10px 0px 10px 0px"/>
+
+										<div class="row">
+												<div class="col-md-12" >
+													<div id="grid">
+														<p:commandButton value="#{msgs.novo}" action="#{idiomaListaBack.novo}" ajax="false" rendered="#{permissao.rendered('IDIOMA_LISTAR_NOVO')}" />
+														<div style="padding: 5px 0px" class="row" />
+												
+														<p:dataTable var="idioma" value="#{idiomaListaBack.dataModel}"
+															border="1" cellpadding="2" cellspacing="0" paginator="true"
+															rows="#{idiomaListaBack.nroRegistrosPorPagina}"
+															paginatorPosition="bottom"
+															paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+															currentPageReportTemplate="({startRecord} - {endRecord} de {totalRecords})"
+															rowsPerPageTemplate="#{idiomaListaBack.opcoesRegistrosPorPagina}"
+															id="idiomasTable" lazy="true" first="#{idiomaListaBack.first}">
+										
+															<p:column>
+																<f:facet name="header">
+																	<h:outputText value="#{msgs.nome}" />
+																</f:facet>
+																<h:outputText value="#{idioma.nome}" />
+															</p:column>
+										
+															<p:column>
+																<f:facet name="header">
+																	<h:outputText value="#{msgs.descricao}" />
+																</f:facet>
+																<h:outputText value="#{idioma.descricao}" />
+															</p:column>
+										
+															<p:column>
+																<f:facet name="header">
+																	<h:outputText value="#{msgs.locale}" />
+																</f:facet>
+																<h:outputText value="#{idioma.locale}" />
+															</p:column>
+										
+															<p:column style="width:5%;text-align:center" rendered="#{permissao.rendered('IDIOMA_LISTAR_EDITAR') or permissao.rendered('IDIOMA_LISTAR_EXCLUIR')}">
+																<f:facet name="header">
+																	<h:outputText value="#{msgs.acoes}" />
+																</f:facet>
+										
+																<h:commandLink action="#{idiomaListaBack.novo}"
+																	rendered="#{permissao.rendered('IDIOMA_LISTAR_EDITAR')}">
+																	<p:graphicImage library="imagens" name="editar.png"
+																		alt="#{msgs.editar}" />
+																	<f:param name="id" value="#{idioma.id}" />
+																	<f:param name="first" value="#{idiomaListaBack.first}" />
+																	<f:param name="nro"
+																		value="#{idiomaListaBack.nroRegistrosPorPagina}" />
+																</h:commandLink>
+										
+																<h:outputText value=" " />
+										
+																<p:commandLink update="@form"
+																	actionListener="#{idiomaListaBack.exclui}"
+																	rendered="#{permissao.rendered('IDIOMA_LISTAR_EXCLUIR')}">
+																	<p:confirm header="#{msgs.confirmacao}" message="#{msgs.confirma_exclusao}"
+																		icon="ui-icon-alert" />
+																	<p:graphicImage library="imagens" name="excluir.png"
+																		alt="#{msgs.excluir}" />
+																	<f:param name="id" value="#{idioma.id}" />
+																</p:commandLink>
+										
+															</p:column>
+														</p:dataTable>
+										
+														<p:confirmDialog global="true">
+															<p:commandButton value="#{msgs.sim}" type="button"
+																styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+															<p:commandButton value="#{msgs.nao}" type="button"
+																styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+														</p:confirmDialog>
+								
+													</div>
+												</div>
+											</div>
+										
+									</h:form>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>

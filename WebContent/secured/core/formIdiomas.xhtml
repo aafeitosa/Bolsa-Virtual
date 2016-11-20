@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/layout3/basicTemplate.xhtml">
+
+	<ui:define name="content">
+
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="portlet box red">
+								<div class="portlet-title" style="background-color: #B32929">
+									<div class="caption">
+										<i class="icon-bubbles"></i>#{msgs.mantem} #{msgs.idiomas} #{idiomaFormBack.idioma.nome}
+									</div>
+								</div>
+								<div class="portlet-body">
+									<h:form id="idiomasForm">
+
+										<div class="row">
+											<div class="col-md-12">
+												<div class="col-md-2">
+													<p:outputLabel class="control-label" for="nome" value="#{msgs.nome}:" />
+												</div>
+												<div class="col-md-10">
+													<p:inputText class="form-control input-sm input-xlarge" id="nome" value="#{idiomaFormBack.idioma.nome}"  maxlength="60" />
+													<p:message for="nome" />
+												</div>
+											</div>
+										</div>
+										
+										<div style="padding: 5px 0px" class="row" />
+										
+										<div class="row">
+											<div class="col-md-12">
+												<div class="col-md-2">
+													<p:outputLabel class="control-label" for="descricao" value="#{msgs.descricao}:" />
+												</div>
+												<div class="col-md-10">
+													<p:inputText class="form-control input-sm input-xlarge" id="descricao" value="#{idiomaFormBack.idioma.descricao}"  maxlength="255" />
+													<p:message for="descricao" />
+												</div>
+											</div>
+										</div>
+										
+										<div style="padding: 5px 0px" class="row" />
+										
+										<div class="row">
+											<div class="col-md-12">
+												<div class="col-md-2">
+													<p:outputLabel class="control-label" for="formatoData" value="#{msgs.formato_data}:" />
+												</div>
+												<div class="col-md-10">
+													<p:inputText class="form-control input-sm input-xlarge" id="formatoData" value="#{idiomaFormBack.idioma.formatoData}" maxlength="30" />
+													<p:message for="formatoData" />
+												</div>
+											</div>
+										</div>
+										
+										<div style="padding: 5px 0px" class="row" />
+										
+										<div class="row">
+											<div class="col-md-12">
+												<div class="col-md-2">
+													<p:outputLabel class="control-label" for="formatoTelefone" value="#{msgs.formato_telefone}:" />
+												</div>
+												<div class="col-md-10">
+													<p:inputText class="form-control input-sm input-xlarge" id="formatoTelefone" value="#{idiomaFormBack.idioma.formatoTelefone}" maxlength="30" />
+													<p:message for="formatoTelefone" />
+												</div>
+											</div>
+										</div>
+										
+										<div style="padding: 5px 0px" class="row" />
+										
+										<div class="row">
+											<div class="col-md-12">
+												<div class="col-md-2">
+													<p:outputLabel class="control-label" for="locale" value="#{msgs.locale}:" />
+												</div>
+												<div class="col-md-10">
+													<h:selectOneMenu class="form-control input-sm input-xlarge" id="locale" value="#{idiomaFormBack.idioma.locale}">
+														<f:selectItem itemLabel="#{msgs.selecione}" noSelectionOption="true" />
+														<f:selectItems value="#{idiomaFormBack.locales}" var="locale" itemLabel="#{locale}" itemValue="#{locale}" />
+													</h:selectOneMenu>
+													<p:message for="locale" />
+												</div>
+											</div>
+										</div>
+										
+										<div style="padding: 5px 0px" class="row" />
+										
+										<div class="row">
+											<div class="col-md-12">
+												<div class="col-md-2">
+													<p:outputLabel class="control-label" for="upload" value="#{msgs.bandeira}:" />
+												</div>
+												<div class="col-md-10">
+												<div class="col-md-12" style="padding-left: 0px;">
+													<div class="col-md-1" style="padding-left: 0px;">
+														<p:fileUpload id="upload" cancelLabel="#{msgs.cancelar}"
+															auto="true" uploadLabel="#{msgs.enviar}" label="#{msgs.escolher}"
+															fileUploadListener="#{idiomaFormBack.handleFileUpload}"
+															mode="advanced" dragDropSupport="false" update="bandeira"
+															sizeLimit="100000" fileLimit="3"
+															allowTypes="/(\.|\/)(gif|jpe?g|png)$/" style="width: 125px" />
+															
+														</div>
+													<div class="col-md-11">
+														<h:graphicImage id="bandeira"
+															value="/images/#{idiomaFormBack.idioma.arquivo.nomeInterno}" width="100" />
+														<p:message for="upload" />
+													</div>
+												</div>
+												
+												</div>
+											</div>
+										</div>
+										
+										<div class="row">
+											<div class="col-md-12" >
+												<div style="padding: 0px 30px; float:right">
+													<p:commandButton value="#{msgs.salvar}" rendered="#{permissao.rendered('IDIOMA_EDITAR_SALVAR')}" action="#{idiomaFormBack.salva}" ajax="false">
+														<f:param name="first" value="#{idiomaFormBack.first}" />
+														<f:param name="nro" value="#{idiomaFormBack.nroRegistrosPorPagina}" />
+													</p:commandButton>
+													
+													<p:commandButton value="#{msgs.voltar}" action="#{idiomaFormBack.listagem}" ajax="false" immediate="true">
+														<f:param name="first" value="#{idiomaFormBack.first}" />
+														<f:param name="nro" value="#{idiomaFormBack.nroRegistrosPorPagina}" />
+													</p:commandButton>
+												</div>
+											</div>
+										</div>
+										
+									</h:form>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+
+</ui:composition>

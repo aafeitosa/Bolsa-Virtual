@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/templateComMenu.xhtml">
+
+	<ui:define name="content">
+
+		<p:fieldset
+			legend="#{msgs.mantem} #{msgs.usuarios} : #{usuarioFormBack.usuario.nome}"
+			style="margin-bottom:20px">
+
+			<h:form id="usuariosForm">
+
+				<p:tabView id="tab-view-usuario" activeIndex="0" dynamic="false"
+					cache="false">
+
+					<p:tab id="tab0-usuario" title="#{msgs.usuario}"
+						disabled="#{permissao.disabled('USUARIO_EDITAR_ABA_USUARIO')}">
+
+						<p:panelGrid columns="3">
+
+							<p:outputLabel for="empresa" value="#{msgs.empresa}:" />
+							<h:outputText id="empresa"
+								value="#{usuarioFormBack.usuario.empresa.nome}"
+								rendered="#{not usuarioFormBack.isEmpresaPrincipal()}" />
+							<h:selectOneMenu 
+								value="#{usuarioFormBack.usuario.empresa}"
+								rendered="#{usuarioFormBack.isEmpresaPrincipal()}"
+								style="width:100%" converter="omnifaces.SelectItemsConverter">
+								<f:selectItems value="#{empresasBack.todasEmpresasAtivas}"
+									var="empresa" itemLabel="#{empresa.nome}"
+									itemValue="#{empresa}" />
+							</h:selectOneMenu>
+							<p:message for="empresa" />
+
+							<p:outputLabel for="nome" value="#{msgs.nome}:" />
+							<p:inputText id="nome"
+								value="#{usuarioFormBack.usuario.nome}" required="true"
+								maxlength="60" />
+							<p:message for="nome" />
+
+							<p:outputLabel for="login" value="#{msgs.login}:" />
+							<p:inputText 
+								id="login" value="#{usuarioFormBack.usuario.login}"
+								required="true" maxlength="60" />
+							<p:message for="login" />
+
+							<!-- 												<p:row rendered="#{usuarioFormBack.insercao}"> -->
+							<!-- 													<div style="padding: 5px 0px" class="row" /> -->
+							<!-- 												</p:row> -->
+
+							<p:outputLabel class="control-label" for="pwd1"
+								value="#{msgs.password}:" rendered="#{usuarioFormBack.insercao}" />
+							<p:password  id="pwd1"
+								value="#{usuarioFormBack.usuario.password}" match="pwd2"
+								label="#{msgs.password}" required="#{usuarioFormBack.insercao}"
+								rendered="#{usuarioFormBack.insercao}" />
+							<p:message for="pwd1" rendered="#{usuarioFormBack.insercao}" />
+
+							<!-- 												<p:row rendered="#{usuarioFormBack.insercao}"> -->
+							<!-- 													<div style="padding: 5px 0px" class="row" /> -->
+							<!-- 												</p:row> -->
+
+							<p:outputLabel class="control-label" for="pwd2"
+								value="#{msgs.password_confirm}:"
+								rendered="#{usuarioFormBack.insercao}" />
+							<p:password class="form-control input-sm input-xlarge" id="pwd2"
+								value="#{usuarioFormBack.usuario.password}"
+								label="#{msgs.password_confirm}"
+								required="#{usuarioFormBack.insercao}"
+								rendered="#{usuarioFormBack.insercao}" />
+							<p:message for="pwd2" rendered="#{usuarioFormBack.insercao}" />
+
+							<p:outputLabel for="email"
+								value="#{msgs.email}:" />
+							<p:inputText 
+								id="email" value="#{usuarioFormBack.usuario.email}"
+								maxlength="60" />
+							<p:message for="email" />
+
+							<p:outputLabel for="ramal"
+								value="#{msgs.ramal}:" />
+							<p:inputText 
+								id="ramal" value="#{usuarioFormBack.usuario.ramal}" />
+							<p:message for="ramal" />
+
+							<p:outputLabel for="ativo"
+								value="#{msgs.ativo}:" />
+							<p:selectBooleanCheckbox id="ativo"
+								value="#{usuarioFormBack.usuario.ativo}"
+								disabled="#{not usuarioFormBack.empresaPrincipal}" />
+							<p:message for="ativo" />
+						</p:panelGrid>
+					</p:tab>
+
+					<p:tab id="tab1-perfis" title="#{msgs.perfis}"
+						disabled="#{permissao.disabled('USUARIO_EDITAR_ABA_PERFIL')}">
+						<p:pickList id="filialPickList"
+							value="#{usuarioFormBack.perfilDualList}" var="perfil"
+							itemLabel="#{perfil.nome}" itemValue="#{perfil}"
+							converter="entityConverter" showSourceFilter="true"
+							showTargetFilter="true" filterMatchMode="contains">
+							<f:facet name="sourceCaption">#{msgs.disponiveis}</f:facet>
+							<f:facet name="targetCaption">#{msgs.selecionados}</f:facet>
+						</p:pickList>
+					</p:tab>
+
+				</p:tabView>
+
+				<p:commandButton value="#{msgs.salvar}"
+					action="#{usuarioFormBack.salva}"
+					rendered="#{permissao.rendered('USUARIO_EDITAR_SALVAR')}"
+					ajax="false">
+					<f:param name="first" value="#{usuarioFormBack.first}" />
+					<f:param name="nro"
+						value="#{usuarioFormBack.nroRegistrosPorPagina}" />
+				</p:commandButton>
+
+				<p:commandButton value="#{msgs.voltar}"
+					action="#{usuarioFormBack.listagem}" ajax="false" immediate="true">
+					<f:param name="first" value="#{usuarioFormBack.first}" />
+					<f:param name="nro"
+						value="#{usuarioFormBack.nroRegistrosPorPagina}" />
+				</p:commandButton>
+
+
+			</h:form>
+
+		</p:fieldset>
+
+	</ui:define>
+</ui:composition>

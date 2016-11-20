@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>#{msgs.nome_cliente_software} - <ui:insert name="modulo"></ui:insert></title>
+
+	<h:outputStylesheet library="css" name="conteudo.css" />
+	<h:outputStylesheet library="css" name="lasis-custom.css" />
+
+	<ui:insert name="scripts"></ui:insert>
+	<ui:insert name="style"></ui:insert>
+</h:head>
+
+<h:body>
+
+	<ui:debug hotkey="M" />
+
+	<div id="main">
+
+		<div id="header">
+			<h:form>
+				<div class="center clearfix">
+					<div class="logo">
+						<h:commandLink action="#{loginBack.index}" title="#{msgs.pagina_inicial}">
+							<p:graphicImage library="imagens" name="logo_ucs.png" alt="#{msgs.nome_cliente_software}"
+								width="161" />
+						</h:commandLink>
+					</div>
+					<div class="detail"></div>
+					<div class="user">
+						<ul>
+							<li><h:link value="#{msgs.area_restrita}" class="ui-commandlink ui-widget" outcome="/secured/home.jsf"/></li>
+						</ul>
+					</div>
+				</div>
+			</h:form>
+		</div>
+
+		<div id="content">
+			<div class="login-background">
+
+				<div class="center clearfix">
+
+					<div id="content-right">
+						<ui:insert name="content">[main content to be replaced]</ui:insert>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div id="footer">
+			<div class="center-fixed">
+				<p>#{msgs.copyrights}</p>
+			</div>
+		</div>
+
+	</div>
+</h:body>
+
+</html>

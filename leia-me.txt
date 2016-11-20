@@ -1,0 +1,5 @@
+Usuários para a aplicação (Aplication Realm)
+
+nome: admin
+senha: admin@123
+grupo: admin

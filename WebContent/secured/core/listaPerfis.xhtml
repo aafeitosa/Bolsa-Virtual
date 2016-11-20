@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/templateComMenu.xhtml">
+
+	<ui:define name="content">
+
+		<p:fieldset legend="#{msgs.perfis}" style="margin-bottom:20px">
+
+
+			<p:messages showDetail="true" closable="true" />
+
+			<h:form id="listaPerfisForm">
+
+				<p:commandButton value="#{msgs.novo}"
+					action="#{perfilListaBack.novo}" ajax="false"
+					rendered="#{permissao.rendered('PERFIL_LISTAR_NOVO')}" />
+				<div style="padding: 5px 0px" class="row" />
+
+				<p:dataTable var="perfil" value="#{perfilListaBack.dataModel}"
+					border="1" cellpadding="2" cellspacing="0" paginator="true"
+					rows="#{perfilListaBack.nroRegistrosPorPagina}"
+					paginatorPosition="bottom"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+					currentPageReportTemplate="({startRecord} - {endRecord} de {totalRecords})"
+					rowsPerPageTemplate="#{perfilListaBack.opcoesRegistrosPorPagina}"
+					id="perfilsTable" lazy="true" first="#{perfilListaBack.first}">
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.nome}" />
+						</f:facet>
+						<h:outputText value="#{perfil.nome}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.descricao}" />
+						</f:facet>
+						<h:outputText value="#{perfil.descricao}" />
+					</p:column>
+
+					<p:column style="width:5%;text-align:center">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.interno}" />
+						</f:facet>
+						<p:selectBooleanCheckbox value="#{perfil.interno}" disabled="true" />
+					</p:column>
+
+					<p:column style="width:5%;text-align:center">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.ativo}" />
+						</f:facet>
+						<p:selectBooleanCheckbox value="#{perfil.ativo}" disabled="true" />
+					</p:column>
+
+					<p:column style="width:5%;text-align:center"
+						rendered="#{permissao.rendered('PERFIL_LISTAR_EDITAR') or permissao.rendered('PERFIL_LISTAR_EXCLUIR')}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.acoes}" />
+						</f:facet>
+
+						<h:commandLink action="#{perfilListaBack.novo}"
+							rendered="#{permissao.rendered('PERFIL_LISTAR_EDITAR')}">
+							<p:graphicImage library="imagens" name="editar.png"
+								alt="#{msgs.editar}" />
+							<f:param name="id" value="#{perfil.id}" />
+							<f:param name="first" value="#{perfilListaBack.first}" />
+							<f:param name="nro"
+								value="#{perfilListaBack.nroRegistrosPorPagina}" />
+						</h:commandLink>
+
+						<h:outputText value=" " />
+
+						<h:commandLink action="#{perfilListaBack.listagem}"
+							actionListener="#{perfilListaBack.exclui}"
+							onclick="return confirm('#{msgs.confirma_exclusao}')"
+							rendered="#{permissao.rendered('PERFIL_LISTAR_EXCLUIR')}">
+							<p:graphicImage library="imagens" name="excluir.png"
+								alt="#{msgs.excluir}" />
+							<f:param name="id" value="#{perfil.id}" />
+						</h:commandLink>
+
+					</p:column>
+				</p:dataTable>
+
+			</h:form>
+		</p:fieldset>
+	</ui:define>
+</ui:composition>

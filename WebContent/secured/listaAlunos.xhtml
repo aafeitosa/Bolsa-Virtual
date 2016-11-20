@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/templateComMenu.xhtml">
+
+	<ui:define name="content">
+
+		<p:fieldset legend="#{msgs.alunos}" style="margin-bottom:20px">
+
+			<p:messages showDetail="true" closable="true" />
+
+			<h:form id="listaalunoesForm">
+
+				<p:panelGrid columns="3">
+
+					<p:outputLabel for="grupo" value="#{msgs.grupo}:" />
+					<h:selectOneMenu value="#{alunoListaBack.grupo}" id="grupo"
+						style="width:100%" converter="omnifaces.SelectItemsConverter" disabled="#{alunoListaBack.grupoUnico}">
+								<p:ajax listener="#{alunoListaBack.onGrupoChange}" update="empresa" />
+<!-- 						<f:selectItem noSelectionOption="true" -->
+<!-- 							itemLabel="#{msgs.selecione}" /> -->
+						<f:selectItems value="#{alunoListaBack.grupos}" var="grupo"
+							itemLabel="#{grupo.nome}" itemValue="#{grupo}">
+						</f:selectItems>
+					</h:selectOneMenu>
+					<p:message for="grupo" />
+					
+					<p:outputLabel for="empresa" value="#{msgs.empresa}:" />
+					<h:selectOneMenu id="empresa"
+						value="#{alunoListaBack.empresa}" style="width:100%"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItem noSelectionOption="true"
+							itemLabel="#{msgs.selecione}" />
+						<f:selectItems value="#{alunoListaBack.empresas}"
+							var="empresa" itemLabel="#{empresa.acronimo} - #{empresa.nome}"
+							itemValue="#{empresa}" />
+					</h:selectOneMenu>
+					<p:message for="empresa" />
+
+					<p:outputLabel class="control-label" for="nome"
+						value="#{msgs.nome}:" />
+					<p:inputText id="nome" value="#{alunoListaBack.aluno.nome}"
+						maxlength="60" />
+					<p:message for="nome" />
+
+					<p:outputLabel for="ativo" value="#{msgs.ativo}:" />
+					<p:selectBooleanCheckbox id="ativo"
+						value="#{alunoListaBack.aluno.ativo}" />
+					<p:message for="ativo" />
+
+				</p:panelGrid>
+
+				<p:commandButton value="#{msgs.pesquisar}"
+					actionListener="#{alunoListaBack.pesquisar}" ajax="true"
+					update="@form" />
+				<p:commandButton value="#{msgs.novo}"
+					action="#{alunoListaBack.novo}" ajax="false"
+					rendered="#{permissao.rendered('ALUNO_LISTAR_NOVO')}" />
+
+				<p:dataTable var="aluno" value="#{alunoListaBack.dataModel}"
+					border="1" cellpadding="2" cellspacing="0" paginator="true"
+					rows="#{alunoListaBack.nroRegistrosPorPagina}"
+					paginatorPosition="bottom"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+					currentPageReportTemplate="({startRecord} - {endRecord} de {totalRecords})"
+					rowsPerPageTemplate="#{usuarioListaBack.opcoesRegistrosPorPagina}"
+					id="alunosTable" lazy="true" first="#{alunoListaBack.first}">
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.nome}" />
+						</f:facet>
+						<h:outputText value="#{aluno.nome}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.email}" />
+						</f:facet>
+						<h:outputText value="#{aluno.email}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.empresa}" />
+						</f:facet>
+						<h:outputText value="#{aluno.empresa.nome}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.ramal}" />
+						</f:facet>
+						<h:outputText value="#{aluno.ramal}" />
+					</p:column>
+
+					<p:column style="width:5%;text-align:center">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.ativo}" />
+						</f:facet>
+						<p:selectBooleanCheckbox value="#{aluno.ativo}" disabled="true" />
+					</p:column>
+
+					<p:column style="width:8%;text-align:center"
+						rendered="#{permissao.rendered('ALUNO_LISTAR_EDITAR') or permissao.rendered('ALUNO_LISTAR_EXCLUIR') or permissao.rendered('ALUNO_LISTAR_TROCAR_SENHA')}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.acoes}" />
+						</f:facet>
+
+						<h:commandLink action="#{alunoListaBack.novo}"
+							rendered="#{permissao.rendered('ALUNO_LISTAR_EDITAR')}">
+							<p:graphicImage library="imagens" name="editar.png"
+								alt="#{msgs.editar}" />
+							<f:param name="id" value="#{aluno.id}" />
+							<f:param name="first" value="#{alunoListaBack.first}" />
+							<f:param name="nro"
+								value="#{alunoListaBack.nroRegistrosPorPagina}" />
+						</h:commandLink>
+
+						<h:outputText value=" " />
+
+						<p:commandLink update="@form"
+							actionListener="#{alunoListaBack.exclui}"
+							rendered="#{permissao.rendered('ALUNO_LISTAR_EXCLUIR')}">
+							<p:confirm header="#{msgs.confirmacao}"
+								message="#{msgs.confirma_exclusao}" icon="ui-icon-alert" />
+							<p:graphicImage library="imagens" name="excluir.png"
+								alt="#{msgs.excluir}" />
+							<f:param name="id" value="#{aluno.id}" />
+						</p:commandLink>
+						
+						<h:outputText value=" " />
+						
+						<p:commandLink id="trocaSenha" update="usuarioSenhaForm" oncomplete="PF('alteraSenha').show();"
+							actionListener="#{dialogSenhaBack.trocaSenha}"
+							rendered="#{permissao.rendered('ALUNO_LISTAR_TROCAR_SENHA')}">
+							<p:graphicImage library="imagens" name="password.png"
+								alt="#{msgs.troca_senha}" />
+							<f:param name="id" value="#{aluno.id}" />
+						</p:commandLink>
+						<p:tooltip for="trocaSenha" value="#{msgs.clique_para_trocar_senha}"/>
+						
+
+					</p:column>
+				</p:dataTable>
+
+				<p:confirmDialog global="true">
+					<p:commandButton value="#{msgs.sim}" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="#{msgs.nao}" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+
+			</h:form>
+
+		</p:fieldset>
+
+	</ui:define>
+
+</ui:composition>

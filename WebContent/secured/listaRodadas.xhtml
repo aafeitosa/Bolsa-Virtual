@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/templateComMenu.xhtml">
+
+	<ui:define name="content">
+
+		<p:fieldset legend="#{msgs.rodadas}" style="margin-bottom:20px">
+
+			<p:messages showDetail="true" closable="true" />
+
+			<h:form id="listaRodadasForm">
+
+				<p:panelGrid columns="3">
+
+					<p:outputLabel for="grupo" value="#{msgs.grupo}:" />
+					<h:selectOneMenu value="#{rodadaListaBack.grupo}" id="grupo"
+						style="width:100%" converter="omnifaces.SelectItemsConverter">
+						<f:selectItem noSelectionOption="true"
+							itemLabel="#{msgs.selecione}" />
+						<f:selectItems value="#{rodadaListaBack.grupos}" var="grupo"
+							itemLabel="#{grupo.nome}" itemValue="#{grupo}">
+						</f:selectItems>
+					</h:selectOneMenu>
+					<p:message for="grupo" />
+
+					<p:outputLabel for="numero" value="#{msgs.numero}:" />
+					<p:inputText id="numero" value="#{rodadaListaBack.numero}"
+						maxlength="10" />
+					<p:message for="numero" />
+
+				</p:panelGrid>
+
+				<p:commandButton value="#{msgs.pesquisar}"
+					actionListener="#{rodadaListaBack.pesquisar}" ajax="true"
+					update="@form" />
+				<p:commandButton value="#{msgs.novo}"
+					actionListener="#{rodadaListaBack.passarGrupo}"
+					action="#{rodadaListaBack.novo}" ajax="false"
+					rendered="#{permissao.rendered('RODADA_LISTAR_NOVO')}" />
+
+				<p:dataTable var="rodada" value="#{rodadaListaBack.dataModel}"
+					border="1" cellpadding="2" cellspacing="0" paginator="true"
+					rows="#{rodadaListaBack.nroRegistrosPorPagina}"
+					paginatorPosition="bottom"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+					currentPageReportTemplate="({startRecord} - {endRecord} de {totalRecords})"
+					rowsPerPageTemplate="#{rodadaListaBack.opcoesRegistrosPorPagina}"
+					id="rodadasTable" lazy="true" first="#{rodadaListaBack.first}">
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.grupo}" />
+						</f:facet>
+						<h:outputText value="#{rodada.grupo.nome}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.dataInicio}" />
+						</f:facet>
+						<h:outputText value="#{rodada.dataInicio}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+								timeZone="#{rodadaListaBack.timeZone}" />
+						</h:outputText>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.numero}" />
+						</f:facet>
+						<h:outputText value="#{rodada.numero}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.valor}" />
+						</f:facet>
+						<h:outputText value="#{rodada.valor}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.encerrada}" />
+						</f:facet>
+						<p:selectBooleanCheckbox id="encerrada" disabled="true"
+							value="#{rodada.encerrada}" />
+						<h:outputText value="   " rendered="#{rodada.encerrada}" />
+						<h:outputText value="#{rodada.dataFim}"
+							rendered="#{rodada.encerrada}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+								timeZone="#{rodadaListaBack.timeZone}" />
+						</h:outputText>
+					</p:column>
+
+
+					<p:column style="width:5%;text-align:center"
+						rendered="#{permissao.rendered('RODADA_LISTAR_EDITAR') or permissao.rendered('RODADA_LISTAR_EXCLUIR')}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.acoes}" />
+						</f:facet>
+
+						<h:commandLink action="#{rodadaListaBack.novo}" id="editar"
+							rendered="#{permissao.rendered('RODADA_LISTAR_EDITAR')}">
+							<p:graphicImage library="imagens" name="editar.png"
+								alt="#{msgs.editar}" />
+							<f:param name="id" value="#{rodada.id}" />
+							<f:param name="first" value="#{rodadaListaBack.first}" />
+							<f:param name="nro"
+								value="#{rodadaListaBack.nroRegistrosPorPagina}" />
+						</h:commandLink>
+						<p:tooltip id="editarToolTip" for="editar" value="#{msgs.editar}"
+							trackMouse="true" />
+
+
+						<h:outputText value=" " />
+
+						<p:commandLink update="@form" id="encerrar"
+							action="#{rodadaListaBack.encerra(rodada)}"
+							rendered="#{permissao.rendered('RODADA_LISTAR_EDITAR') and not rodada.encerrada}">
+							<p:confirm header="#{msgs.confirmacao}"
+								message="#{msgs.confirma_encerramento}" icon="ui-icon-alert" />
+							<p:graphicImage library="imagens" name="stop.png"
+								alt="#{msgs.encerrar}" />
+						</p:commandLink>
+						<p:tooltip id="encerrarToolTip" for="encerrar"
+							value="#{msgs.encerrar}" trackMouse="true" />
+
+						<h:outputText value=" " />
+
+						<p:commandLink update="@form" id="excluir"
+							actionListener="#{rodadaListaBack.exclui}"
+							rendered="#{permissao.rendered('RODADA_LISTAR_EXCLUIR') and not rodada.encerrada}">
+							<p:confirm header="#{msgs.confirmacao}"
+								message="#{msgs.confirma_exclusao}" icon="ui-icon-alert" />
+							<p:graphicImage library="imagens" name="excluir.png"
+								alt="#{msgs.excluir}" />
+							<f:param name="id" value="#{rodada.id}" />
+						</p:commandLink>
+						<p:tooltip id="excluirToolTip" for="excluir"
+							value="#{msgs.excluir}" trackMouse="true" />
+
+					</p:column>
+				</p:dataTable>
+
+				<p:confirmDialog global="true">
+					<p:commandButton value="#{msgs.sim}" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="#{msgs.nao}" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+
+			</h:form>
+		</p:fieldset>
+	</ui:define>
+</ui:composition>

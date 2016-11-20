@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/templateComMenu.xhtml">
+
+	<ui:define name="content">
+
+		<p:fieldset legend="#{msgs.resultados}" style="margin-bottom:20px">
+
+			<p:messages showDetail="true" closable="true" />
+
+			<h:form id="listaResultadosForm">
+
+				<p:dataTable var="grupo" value="#{resultadoListaBack.dataModel}"
+					border="1" cellpadding="2" cellspacing="0" paginator="true"
+					rows="#{resultadoListaBack.nroRegistrosPorPagina}"
+					paginatorPosition="bottom"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+					currentPageReportTemplate="({startRecord} - {endRecord} de {totalRecords})"
+					rowsPerPageTemplate="#{resultadoListaBack.opcoesRegistrosPorPagina}"
+					id="gruposTable" lazy="true" first="#{resultadoListaBack.first}">
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.periodo}" />
+						</f:facet>
+						<h:outputText value="#{grupo.periodo}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.nome}" />
+						</f:facet>
+						<h:outputText value="#{grupo.nome}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.descricao}" />
+						</f:facet>
+						<h:outputText value="#{grupo.descricao}" />
+					</p:column>
+
+
+					<p:column style="width:5%;text-align:center"
+						rendered="#{permissao.rendered('RESULTADO_VISUALIZAR_ACESSAR')}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.acoes}" />
+						</f:facet>
+
+						<h:commandLink action="#{resultadoListaBack.visualizar}" id="visualizar"
+							rendered="#{permissao.rendered('RESULTADO_VISUALIZAR_ACESSAR')}">
+							<p:graphicImage library="imagens" name="chart.png"
+								alt="#{msgs.visualizar}" />
+							<f:param name="id" value="#{grupo.id}" />
+							<f:param name="first" value="#{resultadoListaBack.first}" />
+							<f:param name="nro"
+								value="#{resultadoListaBack.nroRegistrosPorPagina}" />
+						</h:commandLink>
+						<p:tooltip id="visualizarToolTip" for="visualizar" value="#{msgs.visualizar}"
+							trackMouse="true" />
+
+						<h:outputText value=" " />
+
+					</p:column>
+				</p:dataTable>
+
+			</h:form>
+		</p:fieldset>
+	</ui:define>
+</ui:composition>

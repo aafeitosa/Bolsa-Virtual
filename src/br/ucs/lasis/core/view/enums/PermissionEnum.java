@@ -1,0 +1,204 @@
+package br.ucs.lasis.core.view.enums;
+
+import java.io.Serializable;
+
+import br.ucs.lasis.core.permissions.Permission;
+
+public enum PermissionEnum implements Permission, Serializable {
+
+	HOME("HOME", "Home", null, PermissionTypeEnum.ACESSO),
+	
+	ADMINISTRATIVO("ADMINISTRATIVO", "Administrativo", null, PermissionTypeEnum.MODULO),
+
+	USUARIO("USUARIO", "Usuário", ADMINISTRATIVO, PermissionTypeEnum.MODULO),
+	USUARIO_LISTAR("USUARIO_LISTAR", "Usuário Listagem", USUARIO, PermissionTypeEnum.PAGINA),
+	USUARIO_LISTAR_ACESSAR("USUARIO_LISTAR_ACESSAR", "Usuário Acessar Listagem", USUARIO_LISTAR, PermissionTypeEnum.PAGINA),
+	USUARIO_LISTAR_EDITAR("USUARIO_LISTAR_EDITAR", "Usuário Editar", USUARIO_LISTAR, PermissionTypeEnum.BOTAO),
+	USUARIO_LISTAR_EXCLUIR("USUARIO_LISTAR_EXCLUIR", "Usuário Excluir", USUARIO_LISTAR, PermissionTypeEnum.BOTAO),
+	USUARIO_LISTAR_TROCAR_SENHA("USUARIO_LISTAR_TROCAR_SENHA", "Usuário Trocar Senha", USUARIO_LISTAR, PermissionTypeEnum.BOTAO),
+	USUARIO_LISTAR_NOVO("USUARIO_LISTAR_NOVO", "Usuário Novo", USUARIO_LISTAR, PermissionTypeEnum.BOTAO),
+	USUARIO_EDITAR("USUARIO_EDITAR", "Usuário Edição", USUARIO, PermissionTypeEnum.PAGINA),
+	USUARIO_EDITAR_ACESSAR("USUARIO_EDITAR_ACESSAR", "Usuário Acessar Edição", USUARIO_EDITAR, PermissionTypeEnum.PAGINA),
+	USUARIO_EDITAR_ABA_PERFIL("USUARIO_EDITAR_ABA_PERFIL", "Usuário Aba Perfis", USUARIO_EDITAR, PermissionTypeEnum.ABA),
+	USUARIO_EDITAR_ABA_USUARIO("USUARIO_EDITAR_ABA_USUARIO", "Usuário Aba Usuário", USUARIO_EDITAR, PermissionTypeEnum.ABA),
+	USUARIO_EDITAR_SALVAR("USUARIO_EDITAR_SALVAR", "Usuário Salvar", USUARIO_EDITAR, PermissionTypeEnum.BOTAO),
+
+	PERFIL("PERFIL", "Perfil", ADMINISTRATIVO, PermissionTypeEnum.MODULO),
+	PERFIL_LISTAR("PERFIL_LISTAR", "Perfil Listagem", PERFIL, PermissionTypeEnum.PAGINA),
+	PERFIL_LISTAR_ACESSAR("PERFIL_LISTAR_ACESSAR", "Perfil Acessar Listagem", PERFIL_LISTAR, PermissionTypeEnum.ACESSO),
+	PERFIL_LISTAR_EDITAR("PERFIL_LISTAR_EDITAR", "Perfil Editar", PERFIL_LISTAR, PermissionTypeEnum.BOTAO),
+	PERFIL_LISTAR_EXCLUIR("PERFIL_LISTAR_EXCLUIR", "Perfil Excluir", PERFIL_LISTAR, PermissionTypeEnum.BOTAO),
+	PERFIL_LISTAR_NOVO("PERFIL_LISTAR_NOVO", "Perfil Novo", PERFIL_LISTAR, PermissionTypeEnum.BOTAO),
+	PERFIL_EDITAR("PERFIL_EDITAR", "Perfil Edição", PERFIL, PermissionTypeEnum.PAGINA),
+	PERFIL_EDITAR_ACESSAR("PERFIL_EDITAR_ACESSAR", "Perfil Acessar Listagem", PERFIL_EDITAR, PermissionTypeEnum.ACESSO),
+	PERFIL_EDITAR_ABA_PERFIL("PERFIL_EDITAR_ABA_PERFIL", "Perfil Aba Perfis", PERFIL_EDITAR, PermissionTypeEnum.ABA),
+	PERFIL_EDITAR_ABA_PERMISSAO("PERFIL_EDITAR_ABA_PERMISSAO", "Perfil Aba Permissões", PERFIL_EDITAR, PermissionTypeEnum.ABA),
+	PERFIL_EDITAR_SALVAR("PERFIL_EDITAR_SALVAR", "Perfil Salvar", PERFIL_EDITAR, PermissionTypeEnum.BOTAO),
+
+	IDIOMA("IDIOMA", "Idioma", ADMINISTRATIVO, PermissionTypeEnum.MODULO),
+	IDIOMA_LISTAR("IDIOMA_LISTAR", "Idioma Listagem", IDIOMA, PermissionTypeEnum.PAGINA),
+	IDIOMA_LISTAR_ACESSAR("IDIOMA_LISTAR_ACESSAR", "Idioma Acessar Listagem", IDIOMA_LISTAR, PermissionTypeEnum.ACESSO),
+	IDIOMA_LISTAR_EDITAR("IDIOMA_LISTAR_EDITAR", "Idioma Editar", IDIOMA_LISTAR, PermissionTypeEnum.BOTAO),
+	IDIOMA_LISTAR_EXCLUIR("IDIOMA_LISTAR_EXCLUIR", "Idioma Excluir", IDIOMA_LISTAR, PermissionTypeEnum.BOTAO),
+	IDIOMA_LISTAR_NOVO("IDIOMA_LISTAR_NOVO", "Idioma Novo", IDIOMA_LISTAR, PermissionTypeEnum.BOTAO),
+	IDIOMA_EDITAR("IDIOMA_EDITAR", "Idioma Edição", IDIOMA, PermissionTypeEnum.PAGINA),
+	IDIOMA_EDITAR_ACESSAR("IDIOMA_EDITAR_ACESSAR", "Idioma Acessar Listagem", IDIOMA_EDITAR, PermissionTypeEnum.ACESSO),
+	IDIOMA_EDITAR_SALVAR("IDIOMA_EDITAR_SALVAR", "Idioma Salvar", IDIOMA_EDITAR, PermissionTypeEnum.BOTAO),
+	
+	TRADUCAO("TRADUCAO", "Tradução", ADMINISTRATIVO, PermissionTypeEnum.MODULO),
+	TRADUCAO_LISTAR("TRADUCAO_LISTAR", "Tradução Listagem", TRADUCAO, PermissionTypeEnum.PAGINA),
+	TRADUCAO_LISTAR_ACESSAR("TRADUCAO_LISTAR_ACESSAR", "Tradução Acessar Listagem", TRADUCAO_LISTAR, PermissionTypeEnum.ACESSO),
+	TRADUCAO_LISTAR_EDITAR("TRADUCAO_LISTAR_EDITAR", "Tradução Editar", TRADUCAO_LISTAR, PermissionTypeEnum.BOTAO),
+	TRADUCAO_LISTAR_EXCLUIR("TRADUCAO_LISTAR_EXCLUIR", "Tradução Excluir", TRADUCAO_LISTAR, PermissionTypeEnum.BOTAO),
+	TRADUCAO_LISTAR_NOVO("TRADUCAO_LISTAR_NOVO", "Tradução Novo", TRADUCAO_LISTAR, PermissionTypeEnum.BOTAO),
+	TRADUCAO_IMPRIMIR("TRADUCAO_IMPRIMIR", "Tradução Impressao", TRADUCAO, PermissionTypeEnum.PAGINA),
+	TRADUCAO_IMPRIMIR_ACESSAR("TRADUCAO_IMPRIMIR_ACESSAR", "Tradução Acessar Impressao", TRADUCAO_IMPRIMIR, PermissionTypeEnum.ACESSO),
+	
+	PARAMETRO("PARAMETRO", "Parâmetros", ADMINISTRATIVO, PermissionTypeEnum.MODULO),
+	PARAMETRO_LISTAR("PARAMETRO_LISTAR", "Parâmetros Listagem", PARAMETRO, PermissionTypeEnum.PAGINA),
+	PARAMETRO_LISTAR_ACESSAR("PARAMETRO_LISTAR_ACESSAR", "Parâmetro Acessar Listagem", PARAMETRO_LISTAR, PermissionTypeEnum.ACESSO),
+	PARAMETRO_LISTAR_SALVAR("PARAMETRO_LISTAR_SALVAR", "Parâmetro Salvar", PARAMETRO_LISTAR, PermissionTypeEnum.BOTAO),
+
+	CADASTROS("CADASTROS", "Cadastros", null, PermissionTypeEnum.MODULO),
+
+	EMPRESA("EMPRESA", "Empresa", CADASTROS, PermissionTypeEnum.MODULO),
+	EMPRESA_LISTAR("EMPRESA_LISTAR", "Empresa Listagem", EMPRESA, PermissionTypeEnum.PAGINA),
+	EMPRESA_LISTAR_ACESSAR("EMPRESA_LISTAR_ACESSAR", "Empresa Acessar Listagem", EMPRESA_LISTAR, PermissionTypeEnum.ACESSO),
+	EMPRESA_LISTAR_NOVO("EMPRESA_LISTAR_NOVO", "Empresa Novo", EMPRESA_LISTAR, PermissionTypeEnum.BOTAO),
+	EMPRESA_LISTAR_EDITAR("EMPRESA_LISTAR_EDITAR", "Empresa Editar", EMPRESA_LISTAR, PermissionTypeEnum.LINK),
+	EMPRESA_LISTAR_EXCLUIR("EMPRESA_LISTAR_EXCLUIR", "Empresa Excluir", EMPRESA_LISTAR, PermissionTypeEnum.LINK),
+	EMPRESA_EDITAR("EMPRESA_EDITAR", "Empresa Edição", EMPRESA, PermissionTypeEnum.PAGINA),
+	EMPRESA_EDITAR_ACESSAR("EMPRESA_EDITAR_ACESSAR", "Empresa Acessar Edição", EMPRESA_EDITAR, PermissionTypeEnum.ACESSO),
+	EMPRESA_EDITAR_SALVAR("EMPRESA_EDITAR_SALVAR", "Empresa Salvar", EMPRESA_EDITAR, PermissionTypeEnum.BOTAO),
+
+	RAMO_ATIVIDADE("RAMO_ATIVIDADE", "Ramo Atividade", CADASTROS, PermissionTypeEnum.MODULO),
+	RAMO_ATIVIDADE_LISTAR("RAMO_ATIVIDADE_LISTAR", "Ramo Atividade Listagem", RAMO_ATIVIDADE, PermissionTypeEnum.PAGINA),
+	RAMO_ATIVIDADE_ACESSAR("RAMO_ATIVIDADE_LISTAR_ACESSAR", "Ramo Atividade Acessar Listagem", RAMO_ATIVIDADE_LISTAR, PermissionTypeEnum.ACESSO),
+	RAMO_ATIVIDADE_LISTAR_NOVO("RAMO_ATIVIDADE_LISTAR_NOVO", "Ramo Atividade Novo", RAMO_ATIVIDADE_LISTAR, PermissionTypeEnum.BOTAO),
+	RAMO_ATIVIDADE_LISTAR_EDITAR("RAMO_ATIVIDADE_LISTAR_EDITAR", "Ramo Atividade Editar", RAMO_ATIVIDADE_LISTAR, PermissionTypeEnum.LINK),
+	RAMO_ATIVIDADE_LISTAR_EXCLUIR("RAMO_ATIVIDADE_LISTAR_EXCLUIR", "Ramo Atividade Excluir", RAMO_ATIVIDADE_LISTAR, PermissionTypeEnum.LINK),
+	RAMO_ATIVIDADE_EDITAR("RAMO_ATIVIDADE_EDITAR", "Ramo Atividade Edição", RAMO_ATIVIDADE, PermissionTypeEnum.PAGINA),
+	RAMO_ATIVIDADE_EDITAR_ACESSAR("RAMO_ATIVIDADE_EDITAR_ACESSAR", "Ramo Atividade Acessar Edição", RAMO_ATIVIDADE_EDITAR, PermissionTypeEnum.ACESSO),
+	RAMO_ATIVIDADE_EDITAR_SALVAR("RAMO_ATIVIDADE_EDITAR_SALVAR", "Ramo Atividade Salvar", RAMO_ATIVIDADE_EDITAR, PermissionTypeEnum.BOTAO),
+	
+	GRUPO("GRUPO", "Grupo", CADASTROS, PermissionTypeEnum.MODULO),
+	GRUPO_LISTAR("GRUPO_LISTAR", "Grupo Listagem", GRUPO, PermissionTypeEnum.PAGINA),
+	GRUPO_LISTAR_ACESSAR("GRUPO_LISTAR_ACESSAR", "Grupo Acessar Listagem", GRUPO_LISTAR, PermissionTypeEnum.ACESSO),
+	GRUPO_LISTAR_NOVO("GRUPO_LISTAR_NOVO", "Grupo Novo", GRUPO_LISTAR, PermissionTypeEnum.BOTAO),
+	GRUPO_LISTAR_EDITAR("GRUPO_LISTAR_EDITAR", "Grupo Editar", GRUPO_LISTAR, PermissionTypeEnum.LINK),
+	GRUPO_LISTAR_EXCLUIR("GRUPO_LISTAR_EXCLUIR", "Grupo Excluir", GRUPO_LISTAR, PermissionTypeEnum.LINK),
+	GRUPO_EDITAR("GRUPO_EDITAR", "Grupo Edição", GRUPO, PermissionTypeEnum.PAGINA),
+	GRUPO_EDITAR_ACESSAR("GRUPO_EDITAR_ACESSAR", "Grupo Acessar Edição", GRUPO_EDITAR, PermissionTypeEnum.ACESSO),
+	GRUPO_EDITAR_SALVAR("GRUPO_EDITAR_SALVAR", "Grupo Salvar", GRUPO_EDITAR, PermissionTypeEnum.BOTAO),
+	GRUPO_EDITAR_ABA_EMPRESA("GRUPO_EDITAR_ABA_EMPRESA", "Grupo Aba Empresa", GRUPO_EDITAR, PermissionTypeEnum.ABA),
+	GRUPO_EDITAR_ABA_USUARIO("GRUPO_EDITAR_ABA_USUARIO", "Grupo Aba Usuário", GRUPO_EDITAR, PermissionTypeEnum.ABA),
+
+	PERIODO("PERIODO", "Período", CADASTROS, PermissionTypeEnum.MODULO),
+	PERIODO_LISTAR("PERIODO_LISTAR", "Período Listagem", PERIODO, PermissionTypeEnum.PAGINA),
+	PERIODO_LISTAR_ACESSAR("PERIODO_LISTAR_ACESSAR", "Período Acessar Listagem", PERIODO_LISTAR, PermissionTypeEnum.ACESSO),
+	PERIODO_LISTAR_NOVO("PERIODO_LISTAR_NOVO", "Período Novo", PERIODO_LISTAR, PermissionTypeEnum.BOTAO),
+	PERIODO_LISTAR_EDITAR("PERIODO_LISTAR_EDITAR", "Período Editar", PERIODO_LISTAR, PermissionTypeEnum.LINK),
+	PERIODO_LISTAR_EXCLUIR("PERIODO_LISTAR_EXCLUIR", "Período Excluir", PERIODO_LISTAR, PermissionTypeEnum.LINK),
+	PERIODO_EDITAR("PERIODO_EDITAR", "Período Edição", PERIODO, PermissionTypeEnum.PAGINA),
+	PERIODO_EDITAR_ACESSAR("PERIODO_EDITAR_ACESSAR", "Período Acessar Edição", PERIODO_EDITAR, PermissionTypeEnum.ACESSO),
+	PERIODO_EDITAR_SALVAR("PERIODO_EDITAR_SALVAR", "Período Salvar", PERIODO_EDITAR, PermissionTypeEnum.BOTAO),
+	PERIODO_SELECIONAR_PERIODO("PERIODO_SELECIONAR_PERIODO", "Período Selecionar Período", PERIODO, PermissionTypeEnum.BOTAO),
+	
+	RODADA("RODADA", "Rodada", CADASTROS, PermissionTypeEnum.MODULO),
+	RODADA_LISTAR("RODADA_LISTAR", "Rodada Listagem", RODADA, PermissionTypeEnum.PAGINA),
+	RODADA_LISTAR_ACESSAR("RODADA_LISTAR_ACESSAR", "Rodada Acessar Listagem", RODADA_LISTAR, PermissionTypeEnum.ACESSO),
+	RODADA_LISTAR_NOVO("RODADA_LISTAR_NOVO", "Rodada Novo", RODADA_LISTAR, PermissionTypeEnum.BOTAO),
+	RODADA_LISTAR_EDITAR("RODADA_LISTAR_EDITAR", "Rodada Editar", RODADA_LISTAR, PermissionTypeEnum.LINK),
+	RODADA_LISTAR_EXCLUIR("RODADA_LISTAR_EXCLUIR", "Rodada Excluir", RODADA_LISTAR, PermissionTypeEnum.LINK),
+	RODADA_EDITAR("RODADA_EDITAR", "Rodada Edição", RODADA, PermissionTypeEnum.PAGINA),
+	RODADA_EDITAR_ACESSAR("RODADA_EDITAR_ACESSAR", "Rodada Acessar Edição", RODADA_EDITAR, PermissionTypeEnum.ACESSO),
+	RODADA_EDITAR_SALVAR("RODADA_EDITAR_SALVAR", "Rodada Salvar", RODADA_EDITAR, PermissionTypeEnum.BOTAO),
+	RODADA_EDITAR_ABA_RODADA("RODADA_EDITAR_ABA_RODADA", "Rodada Aba Rodada", RODADA_EDITAR, PermissionTypeEnum.ABA),
+	RODADA_EDITAR_ABA_RESULTADOS("RODADA_EDITAR_ABA_RESULTADOS", "Rodada Aba Resultados", RODADA_EDITAR, PermissionTypeEnum.ABA),
+	
+	PROFESSOR("PROFESSOR", "Professor", CADASTROS, PermissionTypeEnum.MODULO),
+	PROFESSOR_LISTAR("PROFESSOR_LISTAR", "Professor Listagem", PROFESSOR, PermissionTypeEnum.PAGINA),
+	PROFESSOR_LISTAR_ACESSAR("PROFESSOR_LISTAR_ACESSAR", "Professor Acessar Listagem", PROFESSOR_LISTAR, PermissionTypeEnum.ACESSO),
+	PROFESSOR_LISTAR_EDITAR("PROFESSOR_LISTAR_EDITAR", "Professor Editar", PROFESSOR_LISTAR, PermissionTypeEnum.BOTAO),
+	PROFESSOR_LISTAR_EXCLUIR("PROFESSOR_LISTAR_EXCLUIR", "Professor Excluir", PROFESSOR_LISTAR, PermissionTypeEnum.BOTAO),
+	PROFESSOR_LISTAR_TROCAR_SENHA("PROFESSOR_LISTAR_TROCAR_SENHA", "Professor Trocar Senha", PROFESSOR_LISTAR, PermissionTypeEnum.BOTAO),
+	PROFESSOR_LISTAR_NOVO("PROFESSOR_LISTAR_NOVO", "Professor Novo", PROFESSOR_LISTAR, PermissionTypeEnum.BOTAO),
+	PROFESSOR_EDITAR("PROFESSOR_EDITAR", "Professor Edição", PROFESSOR, PermissionTypeEnum.PAGINA),
+	PROFESSOR_EDITAR_ACESSAR("PROFESSOR_EDITAR_ACESSAR", "Professor Acessar Listagem", PROFESSOR_EDITAR, PermissionTypeEnum.ACESSO),
+	PROFESSOR_EDITAR_SALVAR("PROFESSOR_EDITAR_SALVAR", "Professor Salvar", PROFESSOR_EDITAR, PermissionTypeEnum.BOTAO),
+
+	ALUNO("ALUNO", "Aluno", CADASTROS, PermissionTypeEnum.MODULO),
+	ALUNO_LISTAR("ALUNO_LISTAR", "Aluno Listagem", ALUNO, PermissionTypeEnum.PAGINA),
+	ALUNO_LISTAR_ACESSAR("ALUNO_LISTAR_ACESSAR", "Aluno Acessar Listagem", ALUNO_LISTAR, PermissionTypeEnum.ACESSO),
+	ALUNO_LISTAR_EDITAR("ALUNO_LISTAR_EDITAR", "Aluno Editar", ALUNO_LISTAR, PermissionTypeEnum.BOTAO),
+	ALUNO_LISTAR_EXCLUIR("ALUNO_LISTAR_EXCLUIR", "Aluno Excluir", ALUNO_LISTAR, PermissionTypeEnum.BOTAO),
+	ALUNO_LISTAR_TROCAR_SENHA("ALUNO_LISTAR_TROCAR_SENHA", "Aluno Trocar Senha", ALUNO_LISTAR, PermissionTypeEnum.BOTAO),
+	ALUNO_LISTAR_NOVO("ALUNO_LISTAR_NOVO", "Aluno Novo", ALUNO_LISTAR, PermissionTypeEnum.BOTAO),
+	ALUNO_EDITAR("ALUNO_EDITAR", "Aluno Edição", ALUNO, PermissionTypeEnum.PAGINA),
+	ALUNO_EDITAR_ACESSAR("ALUNO_EDITAR_ACESSAR", "Aluno Acessar Listagem", ALUNO_EDITAR, PermissionTypeEnum.ACESSO),
+	ALUNO_EDITAR_SALVAR("ALUNO_EDITAR_SALVAR", "Aluno Salvar", ALUNO_EDITAR, PermissionTypeEnum.BOTAO),
+	
+	INVESTIMENTO("INVESTIMENTO", "Investimento", CADASTROS, PermissionTypeEnum.MODULO),
+	INVESTIMENTO_LISTAR("INVESTIMENTO_LISTAR", "Investimento Listagem", INVESTIMENTO, PermissionTypeEnum.PAGINA),
+	INVESTIMENTO_LISTAR_ACESSAR("INVESTIMENTO_LISTAR_ACESSAR", "Investimento Acessar Listagem", INVESTIMENTO_LISTAR, PermissionTypeEnum.ACESSO),
+	INVESTIMENTO_LISTAR_INVESTIR("INVESTIMENTO_LISTAR_INVESTIR", "Investimento Investir", INVESTIMENTO_LISTAR, PermissionTypeEnum.BOTAO),
+	INVESTIMENTO_EDITAR("INVESTIMENTO", "Investimento Edição", INVESTIMENTO, PermissionTypeEnum.PAGINA),
+	INVESTIMENTO_EDITAR_ACESSAR("INVESTIMENTO_EDITAR_ACESSAR", "Investimento Acessar Listagem", INVESTIMENTO_EDITAR, PermissionTypeEnum.ACESSO),
+	INVESTIMENTO_EDITAR_SALVAR("INVESTIMENTO_EDITAR_SALVAR", "Investimento Salvar", INVESTIMENTO_EDITAR, PermissionTypeEnum.BOTAO),
+
+	RESULTADO("RESULTADO", "Resultado", CADASTROS, PermissionTypeEnum.MODULO),
+	RESULTADO_LISTAR("RESULTADO_LISTAR", "Resultado Listagem", RESULTADO, PermissionTypeEnum.PAGINA),
+	RESULTADO_LISTAR_ACESSAR("RESULTADO_LISTAR_ACESSAR", "Resultado Acessar Listagem", RESULTADO_LISTAR, PermissionTypeEnum.ACESSO),
+	RESULTADO_VISUALIZAR("RESULTADO_VISUALIZAR", "Resultado Visualização", RESULTADO, PermissionTypeEnum.PAGINA),
+	RESULTADO_VISUALIZAR_ACESSAR("RESULTADO_VISUALIZAR_ACESSAR", "Resultado Acessar Visualização", RESULTADO_VISUALIZAR, PermissionTypeEnum.ACESSO),
+	RESULTADO_VISUALIZAR_ACESSAR_ABA_RESULTADO("RESULTADO_VISUALIZAR_ACESSAR_ABA_RESULTADOS", "Resultado Acessar Visualização Aba Resultados", RESULTADO_VISUALIZAR, PermissionTypeEnum.ABA),
+	RESULTADO_VISUALIZAR_ACESSAR_ABA_VARIACOES("RESULTADO_VISUALIZAR_ACESSAR_ABA_VARIACOES", "Resultado Acessar Visualização Aba Variações", RESULTADO_VISUALIZAR, PermissionTypeEnum.ABA),
+	RESULTADO_VISUALIZAR_ACESSAR_ABA_VARIACOES_GRAFICO("RESULTADO_VISUALIZAR_ACESSAR_ABA_VARIACOES_GRAFICO", "Resultado Acessar Visualização Aba Variações(Gráfico)", RESULTADO_VISUALIZAR, PermissionTypeEnum.ABA),
+	RESULTADO_VISUALIZAR_ACESSAR_ABA_GRAFICO("RESULTADO_VISUALIZAR_ACESSAR_ABA_GRAFICO", "Resultado Acessar Visualização Aba Gráficos", RESULTADO_VISUALIZAR, PermissionTypeEnum.ABA),
+	DASHBOARD("DASHBOARD", "Dashboard", CADASTROS, PermissionTypeEnum.MODULO),
+	DASHBOARD_LISTAR_ACESSAR("DASHBOARD_LISTAR_ACESSAR", "Acessar DashBoard", DASHBOARD, PermissionTypeEnum.ACESSO);
+
+	private final String id;
+	private final String nome;
+	private final PermissionEnum pai;
+	private final PermissionTypeEnum tipo;
+
+	private PermissionEnum(String id, String nome, PermissionEnum pai, PermissionTypeEnum tipo) {
+		this.nome = nome;
+		this.pai = pai;
+		this.id = id;
+		this.tipo = tipo;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public PermissionEnum getParent() {
+		return pai;
+	}
+
+	@SuppressWarnings("unchecked")
+	public String getId() {
+		return id;
+	}
+
+	public PermissionTypeEnum getTipo() {
+		return tipo;
+	}
+	
+	@Override
+	public String getTranslationKey() {
+		return this.id;
+	}
+
+	public static PermissionEnum getById(String id) {
+		for (PermissionEnum item : PermissionEnum.values()) {
+			if (item.getId().equals(id)) {
+				return item;
+			}
+		}
+		return null;
+	}
+
+}
