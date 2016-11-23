@@ -7,32 +7,34 @@
 	template="/WEB-INF/templates/templateComMenu.xhtml">
 
 	<ui:define name="content">
-
-		<p:fieldset legend="#{msgs.ramosAtividades}" style="margin-bottom:20px">
-
-			<p:messages showDetail="true" closable="true" />
-
-			<h:form id="listaRamosAtividadesForm">
-
-				<p:panelGrid columns="3">
-
-					<p:outputLabel class="control-label" for="nome"
-						value="#{msgs.nome}:" />
-					<p:inputText class="form-control input-sm input-xlarge" id="nome"
+		<p:messages showDetail="true" closable="true" />
+		<h:form id="listaRamosAtividadesForm">
+			<div class="ui-g-6" >
+				<h2>
+					<h:outputText value="#{msgs.ramosAtividades}" />
+				</h2>
+			</div>
+			<div class="ui-g-6" style="text-align: right;">
+				<p:commandButton value="#{msgs.novo}" icon="fa fa-plus"
+					action="#{ramoAtividadeListaBack.novo}" ajax="false"
+					rendered="#{permissao.rendered('RAMO_ATIVIDADE_LISTAR_NOVO')}" />
+			</div>
+			<div class="ui-g-3">
+				<p:outputLabel for="nome" value="#{msgs.nome}:" />
+			</div>
+			<div class="ui-g-9">
+				<p:inputText id="nome"
 						value="#{ramoAtividadeListaBack.nome}" maxlength="60" />
-					<p:message for="nome" />
-
-				</p:panelGrid>
-
+				<p:message for="nome" />
+			</div>
+			<div class="ui-g-12">
 				<p:commandButton value="#{msgs.pesquisar}"
 					actionListener="#{ramoAtividadeListaBack.pesquisar}" ajax="true"
 					update="@form" />
-				<p:commandButton value="#{msgs.novo}"
-					action="#{ramoAtividadeListaBack.novo}" ajax="false"
-					rendered="#{permissao.rendered('RAMO_ATIVIDADE_LISTAR_NOVO')}" />
-
+			</div>
+			<div class="ui-g-12">
 				<p:dataTable var="ramoAtividade" value="#{ramoAtividadeListaBack.dataModel}"
-					border="1" cellpadding="2" cellspacing="0" paginator="true"
+					paginator="true"
 					rows="#{ramoAtividadeListaBack.nroRegistrosPorPagina}"
 					paginatorPosition="bottom"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
@@ -40,14 +42,14 @@
 					rowsPerPageTemplate="#{ramoAtividadeListaBack.opcoesRegistrosPorPagina}"
 					id="ramoAtividadesTable" lazy="true" first="#{ramoAtividadeListaBack.first}">
 
-					<p:column>
+					<p:column style="text-align: left;">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.nome}" />
 						</f:facet>
 						<h:outputText value="#{ramoAtividade.nome}" />
 					</p:column>
 
-					<p:column>
+					<p:column style="text-align: left;">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.descricao}" />
 						</f:facet>
@@ -61,7 +63,7 @@
 <!-- 						<h:outputText value="#{ramoAtividade.indice}" /> -->
 <!-- 					</p:column> -->
 
-					<p:column style="width:5%;text-align:center"
+					<p:column style="width:65px;text-align:center"
 						rendered="#{permissao.rendered('RAMO_ATIVIDADE_LISTAR_EDITAR') or permissao.rendered('RAMO_ATIVIDADE_LISTAR_EXCLUIR')}">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.acoes}" />
@@ -79,8 +81,6 @@
 						<p:tooltip id="editarToolTip" for="editar" value="#{msgs.editar}"
 							trackMouse="true" />
 
-						<h:outputText value=" " />
-
 						<p:commandLink update="@form" id="excluir"
 							actionListener="#{ramoAtividadeListaBack.exclui}"
 							rendered="#{permissao.rendered('RAMO_ATIVIDADE_LISTAR_EXCLUIR')}">
@@ -95,15 +95,13 @@
 
 					</p:column>
 				</p:dataTable>
-
-				<p:confirmDialog global="true">
-					<p:commandButton value="#{msgs.sim}" type="button"
-						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-					<p:commandButton value="#{msgs.nao}" type="button"
-						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-				</p:confirmDialog>
-
-			</h:form>
-		</p:fieldset>
+			</div>
+			<p:confirmDialog global="true">
+				<p:commandButton value="#{msgs.sim}" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="#{msgs.nao}" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		</h:form>
 	</ui:define>
 </ui:composition>

@@ -7,66 +7,85 @@
 	template="/WEB-INF/templates/templateComMenu.xhtml">
 
 	<ui:define name="content">
-
-		<p:fieldset legend="#{msgs.investimentos} : #{msgs.rodadas}" style="margin-bottom:20px">
-
-			<p:messages showDetail="true" closable="true" />
-
-			<h:form id="listaInvestimentosForm">
-
-				<p:panelGrid columns="3"
-					rendered="#{investimentoListaBack.trocaGrupo}">
-
+		<p:messages showDetail="true" closable="true" />
+		<h:form prependid="false">
+			<div class="ui-g-12" >
+				<h2>
+					<h:outputText value="#{msgs.investimentos} : #{msgs.rodadas}" />
+				</h2>
+			</div>
+			
+			<h:panelGroup rendered="#{investimentoListaBack.trocaGrupo}">
+				<div class="ui-g-3">
 					<p:outputLabel for="grupo1" value="#{msgs.grupo}:" />
+				</div>
+				<div class="ui-g-9">
 					<h:selectOneMenu value="#{investimentoListaBack.grupo}" id="grupo1"
-						style="width:100%" converter="omnifaces.SelectItemsConverter">
+							converter="omnifaces.SelectItemsConverter" >
 						<f:selectItem noSelectionOption="true"
-							itemLabel="#{msgs.selecione}" />
+								itemLabel="#{msgs.selecione}" />
 						<f:selectItems value="#{investimentoListaBack.grupos}" var="grupo"
-							itemLabel="#{grupo.nome}" itemValue="#{grupo}">
+								itemLabel="#{grupo.nome}" itemValue="#{grupo}">
 						</f:selectItems>
 						<p:ajax update="rodadasTable"
-							listener="#{investimentoListaBack.onGrupoSelect}" process="@this" />
+								listener="#{investimentoListaBack.onGrupoSelect}" process="@this" />
 					</h:selectOneMenu>
 					<p:message for="grupo1" />
-				</p:panelGrid>
-
-				<p:panelGrid columns="3" rendered="#{not investimentoListaBack.trocaGrupo}">
-
+				</div>
+			</h:panelGroup>
+			
+			<h:panelGroup rendered="#{not investimentoListaBack.trocaGrupo}">
+				<div class="ui-g-3">
 					<p:outputLabel for="grupo" value="#{msgs.grupo}:" />
+				</div>
+				<div class="ui-g-9">
 					<h:outputText id="grupo"
-						value="#{investimentoListaBack.grupo.nome}" />
-					<p:message for="grupo" />
-
+							value="#{investimentoListaBack.grupo.nome}" />
+					<p:message for="grupo"/>
+				</div>
+				
+				<div class="ui-g-3">
 					<p:outputLabel for="empresa" value="#{msgs.empresa}:" />
+				</div>
+				<div class="ui-g-9">
 					<h:outputText id="empresa"
 						value="#{investimentoListaBack.empresa.nome}" />
 					<p:message for="empresa" />
-
-				</p:panelGrid>
-
-				<p:commandButton value="#{msgs.pesquisar}"
-					actionListener="#{investimentoListaBack.pesquisar}" ajax="true"
-					update="@form" />
-
+				</div>
+			</h:panelGroup>
+			<!-- 
+			<h:panelGroup rendered="#{investimentoListaBack.trocaGrupo}">
+				<div class="ui-g-12">
+					<p:commandButton value="#{msgs.pesquisar}"
+						actionListener="#{investimentoListaBack.pesquisar}" ajax="true"
+						update="@form" />
+				</div>
+			</h:panelGroup>  -->
+			<div class="ui-g-12">
 				<p:dataTable var="rodada" value="#{investimentoListaBack.dataModel}"
-					border="1" cellpadding="2" cellspacing="0" paginator="true"
-					rows="#{investimentoListaBack.nroRegistrosPorPagina}"
+					paginator="true" rows="#{investimentoListaBack.nroRegistrosPorPagina}"
 					paginatorPosition="bottom"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 					currentPageReportTemplate="({startRecord} - {endRecord} de {totalRecords})"
 					rowsPerPageTemplate="#{investimentoListaBack.opcoesRegistrosPorPagina}"
 					id="rodadasTable" lazy="true"
 					first="#{investimentoListaBack.first}">
-
-					<p:column rendered="#{investimentoListaBack.trocaGrupo}">
+	
+					<p:column  style="text-align: right; width:50px;" priority="1">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.rodada}" />
+						</f:facet>
+						<h:outputText value="#{rodada.numero}" />
+					</p:column>
+	
+					<p:column style="text-align: left;" rendered="#{investimentoListaBack.trocaGrupo}" priority="1">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.grupo}" />
 						</f:facet>
 						<h:outputText value="#{rodada.grupo.nome}" />
 					</p:column>
-
-					<p:column>
+	
+					<p:column style="text-align: center;" priority="1">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.dataInicio}" />
 						</f:facet>
@@ -75,35 +94,27 @@
 								timeZone="#{investimentoListaBack.timeZone}" />
 						</h:outputText>
 					</p:column>
-
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="#{msgs.numero}" />
-						</f:facet>
-						<h:outputText value="#{rodada.numero}" />
-					</p:column>
-
-					<p:column>
+	
+					<p:column style="text-align: center;" priority="3">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.encerrada}" />
 						</f:facet>
-						<p:selectBooleanCheckbox id="encerrada" disabled="true"
-							value="#{rodada.encerrada}" />
-						<h:outputText value="   " rendered="#{rodada.encerrada}" />
+						<!-- <p:selectBooleanCheckbox id="encerrada" disabled="true"
+							value="#{rodada.encerrada}" />  
+						<h:outputText value="   " rendered="#{rodada.encerrada}" /> -->
 						<h:outputText value="#{rodada.dataFim}"
 							rendered="#{rodada.encerrada}">
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
 								timeZone="#{investimentoListaBack.timeZone}" />
 						</h:outputText>
 					</p:column>
-
-
-					<p:column style="width:5%;text-align:center"
+	
+					<p:column style="width:50px; text-align:center" priority="1"
 						rendered="#{permissao.rendered('INVESTIMENTO_LISTAR_INVESTIR')}">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.acoes}" />
 						</f:facet>
-
+	
 						<h:commandLink action="#{investimentoListaBack.novo}"
 							id="investir"
 							rendered="#{permissao.rendered('INVESTIMENTO_LISTAR_INVESTIR') and not rodada.encerrada}">
@@ -132,7 +143,7 @@
 							value="#{msgs.visualizar}" trackMouse="true" />
 					</p:column>
 				</p:dataTable>
-			</h:form>
-		</p:fieldset>
+			</div>
+		</h:form>
 	</ui:define>
 </ui:composition>

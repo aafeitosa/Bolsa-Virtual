@@ -8,12 +8,10 @@
 <h:head>
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width" />
 
 	<title>#{msgs.nome_cliente_software} - #{msgs.nome_software} <ui:insert
 			name="modulo"></ui:insert></title>
-
-	<h:outputStylesheet library="css" name="conteudo.css" />
-	<h:outputStylesheet library="css" name="lasis-custom.css" />
 
 	<ui:insert name="metadata"></ui:insert>
 	<ui:insert name="scripts"></ui:insert>
@@ -21,99 +19,74 @@
 </h:head>
 
 <h:body>
-
+	<h:outputStylesheet library="css" name="conteudo.css" />
+	<h:outputStylesheet library="css" name="lasis-custom.css" />
+	
 	<ui:debug hotkey="M" />
 	
-	<p:growl id="growl1" showDetail="true"/>
+	<!-- <p:growl id="growl1" showDetail="true"/> -->
 
-	<div id="main">
-
-		<div id="header">
-			<h:form prependid="false">
-				<div class="center clearfix">
-					<div class="logo">
+	<div class="ui-g" style="min-height:100%; position:relative;">
+		<ui:include src="/secured/core/dialogSenhaUsuario.xhtml" />
+		<!-- 		<ui:include src="/secured/core/dialogIdiomaUsuario.xhtml"/> -->
+			<div class="ui-g-12">
+				<h:form prependid="false">
+					<div class="ui-g-3 header-top-left">
 						<h:commandLink action="#{loginBack.home}"
 							title="#{msgs.pagina_inicial}">
 							<p:graphicImage library="imagens" name="logo_ucs.png"
-								alt="#{msgs.nome_cliente_software}" width="128" />
+								alt="#{msgs.nome_cliente_software}" style="max-width: 100%" />
 						</h:commandLink>
 					</div>
-					<div class="detail"></div>
-					<div class="user">
-
-						<ul>
-							<li><h:outputText value="#{msgs.administrador}"
+					<div class="ui-g-6" style="text-align: center">
+						<h1>
+							<h:outputText value="#{msgs.nome_software}" />
+						</h1>
+						<h:outputText value="#{msgs.administrador}"
 									rendered="#{loginBack.usuarioLogado.administrador}"
-									style="color:red;" /></li>
-							<li><h:outputText value=" | "
-									rendered="#{loginBack.usuarioLogado.administrador}" /></li>
-
-							<li><h:outputText
-									value="#{loginBack.nomeEmpresaUsuarioLogado}" /></li>
-							<li><h:outputText value=" | " /></li>
-
-							<!-- 							<li><h:outputText value="#{loginBack.nomeUsuarioLogado}" /> </li>-->
-
-							<li><p:commandLink id="nomeUsuario"
-									update="usuarioSenhaForm"
-									oncomplete="PF('alteraSenha').show();"
-									value="#{loginBack.nomeUsuarioLogado}"
-									actionListener="#{dialogSenhaBack.trocaSenha}">
-									<f:param name="id" value="#{loginBack.idUsuarioLogado}" />
-								</p:commandLink> <p:tooltip for="nomeUsuario"
-									value="#{msgs.clique_para_trocar_senha}" /></li>
-
-
-							<li><h:outputText value=" | " /></li>
-
-							<li><h:selectOneMenu value="#{loginBack.periodo}"
-									style="width:80px;" onchange="submit()" valueChangeListener="#{loginBack.mudaPeriodo}"
-									rendered="#{permissao.rendered('PERIODO_SELECIONAR_PERIODO')}"
-									id="periodos" converter="omnifaces.SelectItemsConverter">
-									<f:selectItems value="#{loginBack.periodos}" var="periodo"
-										itemLabel="#{periodo.nome}" itemValue="#{periodo}">
-									</f:selectItems>
-								</h:selectOneMenu></li>
-							<li><h:outputText id="periodo" value="#{loginBack.periodo}" /></li>
-
-							<li><h:outputText value=" | " /></li>
-							<li><p:commandLink action="#{loginBack.logout}"
-									value="#{msgs.sair}" ajax="false" /></li>
-							<li>
-								<!-- 							<p:commandLink id="idiomaUsuario" oncomplete="PF('alteraIdioma').show();"> -->
-								<!-- 									<h:graphicImage --> <!-- 										value="/images/#{loginBack.idioma.arquivo.nomeInterno}" -->
-								<!-- 										width="48" /> --> <!-- 								</p:commandLink> -->
-								<!-- 							<p:tooltip for="idiomaUsuario" value="#{msgs.clique_para_trocar_idioma}"/> -->
-							</li>
-						</ul>
+									style="color:red;" />
 					</div>
-				</div>
-			</h:form>
-		</div>
-
-		<ui:include src="/secured/core/dialogSenhaUsuario.xhtml" />
-		<!-- 		<ui:include src="/secured/core/dialogIdiomaUsuario.xhtml"/> -->
-
-		<div id="content">
-			<div class="login-background">
-
-				<ui:include src="/secured/menu.xhtml" />
-
-				<div class="center clearfix">
-
-					<div id="content-right">
-						<ui:insert name="content">[main content to be replaced]</ui:insert>
+					<div class="ui-g-3">
+						<div class="ui-g-12" style="text-align: right">
+							<h:outputText value="#{loginBack.nomeEmpresaUsuarioLogado} - " />
+							<p:commandLink id="nomeUsuario"
+										update="usuarioSenhaForm"
+										oncomplete="PF('alteraSenha').show();"
+										value="#{loginBack.nomeUsuarioLogado}"
+										actionListener="#{dialogSenhaBack.trocaSenha}">
+										<f:param name="id" value="#{loginBack.idUsuarioLogado}" />
+							</p:commandLink> 
+							<p:tooltip for="nomeUsuario"
+										value="#{msgs.clique_para_trocar_senha}" />
+						</div>
+						<div class="ui-g-12" style="text-align: right">
+							<h:selectOneMenu value="#{loginBack.periodo}"
+								style="width:80px;" onchange="submit()" valueChangeListener="#{loginBack.mudaPeriodo}"
+								rendered="#{permissao.rendered('PERIODO_SELECIONAR_PERIODO')}"
+								id="periodos" converter="omnifaces.SelectItemsConverter">
+								<f:selectItems value="#{loginBack.periodos}" var="periodo"
+									itemLabel="#{periodo.nome}" itemValue="#{periodo}">
+								</f:selectItems>
+							</h:selectOneMenu>
+							<p:commandLink action="#{loginBack.logout}"
+								value="#{msgs.sair}" ajax="false" />
+							<!-- 							<p:commandLink id="idiomaUsuario" oncomplete="PF('alteraIdioma').show();"> -->
+							<!-- 									<h:graphicImage --> <!-- 										value="/images/#{loginBack.idioma.arquivo.nomeInterno}" -->
+							<!-- 										width="48" /> --> <!-- 								</p:commandLink> -->
+							<!-- 							<p:tooltip for="idiomaUsuario" value="#{msgs.clique_para_trocar_idioma}"/> -->
+						</div>
 					</div>
-
-				</div>
+				</h:form>
 			</div>
+			
+	
+		<div class="ui-g-12" style="padding-bottom: 60px">
+			<ui:include src="/secured/menu.xhtml" />
+			<ui:insert name="content">[main content to be replaced]</ui:insert>
 		</div>
-		<div id="footer">
-			<div class="center-fixed">
-				<p>#{msgs.copyrights}</p>
-			</div>
+		<div class="ui-g-12" id="footer">
+			<h:outputText value="#{msgs.copyrights}" />
 		</div>
-
 	</div>
 </h:body>
 

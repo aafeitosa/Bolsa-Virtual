@@ -7,21 +7,21 @@
 	template="/WEB-INF/templates/templateComMenu.xhtml">
 
 	<ui:define name="content">
+		<h:form id="rodadasForm">
+			<p:growl id="msgs" showDetail="true" sticky="true" />
+			<div class="ui-g-12" >
+				<h2>
+					<h:outputText value="#{msgs.rodada} #{investimentoFormBack.rodada.numero} : #{msgs.investimentos}" />
+				</h2>
+			</div>			
 
-		<p:fieldset
-			legend="#{msgs.rodada} #{investimentoFormBack.rodada.numero} : #{msgs.investimentos}"
-			style="margin-bottom:20px">
-
-			<h:form id="rodadasForm">
-
-				<p:growl id="msgs" showDetail="true" sticky="true" />
-
-				<p:panelGrid columns="3"
-					rendered="#{investimentoFormBack.trocaEmpresas}">
-
+			<h:panelGroup rendered="#{investimentoFormBack.trocaEmpresas}">
+				<div class="ui-g-3">
 					<p:outputLabel for="grupo1" value="#{msgs.grupo}:" />
+				</div>
+				<div class="ui-g-9">
 					<h:selectOneMenu value="#{investimentoFormBack.grupo}" id="grupo1"
-						style="width:100%" converter="omnifaces.SelectItemsConverter">
+							converter="omnifaces.SelectItemsConverter">
 						<f:selectItem noSelectionOption="true"
 							itemLabel="#{msgs.selecione}" />
 						<f:selectItems value="#{investimentoFormBack.grupos}" var="grupo"
@@ -32,10 +32,14 @@
 							listener="#{investimentoFormBack.onGrupoSelect}" process="@this" />
 					</h:selectOneMenu>
 					<p:message for="grupo1" />
+				</div>
 
+				<div class="ui-g-3">
 					<p:outputLabel for="empresas" value="#{msgs.empresa}:" />
+				</div>
+				<div class="ui-g-9">
 					<h:selectOneMenu id="empresas"
-						value="#{investimentoFormBack.empresa}" style="width:100%"
+						value="#{investimentoFormBack.empresa}"
 						converter="omnifaces.SelectItemsConverter">
 						<f:selectItem noSelectionOption="true"
 							itemLabel="#{msgs.selecione}" />
@@ -46,96 +50,108 @@
 							process="@this" />
 					</h:selectOneMenu>
 					<p:message for="empresas" />
-
-				</p:panelGrid>
-
-				<p:panelGrid columns="3"
-					rendered="#{not investimentoFormBack.trocaEmpresas}">
-
+				</div>
+			</h:panelGroup>
+			
+			<h:panelGroup rendered="#{not investimentoFormBack.trocaEmpresas}">
+				<div class="ui-g-3">
 					<p:outputLabel for="grupo" value="#{msgs.grupo}:" />
+				</div>
+				<div class="ui-g-9">
 					<h:outputText id="grupo"
 						value="#{investimentoFormBack.rodada.grupo.nome}" />
-
 					<p:message for="grupo" />
-
+				</div>
+				<div class="ui-g-3">
 					<p:outputLabel for="empresa" value="#{msgs.empresa}:" />
+				</div>
+				<div class="ui-g-9">
 					<h:outputText id="empresa"
 						value="#{investimentoFormBack.empresa.nome}" />
 					<p:message for="empresa" />
+				</div>
+			</h:panelGroup>
 
-				</p:panelGrid>
-
-				<p:panelGrid columns="3">
-
-					<p:outputLabel for="numero" value="#{msgs.rodada}:" />
-					<h:outputText id="numero"
-						value="#{investimentoFormBack.rodada.numero}" />
-					<p:message for="numero" />
-
-					<p:outputLabel for="valor1" value="#{msgs.valor}:" />
-					<p:panelGrid columns="4">
-					<h:outputText id="valor1"
-						value="#{investimentoFormBack.valorInvestido}">
-						<f:convertNumber type="currency" currencySymbol="R$" />
-					</h:outputText>
-					<h:outputText id="valor2" value=" de " />
-					<h:outputText id="valor3" value="#{investimentoFormBack.valor}">
-						<f:convertNumber type="currency" currencySymbol="R$" />
-					</h:outputText>
-					</p:panelGrid>
-					<p:message for="valor1" />
-
-
-					<p:outputLabel for="numeroMaximoInvestimentos"
+			<div class="ui-g-3">
+				<p:outputLabel for="numero" value="#{msgs.rodada}:" />
+			</div>
+			<div class="ui-g-9">
+				<h:outputText id="numero"
+					value="#{investimentoFormBack.rodada.numero}" />
+				<p:message for="numero" />
+			</div>
+			<div class="ui-g-3">
+				<p:outputLabel for="valor1" value="#{msgs.valor}:" />
+			</div>
+			<div class="ui-g-9">
+				<h:outputText id="valor1"
+					value="#{investimentoFormBack.valorInvestido}">
+					<f:convertNumber type="currency" currencySymbol="R$" />
+				</h:outputText>
+				<h:outputText id="valor2" value=" de " />
+				<h:outputText id="valor3" value="#{investimentoFormBack.valor}">
+					<f:convertNumber type="currency" currencySymbol="R$" />
+				</h:outputText>
+				<p:message for="valor1" />
+			</div>
+			<div class="ui-g-3">
+				<p:outputLabel for="numeroMaximoInvestimentos"
 						value="#{msgs.investimentos}:" />
-					<h:outputText id="numeroMaximoInvestimentos"
-						value="#{investimentoFormBack.nroInvestimentos} de #{investimentoFormBack.rodada.numeroMaximoInvestimentos}" />
-					<p:message for="numeroMaximoInvestimentos" />
-
-					<p:outputLabel for="valorRodada" value="#{msgs.valorRodada}:" />
-					<h:outputText id="valorRodada"
-						value="#{investimentoFormBack.valorRodada}">
-						<f:convertNumber type="currency" currencySymbol="R$" />
-					</h:outputText>
-					<p:message for="valorRodada" />
-
-					<p:outputLabel for="resultadoAnterior"
+			</div>
+			<div class="ui-g-9">
+				<h:outputText id="numeroMaximoInvestimentos"
+					value="#{investimentoFormBack.nroInvestimentos} de #{investimentoFormBack.rodada.numeroMaximoInvestimentos}" />
+				<p:message for="numeroMaximoInvestimentos" />
+			</div>
+			<div class="ui-g-3">
+				<p:outputLabel for="valorRodada" value="#{msgs.valorRodada}:" />
+			</div>
+			<div class="ui-g-9">
+				<h:outputText id="valorRodada"
+					value="#{investimentoFormBack.valorRodada}">
+					<f:convertNumber type="currency" currencySymbol="R$" />
+				</h:outputText>
+				<p:message for="valorRodada" />
+			</div>
+			<div class="ui-g-3">
+				<p:outputLabel for="resultadoAnterior"
 						value="#{msgs.resultado_anterior}:" />
-					<h:outputText id="resultadoAnterior"
-						value="#{investimentoFormBack.resultadoAnterior}">
-						<f:convertNumber type="currency" currencySymbol="R$" />
-					</h:outputText>
-					<p:message for="resultadoAnterior" />
-
-
-				</p:panelGrid>
-
+			</div>
+			<div class="ui-g-9">
+				<h:outputText id="resultadoAnterior"
+					value="#{investimentoFormBack.resultadoAnterior}">
+					<f:convertNumber type="currency" currencySymbol="R$" />
+				</h:outputText>
+				<p:message for="resultadoAnterior" />
+			</div>
+			<div class="ui-g-12">
 				<p:remoteCommand name="onCellEdit"
 					update=":rodadasForm:investimentosTable :rodadasForm:msgs" />
 				<p:dataTable var="investimento"
 					editable="#{not investimentoFormBack.rodada.encerrada}"
 					editMode="cell" widgetVar="cellInvests"
-					value="#{investimentoFormBack.investimentos}" border="1"
-					cellpadding="2" cellspacing="0" id="investimentosTable">
+					value="#{investimentoFormBack.investimentos}" id="investimentosTable">
 
 					<p:ajax event="cellEdit"
 						listener="#{investimentoFormBack.onCellEdit}"
 						update=":rodadasForm:msgs :rodadasForm:valor1 :rodadasForm:valor3 :rodadasForm:numeroMaximoInvestimentos" />
 
-					<p:column>
+					<p:column style="text-align: left;">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.empresa}" />
 						</f:facet>
 						<h:outputText value="#{investimento.investida.nome}" />
 					</p:column>
 
-					<p:column id="editar_valor">
+					<p:column id="editar_valor" style="text-align: right;">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.valor}" />
 						</f:facet>
 						<p:cellEditor>
 							<f:facet name="output">
-								<h:outputText value="#{investimento.valor}" />
+								<h:outputText value="#{investimento.valor}">
+									<f:convertNumber type="currency" currencySymbol="R$" />
+								</h:outputText>
 							</f:facet>
 							<f:facet name="input">
 								<p:inputText id="modelInput" value="#{investimento.valor}"
@@ -147,7 +163,8 @@
 						value="#{msgs.clique_para_editar}" trackMouse="true" />
 
 				</p:dataTable>
-
+			</div>
+			<div class="ui-g-12">
 				<p:commandButton value="#{msgs.salvar}"
 					rendered="#{permissao.rendered('INVESTIMENTO_EDITAR_SALVAR') and not investimentoFormBack.rodada.encerrada}"
 					action="#{investimentoFormBack.salva}" ajax="false">
@@ -164,7 +181,7 @@
 					<f:param name="nro"
 						value="#{investimentoFormBack.nroRegistrosPorPagina}" />
 				</p:commandButton>
-			</h:form>
-		</p:fieldset>
+			</div>
+		</h:form>
 	</ui:define>
 </ui:composition>

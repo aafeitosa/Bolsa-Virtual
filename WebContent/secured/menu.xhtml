@@ -4,80 +4,84 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-
-<h:form id="formMenu">
-	<p:menubar>
-		<p:submenu label="#{msgs.administracao}"
-			rendered="#{permissao.rendered('ADMINISTRATIVO')}">
-<!-- 			<p:menuitem value="#{msgs.empresas}" -->
-<!-- 				url="/secured/core/listaEmpresas.jsf" -->
-<!-- 				rendered="#{permissao.rendered('EMPRESA') and permissao.empresaPrincipal}" /> -->
-<!-- 			<p:menuitem value="#{msgs.empresas}" -->
-<!-- 				url="/secured/core/formEmpresas.jsf" -->
-<!-- 				rendered="#{permissao.rendered('EMPRESA') and not permissao.empresaPrincipal}"/> -->
- 			<p:menuitem value="#{msgs.parametros}" 
- 				url="/secured/core/listaParametros.jsf" 
- 				rendered="#{permissao.rendered('PARAMETRO')}" /> 
-<!-- 			<p:menuitem value="#{msgs.idiomas}" -->
-<!-- 				url="/secured/core/listaIdiomas.jsf" -->
-<!-- 				rendered="#{permissao.rendered('IDIOMA')}" /> -->
-			<p:menuitem value="#{msgs.traducoes}"
-				url="/secured/core/listaTraducoes.jsf"
-				rendered="#{permissao.rendered('TRADUCAO')}" />
-			<p:menuitem value="#{msgs.perfis}"
-				url="/secured/core/listaPerfis.jsf"
-				rendered="#{permissao.rendered('PERFIL')}" />
-			<p:menuitem value="#{msgs.usuarios}"
-				url="/secured/core/listaUsuarios.jsf"
-				rendered="#{permissao.rendered('USUARIO')}" />
-			<p:menuitem value="Bootsfaces"
-				url="/secured/responsive.jsf"
-				rendered="#{permissao.rendered('USUARIO')}" />
-		</p:submenu>
-		
-		<p:submenu label="#{msgs.cadastros}" 
-			rendered="#{permissao.rendered('CADASTROS')}">
+	
+	<h:form id="desktopMenu">
+		<p:menubar>
+			<p:submenu label="#{msgs.administracao}"
+				rendered="#{permissao.rendered('ADMINISTRATIVO')}">
+	<!-- 			<p:menuitem value="#{msgs.empresas}" -->
+	<!-- 				url="/secured/core/listaEmpresas.jsf" -->
+	<!-- 				rendered="#{permissao.rendered('EMPRESA') and permissao.empresaPrincipal}" /> -->
+	<!-- 			<p:menuitem value="#{msgs.empresas}" -->
+	<!-- 				url="/secured/core/formEmpresas.jsf" -->
+	<!-- 				rendered="#{permissao.rendered('EMPRESA') and not permissao.empresaPrincipal}"/> -->
+	 			<p:menuitem value="#{msgs.parametros}" 
+	 				url="/secured/core/listaParametros.jsf" 
+	 				rendered="#{permissao.rendered('PARAMETRO')}" /> 
+	<!-- 			<p:menuitem value="#{msgs.idiomas}" -->
+	<!-- 				url="/secured/core/listaIdiomas.jsf" -->
+	<!-- 				rendered="#{permissao.rendered('IDIOMA')}" /> -->
+				<p:menuitem value="#{msgs.traducoes}"
+					url="/secured/core/listaTraducoes.jsf"
+					rendered="#{permissao.rendered('TRADUCAO')}" />
+				<p:menuitem value="#{msgs.perfis}"
+					url="/secured/core/listaPerfis.jsf"
+					rendered="#{permissao.rendered('PERFIL')}" />
+				<p:menuitem value="#{msgs.usuarios}"
+					url="/secured/core/listaUsuarios.jsf"
+					rendered="#{permissao.rendered('USUARIO')}" />
+				<p:menuitem value="Bootsfaces"
+					url="/secured/responsive.jsf"
+					rendered="#{permissao.rendered('USUARIO')}" />
+			</p:submenu>
+			
 			<p:menuitem value="#{msgs.dashboard}"
-				url="/secured/dashboard.jsf"
-				rendered="#{permissao.rendered('DASHBOARD')}" />
-			<p:menuitem value="#{msgs.ramosAtividades}"
-				url="/secured/core/listaRamosAtividades.jsf"
-				rendered="#{permissao.rendered('RAMO_ATIVIDADE') and permissao.empresaPrincipal}" />
-			<p:menuitem value="#{msgs.empresas}"
-				url="/secured/core/listaEmpresas.jsf"
-				rendered="#{permissao.rendered('EMPRESA') and permissao.empresaPrincipal}" />
-			<p:menuitem value="#{msgs.empresas}"
-				url="/secured/core/formEmpresas.jsf"
-				rendered="#{permissao.rendered('EMPRESA') and not permissao.empresaPrincipal}"/>
-			<p:menuitem value="#{msgs.alunos}"
-				url="/secured/listaAlunos.jsf"
-				rendered="#{permissao.rendered('ALUNO')}" />
-			<p:menuitem value="#{msgs.professores}"
-				url="/secured/listaProfessores.jsf"
-				rendered="#{permissao.rendered('PROFESSOR')}" />
-			<p:menuitem value="#{msgs.grupos}"
-				url="/secured/listaGrupos.jsf"
-				rendered="#{permissao.rendered('GRUPO')}" />
-			<p:menuitem value="#{msgs.periodos}"
-				url="/secured/listaPeriodos.jsf"
-				rendered="#{permissao.rendered('PERIODO')}" />
-			<p:menuitem value="#{msgs.rodadas}"
-				url="/secured/listaRodadas.jsf"
-				rendered="#{permissao.rendered('RODADA')}" />
-			<p:menuitem value="#{msgs.investimentos}"
-				url="/secured/listaInvestimentos.jsf"
-				rendered="#{permissao.rendered('INVESTIMENTO')}" />
+					url="/secured/dashboard.jsf" icon="fa fa-dashboard menuIcons"
+					rendered="#{permissao.rendered('DASHBOARD')}" />
 			<p:menuitem value="#{msgs.resultados}"
-				url="/secured/listaResultados.jsf"
-				rendered="#{permissao.rendered('RESULTADO')}" />
-
-
-<!-- 			<p:menuitem value="#{msgs.equipamentos}" url="/secured/listaEquipamentos.jsf" -->
-<!-- 				rendered="#{permissao.rendered('EQUIPAMENTO')}" /> -->
-<!-- 			<p:menuitem value="#{msgs.operadores}" url="/secured/listaOperadores.jsf" -->
-<!-- 				rendered="#{permissao.rendered('OPERADOR')}" /> -->
-		</p:submenu>
-		<p:menuitem value="#{msgs.home}" url="/secured/home.jsf" />
-	</p:menubar>
-</h:form>
+					url="/secured/listaResultados.jsf" icon="fa fa-file-o menuIcons"
+					rendered="#{permissao.rendered('RESULTADO')}" />
+			<p:menuitem value="#{msgs.investimentos}"
+					url="/secured/listaInvestimentos.jsf" icon="fa fa-dollar menuIcons"
+					rendered="#{permissao.rendered('INVESTIMENTO')}" />
+			
+			<p:submenu label="#{msgs.cadastros}" 
+				rendered="#{permissao.rendered('CADASTROS')}">
+				
+				<p:menuitem value="#{msgs.ramosAtividades}"
+					url="/secured/core/listaRamosAtividades.jsf"
+					rendered="#{permissao.rendered('RAMO_ATIVIDADE') and permissao.empresaPrincipal}" />
+				<p:menuitem value="#{msgs.empresas}"
+					url="/secured/core/listaEmpresas.jsf" icon="fa fa-building-o menuIcons"
+					rendered="#{permissao.rendered('EMPRESA') and permissao.empresaPrincipal}" />
+				<p:menuitem value="#{msgs.empresas}"
+					url="/secured/core/formEmpresas.jsf" icon="fa fa-building-o menuIcons"
+					rendered="#{permissao.rendered('EMPRESA') and not permissao.empresaPrincipal}"/>
+				<p:menuitem value="#{msgs.alunos}"
+					url="/secured/listaAlunos.jsf" icon="fa fa-user menuIcons"
+					rendered="#{permissao.rendered('ALUNO')}" />
+				<p:menuitem value="#{msgs.professores}"
+					url="/secured/listaProfessores.jsf"
+					rendered="#{permissao.rendered('PROFESSOR')}" />
+				<p:menuitem value="#{msgs.grupos}"
+					url="/secured/listaGrupos.jsf" icon="fa fa-users menuIcons"
+					rendered="#{permissao.rendered('GRUPO')}" />
+				<p:menuitem value="#{msgs.periodos}"
+					url="/secured/listaPeriodos.jsf"
+					rendered="#{permissao.rendered('PERIODO')}" />
+				<p:menuitem value="#{msgs.rodadas}"
+					url="/secured/listaRodadas.jsf"
+					rendered="#{permissao.rendered('RODADA')}" />
+				
+				
+	
+	
+	<!-- 			<p:menuitem value="#{msgs.equipamentos}" url="/secured/listaEquipamentos.jsf" -->
+	<!-- 				rendered="#{permissao.rendered('EQUIPAMENTO')}" /> -->
+	<!-- 			<p:menuitem value="#{msgs.operadores}" url="/secured/listaOperadores.jsf" -->
+	<!-- 				rendered="#{permissao.rendered('OPERADOR')}" /> -->
+			</p:submenu>
+	<!--		<p:menuitem value="#{msgs.home}" url="/secured/home.jsf" /> -->
+		</p:menubar>
+	</h:form>
 </ui:composition>

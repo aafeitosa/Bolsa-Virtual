@@ -7,167 +7,164 @@
 	template="/WEB-INF/templates/templateComMenu.xhtml">
 
 	<ui:define name="content">
+		<h:form id="gruposForm">
+			<div class="ui-g-12" >
+				<h2>
+					<h:outputText value="#{msgs.resuldados_do_grupo} #{resultadoFormBack.grupo.nome}" />
+				</h2>
+			</div>
+			<div class="ui-g-12" >
+				<p:tabView id="tab-view-resultados" activeIndex="0" dynamic="false"
+					cache="false">
 
-		<div style="width: 100%;">
+					<p:tab id="tab0-grafico" title="#{msgs.evolucao_das_empresas}"
+						disabled="#{permissao.disabled('RESULTADO_VISUALIZAR_ACESSAR_ABA_GRAFICO')}">
 
-			<p:fieldset
-				legend="#{msgs.resuldados_do_grupo} #{resultadoFormBack.grupo.nome}"
-				style="width:1000px; margin-bottom:20px;display:inline-block;">
+						<p:chart type="line" model="#{resultadoFormBack.chartModel}"
+							style="height:700px;" />
+					</p:tab>
 
-				<h:form id="gruposForm">
+					<p:tab id="tab0-resultados" title="#{msgs.resultados}"
+						disabled="#{permissao.disabled('RESULTADO_VISUALIZAR_ACESSAR_ABA_RESULTADOS')}">
 
-					<p:tabView id="tab-view-resultados" activeIndex="0" dynamic="false"
-						cache="false">
+						<p:panelGrid columns="3">
 
-						<p:tab id="tab0-grafico" title="#{msgs.evolucao_das_empresas}"
-							disabled="#{permissao.disabled('RESULTADO_VISUALIZAR_ACESSAR_ABA_GRAFICO')}">
+							<p:outputLabel for="rodada" value="#{msgs.rodada}:" />
 
-							<p:chart type="line" model="#{resultadoFormBack.chartModel}"
-								style="height:700px;" />
-						</p:tab>
+							<h:selectOneMenu value="#{resultadoFormBack.rodada}" id="rodada"
+								style="width:100%" converter="omnifaces.SelectItemsConverter">
+								<f:selectItem noSelectionOption="true"
+									itemLabel="#{msgs.selecione}" />
+								<f:selectItems value="#{resultadoFormBack.rodadas}"
+									var="rodada" itemLabel="#{rodada.numero}"
+									itemValue="#{rodada}" />
+								<p:ajax update="resultados-empresas"
+									listener="#{resultadoFormBack.onRodadaSelect}" process="@this" />
+							</h:selectOneMenu>
+							<p:message for="rodada" />
 
-						<p:tab id="tab0-resultados" title="#{msgs.resultados}"
-							disabled="#{permissao.disabled('RESULTADO_VISUALIZAR_ACESSAR_ABA_RESULTADOS')}">
+						</p:panelGrid>
 
-							<p:panelGrid columns="3">
+						<p:dataTable id="resultados-empresas"
+							value="#{resultadoFormBack.resultadosDtos}" var="dto">
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{msgs.empresa}" />
+								</f:facet>
+								<h:outputText value="#{dto.empresa.nome}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{msgs.resultado}" />
+								</f:facet>
+								<div align="right">
+									<h:outputText value="#{dto.resultado}">
+										<f:convertNumber type="currency" currencySymbol="R$" />
+									</h:outputText>
+								</div>
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{msgs.percentual_atratividade}" />
+								</f:facet>
+								<div align="right">
+									<h:outputText value="#{dto.atratividade}" />
+								</div>
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{msgs.posicao}" />
+								</f:facet>
+								<div align="center">
+									<h:outputText value="#{dto.posicaoAtual}" />
+								</div>
+							</p:column>
+							<p:column rendered="#{resultadoFormBack.rodada.numero gt 1}">
+								<f:facet name="header">
+									<h:outputText value="#{msgs.variacao_posicao}" />
+								</f:facet>
+								<div align="center">
+									<p:graphicImage library="imagens" name="up.png"
+										alt="#{msgs.sobe}" rendered="#{dto.variacao gt 0}" />
+									<p:graphicImage library="imagens" name="down.png"
+										alt="#{msgs.desce}" rendered="#{dto.variacao lt 0}" />
+									<p:graphicImage library="imagens" name="equal.png"
+										alt="#{msgs.permanece}" rendered="#{dto.variacao eq 0}" />
+									<h:outputText value="(#{dto.variacao})"
+										rendered="#{dto.variacao ne 0}" />
+								</div>
+							</p:column>
+						</p:dataTable>
 
-								<p:outputLabel for="rodada" value="#{msgs.rodada}:" />
+					</p:tab>
 
-								<h:selectOneMenu value="#{resultadoFormBack.rodada}" id="rodada"
-									style="width:100%" converter="omnifaces.SelectItemsConverter">
-									<f:selectItem noSelectionOption="true"
-										itemLabel="#{msgs.selecione}" />
-									<f:selectItems value="#{resultadoFormBack.rodadas}"
-										var="rodada" itemLabel="#{rodada.numero}"
-										itemValue="#{rodada}" />
-									<p:ajax update="resultados-empresas"
-										listener="#{resultadoFormBack.onRodadaSelect}" process="@this" />
-								</h:selectOneMenu>
-								<p:message for="rodada" />
+					<p:tab id="tab0-variacoes" title="#{msgs.variacoes}"
+						disabled="#{permissao.disabled('RESULTADO_VISUALIZAR_ACESSAR_ABA_VARIACOES')}">
 
-							</p:panelGrid>
+						<p:panelGrid columns="3">
 
-							<p:dataTable id="resultados-empresas"
-								value="#{resultadoFormBack.resultadosDtos}" var="dto">
-								<p:column>
-									<f:facet name="header">
-										<h:outputText value="#{msgs.empresa}" />
-									</f:facet>
-									<h:outputText value="#{dto.empresa.nome}" />
-								</p:column>
-								<p:column>
-									<f:facet name="header">
-										<h:outputText value="#{msgs.resultado}" />
-									</f:facet>
-									<div align="right">
-										<h:outputText value="#{dto.resultado}">
-											<f:convertNumber type="currency" currencySymbol="R$" />
-										</h:outputText>
-									</div>
-								</p:column>
-								<p:column>
-									<f:facet name="header">
-										<h:outputText value="#{msgs.percentual_atratividade}" />
-									</f:facet>
-									<div align="right">
-										<h:outputText value="#{dto.atratividade}" />
-									</div>
-								</p:column>
-								<p:column>
-									<f:facet name="header">
-										<h:outputText value="#{msgs.posicao}" />
-									</f:facet>
-									<div align="center">
-										<h:outputText value="#{dto.posicaoAtual}" />
-									</div>
-								</p:column>
-								<p:column rendered="#{resultadoFormBack.rodada.numero gt 1}">
-									<f:facet name="header">
-										<h:outputText value="#{msgs.variacao_posicao}" />
-									</f:facet>
-									<div align="center">
-										<p:graphicImage library="imagens" name="up.png"
-											alt="#{msgs.sobe}" rendered="#{dto.variacao gt 0}" />
-										<p:graphicImage library="imagens" name="down.png"
-											alt="#{msgs.desce}" rendered="#{dto.variacao lt 0}" />
-										<p:graphicImage library="imagens" name="equal.png"
-											alt="#{msgs.permanece}" rendered="#{dto.variacao eq 0}" />
-										<h:outputText value="(#{dto.variacao})"
-											rendered="#{dto.variacao ne 0}" />
-									</div>
-								</p:column>
-							</p:dataTable>
+							<p:outputLabel for="rodada" value="#{msgs.rodada}:" />
 
-						</p:tab>
+							<h:selectOneMenu value="#{resultadoFormBack.rodada}"
+								id="rodada_v" style="width:100%"
+								converter="omnifaces.SelectItemsConverter">
+								<f:selectItem noSelectionOption="true"
+									itemLabel="#{msgs.selecione}" />
+								<f:selectItems value="#{resultadoFormBack.rodadas}"
+									var="rodada" itemLabel="#{rodada.numero}"
+									itemValue="#{rodada}" />
+								<p:ajax update="resultados-variacoes"
+									listener="#{resultadoFormBack.onRodadaSelect}" process="@this" />
+							</h:selectOneMenu>
+							<p:message for="rodada_v" />
 
-						<p:tab id="tab0-variacoes" title="#{msgs.variacoes}"
-							disabled="#{permissao.disabled('RESULTADO_VISUALIZAR_ACESSAR_ABA_VARIACOES')}">
+						</p:panelGrid>
 
-							<p:panelGrid columns="3">
+						<p:dataTable var="variacao"
+							value="#{resultadoFormBack.variacoes}" styleClass="variacoes"
+							border="1" cellpadding="2" editMode="cell" cellspacing="0"
+							id="resultados-variacoes"
+							rowStyleClass="#{variacao.variacao gt 0 ? 'blue' : 'red'}">
 
-								<p:outputLabel for="rodada" value="#{msgs.rodada}:" />
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{msgs.ramo_atividade}" />
+								</f:facet>
+								<h:outputText value="#{variacao.ramoAtividade.nome}" />
+							</p:column>
 
-								<h:selectOneMenu value="#{resultadoFormBack.rodada}"
-									id="rodada_v" style="width:100%"
-									converter="omnifaces.SelectItemsConverter">
-									<f:selectItem noSelectionOption="true"
-										itemLabel="#{msgs.selecione}" />
-									<f:selectItems value="#{resultadoFormBack.rodadas}"
-										var="rodada" itemLabel="#{rodada.numero}"
-										itemValue="#{rodada}" />
-									<p:ajax update="resultados-variacoes"
-										listener="#{resultadoFormBack.onRodadaSelect}" process="@this" />
-								</h:selectOneMenu>
-								<p:message for="rodada_v" />
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{msgs.variacao}" />
+								</f:facet>
+								<div align="right">
+									<h:outputText value="#{variacao.variacao} %" />
+								</div>
+							</p:column>
 
-							</p:panelGrid>
+						</p:dataTable>
 
-							<p:dataTable var="variacao"
-								value="#{resultadoFormBack.variacoes}" styleClass="variacoes"
-								border="1" cellpadding="2" editMode="cell" cellspacing="0"
-								id="resultados-variacoes"
-								rowStyleClass="#{variacao.variacao gt 0 ? 'blue' : 'red'}">
+					</p:tab>
 
-								<p:column>
-									<f:facet name="header">
-										<h:outputText value="#{msgs.ramo_atividade}" />
-									</f:facet>
-									<h:outputText value="#{variacao.ramoAtividade.nome}" />
-								</p:column>
+					<p:tab id="tab0-grafico_setor" title="#{msgs.variacoes_grafico}"
+						disabled="#{permissao.disabled('RESULTADO_VISUALIZAR_ACESSAR_ABA_VARIACOES_GRAFICO')}">
 
-								<p:column>
-									<f:facet name="header">
-										<h:outputText value="#{msgs.variacao}" />
-									</f:facet>
-									<div align="right">
-										<h:outputText value="#{variacao.variacao} %" />
-									</div>
-								</p:column>
-
-							</p:dataTable>
-
-						</p:tab>
-
-						<p:tab id="tab0-grafico_setor" title="#{msgs.variacoes_grafico}"
-							disabled="#{permissao.disabled('RESULTADO_VISUALIZAR_ACESSAR_ABA_VARIACOES_GRAFICO')}">
-
-							<p:chart type="line" model="#{resultadoFormBack.chartModelSetor}"
-								style="height:400px;" />
-						</p:tab>
+						<p:chart type="line" model="#{resultadoFormBack.chartModelSetor}"
+							style="height:400px;" />
+					</p:tab>
 
 
-					</p:tabView>
-
-					<p:commandButton value="#{msgs.voltar}"
-						action="#{resultadoFormBack.listagem}" ajax="false">
-						<f:param name="first" value="#{resultadoFormBack.first}" />
-						<f:param name="nro"
-							value="#{resultadoFormBack.nroRegistrosPorPagina}" />
-					</p:commandButton>
-
-				</h:form>
-			</p:fieldset>
-		</div>
+				</p:tabView>
+			</div>
+			<div class="ui-g-12" >
+				<p:commandButton value="#{msgs.voltar}"
+					action="#{resultadoFormBack.listagem}" ajax="false">
+					<f:param name="first" value="#{resultadoFormBack.first}" />
+					<f:param name="nro"
+						value="#{resultadoFormBack.nroRegistrosPorPagina}" />
+				</p:commandButton>
+			</div>
+		</h:form>
 	</ui:define>
 
 </ui:composition>
