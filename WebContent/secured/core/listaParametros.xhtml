@@ -7,16 +7,23 @@
 	template="/WEB-INF/templates/templateComMenu.xhtml">
 
 	<ui:define name="content">
-
-		<p:fieldset legend="#{msgs.parametros}" style="margin-bottom:20px">
-
-			<h:form id="listaParametrosForm">
-
-				<p:growl id="msgs" showDetail="true" sticky="true" />
-
+		<h:form id="listaParametrosForm">
+			<p:growl id="msgs" showDetail="true" sticky="true" />
+			<div class="ui-g-12" >
+				<h2>
+					<h:outputText value="#{msgs.parametros}" />
+				</h2>
+			</div>
+			<div class="ui-g-12" >
 				<p:dataTable var="parametro" editable="true"
-					value="#{parametroListaBack.parametros}" border="1"
-					id="parametrosTable">
+					value="#{parametroListaBack.parametros}"
+					id="parametrosTable" 
+					rows="#{parametroListaBack.nroRegistrosPorPagina}"
+					paginatorPosition="bottom" paginator="true"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+					currentPageReportTemplate="({startRecord} - {endRecord} de {totalRecords})"
+					rowsPerPageTemplate="#{parametroListaBack.opcoesRegistrosPorPagina}"
+					lazy="true" first="#{parametroListaBack.first}">
 
 					<p:ajax event="rowEdit" listener="#{parametroListaBack.onRowEdit}"
 						update=":listaParametrosForm:msgs" />
@@ -24,28 +31,28 @@
 						listener="#{parametroListaBack.onRowCancel}"
 						update=":listaParametrosForm:msgs" />
 
-					<p:column>
+					<p:column style="text-align: left;">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.modulo}" />
 						</f:facet>
 						<h:outputText value="#{parametro.modulo}" />
 					</p:column>
 
-					<p:column>
+					<p:column style="text-align: left;">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.parametro}" />
 						</f:facet>
 						<h:outputText value="#{parametro.tipo}" />
 					</p:column>
 
-					<p:column>
+					<p:column style="text-align: left;">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.tipo_dado}" />
 						</f:facet>
 						<h:outputText value="#{parametro.tipoDado}" />
 					</p:column>
 
-					<p:column>
+					<p:column style="text-align: left;">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.valor}" />
 						</f:facet>
@@ -60,14 +67,16 @@
 						</p:cellEditor>
 					</p:column>
 
-					<p:column style="width:3%;text-align:center">
-						<p:rowEditor />
+					<p:column style="width:45px;text-align:center">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.acoes}" />
+						</f:facet>
+						<p:rowEditor/>
 					</p:column>
 
 				</p:dataTable>
-
-			</h:form>
-		</p:fieldset>
+			</div>
+		</h:form>
 	</ui:define>
 
 </ui:composition>

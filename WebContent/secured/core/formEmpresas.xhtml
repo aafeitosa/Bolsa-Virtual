@@ -7,63 +7,79 @@
 	template="/WEB-INF/templates/templateComMenu.xhtml">
 
 	<ui:define name="content">
-
-		<p:fieldset
-			legend="#{msgs.mantem} #{msgs.empresas} : #{empresaFormBack.empresa.nome}"
-			style="margin-bottom:20px">
-
-			<h:form id="empresasForm">
-
-				<p:growl id="msgs" showDetail="true" sticky="true" />
-
-				<p:panelGrid columns="3">
-
-					<p:outputLabel for="nome" value="#{msgs.nome}:" />
-					<p:inputText id="nome" value="#{empresaFormBack.empresa.nome}"
+		<h:form id="empresasForm">
+			<p:growl id="msgs" showDetail="true" sticky="true" />	
+			<div class="ui-g-12" >
+				<h2>
+					<h:outputText value="#{msgs.mantem} #{msgs.empresas}" />
+				</h2>
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="nome" value="#{msgs.nome}:" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<p:inputText id="nome" value="#{empresaFormBack.empresa.nome}"
 						maxlength="60" />
-					<p:message for="nome" />
+				<p:message for="nome" />
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="acronimo" value="#{msgs.acronimo}:" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<p:inputText id="acronimo"
+					value="#{empresaFormBack.empresa.acronimo}" maxlength="10" />
+				<p:message for="acronimo" />
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="descricao" value="#{msgs.descricao}:" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<p:inputText id="descricao"
+					value="#{empresaFormBack.empresa.descricao}" maxlength="255" />
+				<p:message for="descricao" />
+			</div>
 
-					<p:outputLabel for="acronimo" value="#{msgs.acronimo}:" />
-					<p:inputText id="acronimo"
-						value="#{empresaFormBack.empresa.acronimo}" maxlength="10" />
-					<p:message for="acronimo" />
-
-					<p:outputLabel for="descricao" value="#{msgs.descricao}:" />
-					<p:inputText id="descricao"
-						value="#{empresaFormBack.empresa.descricao}" maxlength="255" />
-					<p:message for="descricao" />
-
-					<!-- 					<p:outputLabel class="control-label" for="cnpj" -->
-					<!-- 						value="#{msgs.cnpj}:" /> -->
-					<!-- 					<p:inputText class="form-control input-sm input-xlarge" id="cnpj" -->
-					<!-- 						value="#{empresaFormBack.empresa.cnpj}" maxlength="14" /> -->
-					<!-- 					<p:message for="cnpj" /> -->
-					
-					<p:outputLabel for="ramoAtividade" value="#{msgs.ramoAtividade}:" />
-					<h:selectOneMenu id="ramoAtividade" value="#{empresaFormBack.empresa.ramoAtividade}"
-						style="width:100%" converter="omnifaces.SelectItemsConverter" disabled="#{not empresaFormBack.mostrarIndice}">
-						<f:selectItem noSelectionOption="true"
-							itemLabel="#{msgs.selecione}" />
-						<f:selectItems value="#{ramosAtividadesBack.todosRamosAtividades}" var="ramoAtividade"
-							itemLabel="#{ramoAtividade.nome}" itemValue="#{ramoAtividade}" />
-					</h:selectOneMenu>
-					<p:message for="ramoAtividade" />
-
-					<p:outputLabel for="indice" value="#{msgs.indice}:"
+<!-- 					<p:outputLabel class="control-label" for="cnpj" -->
+<!-- 						value="#{msgs.cnpj}:" /> -->
+<!-- 					<p:inputText class="form-control input-sm input-xlarge" id="cnpj" -->
+<!-- 						value="#{empresaFormBack.empresa.cnpj}" maxlength="14" /> -->
+<!-- 					<p:message for="cnpj" /> -->
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="ramoAtividade" value="#{msgs.ramoAtividade}:" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<h:selectOneMenu id="ramoAtividade" value="#{empresaFormBack.empresa.ramoAtividade}"
+						converter="omnifaces.SelectItemsConverter" disabled="#{not empresaFormBack.mostrarIndice}"
+						class="maxWidthSelect">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="#{msgs.selecione}" />
+					<f:selectItems value="#{ramosAtividadesBack.todosRamosAtividades}" var="ramoAtividade"
+						itemLabel="#{ramoAtividade.nome}" itemValue="#{ramoAtividade}" />
+				</h:selectOneMenu>
+				<p:message for="ramoAtividade" />
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="indice" value="#{msgs.indice}:"
 						rendered="#{empresaFormBack.mostrarIndice}" />
-					<p:inputText id="indice"
-						rendered="#{empresaFormBack.mostrarIndice}"
-						value="#{empresaFormBack.empresa.indice}" maxlength="10" validatorMessage="#{msgs.indice_fora_dos_limites}">
-						<f:validateDoubleRange minimum="-2" maximum="1.75"
-							for="indice" />
-					</p:inputText>
-					<p:message for="indice" rendered="#{empresaFormBack.mostrarIndice}" />
-
-					<p:outputLabel for="ativo" value="#{msgs.ativo}:" />
-					<p:selectBooleanCheckbox id="ativo"
-						value="#{empresaFormBack.empresa.ativo}"
-						disabled="#{not empresaFormBack.empresaPrincipal}" />
-					<p:message for="ativo" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<p:inputText id="indice"
+					rendered="#{empresaFormBack.mostrarIndice}"
+					value="#{empresaFormBack.empresa.indice}" maxlength="10" validatorMessage="#{msgs.indice_fora_dos_limites}">
+					<f:validateDoubleRange minimum="-2" maximum="1.75"
+						for="indice" />
+				</p:inputText>
+				<p:message for="indice" rendered="#{empresaFormBack.mostrarIndice}" />
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="ativo" value="#{msgs.ativo}:" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<p:selectBooleanCheckbox id="ativo"
+					value="#{empresaFormBack.empresa.ativo}"
+					disabled="#{not empresaFormBack.empresaPrincipal}" />
+				<p:message for="ativo" />
+			</div>
 
 <!-- 					<p:outputLabel for="criar_usuario" value="#{msgs.criarUsuario}:" /> -->
 <!-- 					<p:selectBooleanCheckbox id="criar_usuario" -->
@@ -72,42 +88,40 @@
 <!-- 					<p:message for="criar_usuario" /> -->
 
 
-					<!-- 					<p:outputLabel class="control-label" for="idioma" -->
-					<!-- 						value="#{msgs.idioma}:" /> -->
-					<!-- 					<h:selectOneMenu class="form-control input-sm input-xlarge" -->
-					<!-- 						id="idioma" value="#{empresaFormBack.empresa.idioma}" -->
-					<!-- 						converter="omnifaces.SelectItemsConverter"> -->
-					<!-- 						<f:selectItem itemLabel="#{msgs.selecione}" -->
-					<!-- 							noSelectionOption="true" /> -->
-					<!-- 						<f:selectItems value="#{empresaFormBack.idiomas}" var="idioma" -->
-					<!-- 							itemLabel="#{idioma.nome}" itemValue="#{idioma}" /> -->
-					<!-- 					</h:selectOneMenu> -->
-					<!-- 					<p:message for="idioma" /> -->
-
-				</p:panelGrid>
-
-				<p:commandButton value="#{msgs.salvar}"
-					rendered="#{permissao.rendered('EMPRESA_EDITAR_SALVAR')}"
-					action="#{empresaFormBack.salva}" ajax="false">
-					<f:param name="first" value="#{empresaFormBack.first}" />
-					<f:param name="nro"
-						value="#{empresaFormBack.nroRegistrosPorPagina}" />
-				</p:commandButton>
-
-				<p:commandButton value="#{msgs.voltar}"
+<!-- 					<p:outputLabel class="control-label" for="idioma" -->
+<!-- 						value="#{msgs.idioma}:" /> -->
+<!-- 					<h:selectOneMenu class="form-control input-sm input-xlarge" -->
+<!-- 						id="idioma" value="#{empresaFormBack.empresa.idioma}" -->
+<!-- 						converter="omnifaces.SelectItemsConverter"> -->
+<!-- 						<f:selectItem itemLabel="#{msgs.selecione}" -->
+<!-- 							noSelectionOption="true" /> -->
+<!-- 						<f:selectItems value="#{empresaFormBack.idiomas}" var="idioma" -->
+<!-- 							itemLabel="#{idioma.nome}" itemValue="#{idioma}" /> -->
+<!-- 					</h:selectOneMenu> -->
+<!-- 					<p:message for="idioma" /> -->
+			
+			<div class="ui-g-5 ui-md-3">
+				<p:commandButton value="#{msgs.cancelar}" icon="fa fa-remove"
 					rendered="#{empresaFormBack.empresaPrincipal}"
 					action="#{empresaFormBack.listagem}" ajax="false">
 					<f:param name="first" value="#{empresaFormBack.first}" />
 					<f:param name="nro"
 						value="#{empresaFormBack.nroRegistrosPorPagina}" />
 				</p:commandButton>
-
-				<p:commandButton value="#{msgs.voltar}"
+				<p:commandButton value="#{msgs.cancelar}" icon="fa fa-remove"
 					rendered="#{not empresaFormBack.empresaPrincipal}"
 					action="/secured/home" ajax="false" />
-
-			</h:form>
-		</p:fieldset>
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<p:commandButton value="#{msgs.salvar}" icon="fa fa-save"
+					rendered="#{permissao.rendered('EMPRESA_EDITAR_SALVAR')}"
+					action="#{empresaFormBack.salva}" ajax="false">
+					<f:param name="first" value="#{empresaFormBack.first}" />
+					<f:param name="nro"
+						value="#{empresaFormBack.nroRegistrosPorPagina}" />
+				</p:commandButton>
+			</div>
+		</h:form>
 	</ui:define>
 
 </ui:composition>

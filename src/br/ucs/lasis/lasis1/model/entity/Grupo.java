@@ -50,7 +50,6 @@ public class Grupo implements Serializable {
 	private Long id;
 
 	@Column(length = 30, name = "nome", nullable = false)
-	@Size(min = 1, max = 30)
 	@NotNull
 	private String nome;
 

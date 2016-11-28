@@ -8,25 +8,25 @@
 
 	<ui:define name="content">
 		<h:form id="ramosAtividadesForm">
-		<p:growl id="msgs" showDetail="true" sticky="true" />
+			<p:growl id="msgs" showDetail="true" sticky="true" />
 			<div class="ui-g-12" >
 				<h2>
 					<h:outputText value="#{msgs.mantem} #{msgs.ramosAtividades}" />
 				</h2>
 			</div>
-			<div class="ui-g-3">
+			<div class="ui-g-5 ui-md-3">
 				<p:outputLabel for="nome" value="#{msgs.nome}:" />
 			</div>
-			<div class="ui-g-9">
+			<div class="ui-g-7 ui-md-9">
 				<p:inputText id="nome" value="#{ramoAtividadeFormBack.ramoAtividade.nome}"
 					maxlength="60" />
 				<p:message for="nome" />
 			</div>
-			<div class="ui-g-3">
+			<div class="ui-g-5 ui-md-3">
 				<p:outputLabel for="descricao" value="#{msgs.descricao}:" />
 			</div>
-			<div class="ui-g-9">
-				<p:inputTextarea id="descricao" cols="50" rows="4"
+			<div class="ui-g-7 ui-md-9">
+				<p:inputTextarea id="descricao" cols="50" rows="4" style="max-width:100%"
 					value="#{ramoAtividadeFormBack.ramoAtividade.descricao}" maxlength="255" />
 				<p:message for="descricao" />
 			</div>
@@ -36,7 +36,7 @@
 <!-- 						value="#{ramoAtividadeFormBack.ramoAtividade.indice}" maxlength="10" validatorMessage="#{msgs.indice_fora_dos_limites}"> -->
 <!-- 					</p:inputText> -->
 <!-- 					<p:message for="indice"  /> -->
-			<div class="ui-g-3">
+			<div class="ui-g-5 ui-md-3">
 				<p:commandButton value="#{msgs.cancelar}" icon="fa fa-remove"
 					action="#{ramoAtividadeFormBack.listagem}" ajax="false">
 					<f:param name="first" value="#{ramoAtividadeFormBack.first}" />
@@ -44,7 +44,7 @@
 						value="#{ramoAtividadeFormBack.nroRegistrosPorPagina}" />
 				</p:commandButton>
 			</div>
-			<div class="ui-g-9">
+			<div class="ui-g-7 ui-md-9">
 				<p:commandButton value="#{msgs.salvar}" icon="fa fa-save"
 					rendered="#{permissao.rendered('RAMO_ATIVIDADE_EDITAR_SALVAR')}"
 					action="#{ramoAtividadeFormBack.salva}" ajax="false">

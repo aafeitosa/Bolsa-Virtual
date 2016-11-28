@@ -7,43 +7,48 @@
 	template="/WEB-INF/templates/templateComMenu.xhtml">
 
 	<ui:define name="content">
-
-		<p:fieldset legend="#{msgs.rodadas}" style="margin-bottom:20px">
-
-			<p:messages showDetail="true" closable="true" />
-
-			<h:form id="listaRodadasForm">
-
-				<p:panelGrid columns="3">
-
-					<p:outputLabel for="grupo" value="#{msgs.grupo}:" />
-					<h:selectOneMenu value="#{rodadaListaBack.grupo}" id="grupo"
-						style="width:100%" converter="omnifaces.SelectItemsConverter">
-						<f:selectItem noSelectionOption="true"
-							itemLabel="#{msgs.selecione}" />
-						<f:selectItems value="#{rodadaListaBack.grupos}" var="grupo"
-							itemLabel="#{grupo.nome}" itemValue="#{grupo}">
-						</f:selectItems>
-					</h:selectOneMenu>
-					<p:message for="grupo" />
-
-					<p:outputLabel for="numero" value="#{msgs.numero}:" />
-					<p:inputText id="numero" value="#{rodadaListaBack.numero}"
-						maxlength="10" />
-					<p:message for="numero" />
-
-				</p:panelGrid>
-
-				<p:commandButton value="#{msgs.pesquisar}"
-					actionListener="#{rodadaListaBack.pesquisar}" ajax="true"
-					update="@form" />
-				<p:commandButton value="#{msgs.novo}"
+		<p:messages showDetail="true" closable="true" />
+		<h:form id="listaRodadasForm">
+			<div class="ui-g-6" >
+				<h2>
+					<h:outputText value="#{msgs.rodadas}" />
+				</h2>
+			</div>
+			<div class="ui-g-6" style="text-align: right;">
+				<p:commandButton value="#{msgs.novo}" icon="fa fa-plus"
 					actionListener="#{rodadaListaBack.passarGrupo}"
 					action="#{rodadaListaBack.novo}" ajax="false"
 					rendered="#{permissao.rendered('RODADA_LISTAR_NOVO')}" />
-
-				<p:dataTable var="rodada" value="#{rodadaListaBack.dataModel}"
-					border="1" cellpadding="2" cellspacing="0" paginator="true"
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="grupo" value="#{msgs.grupo}:" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<h:selectOneMenu value="#{rodadaListaBack.grupo}" id="grupo"
+					class="maxWidthSelect" converter="omnifaces.SelectItemsConverter">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="#{msgs.selecione}" />
+					<f:selectItems value="#{rodadaListaBack.grupos}" var="grupo"
+						itemLabel="#{grupo.nome}" itemValue="#{grupo}">
+					</f:selectItems>
+				</h:selectOneMenu>
+				<p:message for="grupo" />
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="numero" value="#{msgs.numero}:" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<p:inputText id="numero" value="#{rodadaListaBack.numero}"
+					maxlength="10" />
+				<p:message for="numero" />
+			</div>
+			<div class="ui-g-12">
+				<p:commandButton value="#{msgs.pesquisar}"
+					actionListener="#{rodadaListaBack.pesquisar}" ajax="true"
+					update="@form" />
+			</div>
+			<div class="ui-g-12">
+				<p:dataTable var="rodada" value="#{rodadaListaBack.dataModel}" paginator="true"
 					rows="#{rodadaListaBack.nroRegistrosPorPagina}"
 					paginatorPosition="bottom"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
@@ -51,14 +56,30 @@
 					rowsPerPageTemplate="#{rodadaListaBack.opcoesRegistrosPorPagina}"
 					id="rodadasTable" lazy="true" first="#{rodadaListaBack.first}">
 
-					<p:column>
+					<p:column style="text-align: right; width:45px;" priority="1">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.rodada}" />
+						</f:facet>
+						<h:outputText value="#{rodada.numero}" />
+					</p:column>
+
+					<p:column style="text-align: left;" priority="1">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.grupo}" />
 						</f:facet>
 						<h:outputText value="#{rodada.grupo.nome}" />
 					</p:column>
+					
+					<p:column style="text-align: right;" priority="3">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.valor}" />
+						</f:facet>
+						<h:outputText value="#{rodada.valor}" >
+							<f:convertNumber type="currency" currencySymbol="R$" />
+						</h:outputText>
+					</p:column>
 
-					<p:column>
+					<p:column style="text-align: center;" priority="3">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.dataInicio}" />
 						</f:facet>
@@ -68,27 +89,10 @@
 						</h:outputText>
 					</p:column>
 
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="#{msgs.numero}" />
-						</f:facet>
-						<h:outputText value="#{rodada.numero}" />
-					</p:column>
-
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="#{msgs.valor}" />
-						</f:facet>
-						<h:outputText value="#{rodada.valor}" />
-					</p:column>
-
-					<p:column>
+					<p:column style="text-align: center;" priority="1">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.encerrada}" />
 						</f:facet>
-						<p:selectBooleanCheckbox id="encerrada" disabled="true"
-							value="#{rodada.encerrada}" />
-						<h:outputText value="   " rendered="#{rodada.encerrada}" />
 						<h:outputText value="#{rodada.dataFim}"
 							rendered="#{rodada.encerrada}">
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
@@ -96,8 +100,7 @@
 						</h:outputText>
 					</p:column>
 
-
-					<p:column style="width:5%;text-align:center"
+					<p:column style="width:50px;text-align:center"
 						rendered="#{permissao.rendered('RODADA_LISTAR_EDITAR') or permissao.rendered('RODADA_LISTAR_EXCLUIR')}">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.acoes}" />
@@ -115,9 +118,6 @@
 						<p:tooltip id="editarToolTip" for="editar" value="#{msgs.editar}"
 							trackMouse="true" />
 
-
-						<h:outputText value=" " />
-
 						<p:commandLink update="@form" id="encerrar"
 							action="#{rodadaListaBack.encerra(rodada)}"
 							rendered="#{permissao.rendered('RODADA_LISTAR_EDITAR') and not rodada.encerrada}">
@@ -128,8 +128,6 @@
 						</p:commandLink>
 						<p:tooltip id="encerrarToolTip" for="encerrar"
 							value="#{msgs.encerrar}" trackMouse="true" />
-
-						<h:outputText value=" " />
 
 						<p:commandLink update="@form" id="excluir"
 							actionListener="#{rodadaListaBack.exclui}"
@@ -145,15 +143,7 @@
 
 					</p:column>
 				</p:dataTable>
-
-				<p:confirmDialog global="true">
-					<p:commandButton value="#{msgs.sim}" type="button"
-						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-					<p:commandButton value="#{msgs.nao}" type="button"
-						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-				</p:confirmDialog>
-
-			</h:form>
-		</p:fieldset>
+			</div>
+		</h:form>
 	</ui:define>
 </ui:composition>

@@ -36,13 +36,13 @@
 			</p:submenu>
 			
 			<p:menuitem value="#{msgs.dashboard}"
-					url="/secured/dashboard.jsf" icon="fa fa-dashboard menuIcons"
+					url="/secured/dashboard.jsf" icon="fa fa-dashboard menuBarIcons"
 					rendered="#{permissao.rendered('DASHBOARD')}" />
 			<p:menuitem value="#{msgs.resultados}"
-					url="/secured/listaResultados.jsf" icon="fa fa-file-o menuIcons"
+					url="/secured/listaResultados.jsf" icon="fa fa-file-o menuBarIcons"
 					rendered="#{permissao.rendered('RESULTADO')}" />
 			<p:menuitem value="#{msgs.investimentos}"
-					url="/secured/listaInvestimentos.jsf" icon="fa fa-dollar menuIcons"
+					url="/secured/listaInvestimentos.jsf" icon="fa fa-dollar menuBarIcons"
 					rendered="#{permissao.rendered('INVESTIMENTO')}" />
 			
 			<p:submenu label="#{msgs.cadastros}" 
@@ -52,19 +52,19 @@
 					url="/secured/core/listaRamosAtividades.jsf"
 					rendered="#{permissao.rendered('RAMO_ATIVIDADE') and permissao.empresaPrincipal}" />
 				<p:menuitem value="#{msgs.empresas}"
-					url="/secured/core/listaEmpresas.jsf" icon="fa fa-building-o menuIcons"
+					url="/secured/core/listaEmpresas.jsf" icon="fa fa-building-o menuBarIcons"
 					rendered="#{permissao.rendered('EMPRESA') and permissao.empresaPrincipal}" />
 				<p:menuitem value="#{msgs.empresas}"
-					url="/secured/core/formEmpresas.jsf" icon="fa fa-building-o menuIcons"
+					url="/secured/core/formEmpresas.jsf" icon="fa fa-building-o menuBarIcons"
 					rendered="#{permissao.rendered('EMPRESA') and not permissao.empresaPrincipal}"/>
 				<p:menuitem value="#{msgs.alunos}"
-					url="/secured/listaAlunos.jsf" icon="fa fa-user menuIcons"
+					url="/secured/listaAlunos.jsf" icon="fa fa-user menuBarIcons"
 					rendered="#{permissao.rendered('ALUNO')}" />
 				<p:menuitem value="#{msgs.professores}"
 					url="/secured/listaProfessores.jsf"
 					rendered="#{permissao.rendered('PROFESSOR')}" />
 				<p:menuitem value="#{msgs.grupos}"
-					url="/secured/listaGrupos.jsf" icon="fa fa-users menuIcons"
+					url="/secured/listaGrupos.jsf" icon="fa fa-users menuBarIcons"
 					rendered="#{permissao.rendered('GRUPO')}" />
 				<p:menuitem value="#{msgs.periodos}"
 					url="/secured/listaPeriodos.jsf"

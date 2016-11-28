@@ -7,43 +7,46 @@
 	template="/WEB-INF/templates/templateComMenu.xhtml">
 
 	<ui:define name="content">
-
-		<p:fieldset
-			legend="#{msgs.mantem} #{msgs.grupos} : #{grupoFormBack.grupo.nome}"
-			style="margin-bottom:20px">
-
-
-			<h:form id="gruposForm">
-
-				<p:panelGrid columns="3">
-
-					<p:outputLabel for="periodo" value="#{msgs.periodo}:" />
-					<h:outputText id="periodo"
-						value="#{grupoFormBack.grupo.periodo.nome}"
-						rendered="#{not grupoFormBack.isEmpresaPrincipal()}" />
-					<h:selectOneMenu value="#{grupoFormBack.grupo.periodo}"
-						rendered="#{grupoFormBack.isEmpresaPrincipal()}"
-						style="width:100%" converter="omnifaces.SelectItemsConverter">
-						<f:selectItem noSelectionOption="true"
-							itemLabel="#{msgs.selecione}" />
-						<f:selectItems value="#{periodosBack.todosPeriodos}" var="periodo"
-							itemLabel="#{periodo.nome}" itemValue="#{periodo}" />
-					</h:selectOneMenu>
-					<p:message for="periodo" />
-
-					<p:outputLabel for="nome" value="#{msgs.nome}:" />
-					<p:inputText id="nome" value="#{grupoFormBack.grupo.nome}"
-						maxlength="30" />
-					<p:message for="nome" />
-
-					<p:outputLabel for="descricao" value="#{msgs.descricao}:" />
-					<p:inputTextarea id="descricao"
-						value="#{grupoFormBack.grupo.descricao}" maxlength="255" />
-					<p:message for="descricao" />
-
-
-				</p:panelGrid>
-
+		<h:form id="gruposForm">
+			<div class="ui-g-12" >
+				<h2>
+					<h:outputText value="#{msgs.mantem} #{msgs.grupos}" />
+				</h2>
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="periodo" value="#{msgs.periodo}:" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<h:outputText id="periodo"
+					value="#{grupoFormBack.grupo.periodo.nome}"
+					rendered="#{not grupoFormBack.isEmpresaPrincipal()}" />
+				<h:selectOneMenu value="#{grupoFormBack.grupo.periodo}"
+					rendered="#{grupoFormBack.isEmpresaPrincipal()}" 
+					class="maxWidthSelect" converter="omnifaces.SelectItemsConverter">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="#{msgs.selecione}" />
+					<f:selectItems value="#{periodosBack.todosPeriodos}" var="periodo"
+						itemLabel="#{periodo.nome}" itemValue="#{periodo}" />
+				</h:selectOneMenu>
+				<p:message for="periodo" />
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="nome" value="#{msgs.nome}:" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<p:inputText id="nome" value="#{grupoFormBack.grupo.nome}"
+					maxlength="30" />
+				<p:message for="nome" />
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="descricao" value="#{msgs.descricao}:" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<p:inputTextarea id="descricao" cols="50" rows="2" style="max-width:100%"
+					value="#{grupoFormBack.grupo.descricao}" maxlength="255" />
+				<p:message for="descricao" />
+			</div>
+			<div class="ui-g-12">
 				<p:tabView id="tab-view-grupo" activeIndex="0" dynamic="false"
 					cache="false">
 
@@ -75,23 +78,23 @@
 						</p:pickList>
 					</p:tab>
 				</p:tabView>
-
-				<p:commandButton value="#{msgs.salvar}"
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:commandButton value="#{msgs.cancelar}" icon="fa fa-remove"
+					action="#{grupoFormBack.listagem}" ajax="false">
+					<f:param name="first" value="#{grupoFormBack.first}" />
+					<f:param name="nro" value="#{grupoFormBack.nroRegistrosPorPagina}" />
+				</p:commandButton>
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<p:commandButton value="#{msgs.salvar}" icon="fa fa-save"
 					rendered="#{permissao.rendered('GRUPO_EDITAR_SALVAR')}"
 					action="#{grupoFormBack.salva}" ajax="false">
 					<f:param name="first" value="#{grupoFormBack.first}" />
 					<f:param name="nro" value="#{grupoFormBack.nroRegistrosPorPagina}" />
 				</p:commandButton>
-
-				<p:commandButton value="#{msgs.voltar}"
-					action="#{grupoFormBack.listagem}" ajax="false">
-					<f:param name="first" value="#{grupoFormBack.first}" />
-					<f:param name="nro" value="#{grupoFormBack.nroRegistrosPorPagina}" />
-				</p:commandButton>
-
-
-			</h:form>
-		</p:fieldset>
+			</div>
+		</h:form>
 	</ui:define>
 
 </ui:composition>

@@ -349,14 +349,24 @@ body {
 	}
 }
 
-.header-top-left{
-	text-align: left;
-	max-width: 100%;
+h5 {
+	font-size: 14px;
+	margin: 0;
+}
+
+.menuBarIcons {
+	font-size:16px;
+	color:#fff;
+}
+
+.maxWidthSelect {
+	max-width: 200px;
 }
 
 .menuIcons {
-	font-size:16px;
-	color:#fff;
+	font-size:32px;
+	color:#2185d0;
+	text-decoration: none;
 }
 /*
 .ui-g,

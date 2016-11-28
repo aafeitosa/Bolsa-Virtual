@@ -7,61 +7,71 @@
 	template="/WEB-INF/templates/templateComMenu.xhtml">
 
 	<ui:define name="content">
-
-		<p:fieldset legend="#{msgs.alunos}" style="margin-bottom:20px">
-
-			<p:messages showDetail="true" closable="true" />
-
-			<h:form id="listaalunoesForm">
-
-				<p:panelGrid columns="3">
-
-					<p:outputLabel for="grupo" value="#{msgs.grupo}:" />
-					<h:selectOneMenu value="#{alunoListaBack.grupo}" id="grupo"
-						style="width:100%" converter="omnifaces.SelectItemsConverter" disabled="#{alunoListaBack.grupoUnico}">
-								<p:ajax listener="#{alunoListaBack.onGrupoChange}" update="empresa" />
+		<p:messages showDetail="true" closable="true" />
+		<h:form id="listaalunoesForm">
+			<div class="ui-g-6" >
+				<h2>
+					<h:outputText value="#{msgs.alunos}" />
+				</h2>
+			</div>
+			<div class="ui-g-6" style="text-align: right;">
+				<p:commandButton value="#{msgs.novo}" icon="fa fa-plus"
+					action="#{alunoListaBack.novo}" ajax="false"
+					rendered="#{permissao.rendered('ALUNO_LISTAR_NOVO')}" />
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="grupo" value="#{msgs.grupo}:" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<h:selectOneMenu value="#{alunoListaBack.grupo}" id="grupo"
+					class="maxWidthSelect" converter="omnifaces.SelectItemsConverter" disabled="#{alunoListaBack.grupoUnico}">
+							<p:ajax listener="#{alunoListaBack.onGrupoChange}" update="empresa" />
 <!-- 						<f:selectItem noSelectionOption="true" -->
 <!-- 							itemLabel="#{msgs.selecione}" /> -->
-						<f:selectItems value="#{alunoListaBack.grupos}" var="grupo"
-							itemLabel="#{grupo.nome}" itemValue="#{grupo}">
-						</f:selectItems>
-					</h:selectOneMenu>
-					<p:message for="grupo" />
-					
-					<p:outputLabel for="empresa" value="#{msgs.empresa}:" />
-					<h:selectOneMenu id="empresa"
-						value="#{alunoListaBack.empresa}" style="width:100%"
-						converter="omnifaces.SelectItemsConverter">
-						<f:selectItem noSelectionOption="true"
-							itemLabel="#{msgs.selecione}" />
-						<f:selectItems value="#{alunoListaBack.empresas}"
-							var="empresa" itemLabel="#{empresa.acronimo} - #{empresa.nome}"
-							itemValue="#{empresa}" />
-					</h:selectOneMenu>
-					<p:message for="empresa" />
-
-					<p:outputLabel class="control-label" for="nome"
-						value="#{msgs.nome}:" />
-					<p:inputText id="nome" value="#{alunoListaBack.aluno.nome}"
-						maxlength="60" />
-					<p:message for="nome" />
-
-					<p:outputLabel for="ativo" value="#{msgs.ativo}:" />
-					<p:selectBooleanCheckbox id="ativo"
-						value="#{alunoListaBack.aluno.ativo}" />
-					<p:message for="ativo" />
-
-				</p:panelGrid>
-
+					<f:selectItems value="#{alunoListaBack.grupos}" var="grupo"
+						itemLabel="#{grupo.nome}" itemValue="#{grupo}">
+					</f:selectItems>
+				</h:selectOneMenu>
+				<p:message for="grupo" />
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="empresa" value="#{msgs.empresa}:" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<h:selectOneMenu id="empresa"
+					value="#{alunoListaBack.empresa}" class="maxWidthSelect"
+					converter="omnifaces.SelectItemsConverter">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="#{msgs.selecione}" />
+					<f:selectItems value="#{alunoListaBack.empresas}"
+						var="empresa" itemLabel="#{empresa.acronimo} - #{empresa.nome}"
+						itemValue="#{empresa}" />
+				</h:selectOneMenu>
+				<p:message for="empresa" />
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="nome" value="#{msgs.nome}:" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<p:inputText id="nome" value="#{alunoListaBack.aluno.nome}"
+					maxlength="60" />
+				<p:message for="nome" />
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="ativo" value="#{msgs.ativo}:" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<p:selectBooleanCheckbox id="ativo"
+					value="#{alunoListaBack.aluno.ativo}" />
+				<p:message for="ativo" />
+			</div>
+			<div class="ui-g-12">
 				<p:commandButton value="#{msgs.pesquisar}"
 					actionListener="#{alunoListaBack.pesquisar}" ajax="true"
 					update="@form" />
-				<p:commandButton value="#{msgs.novo}"
-					action="#{alunoListaBack.novo}" ajax="false"
-					rendered="#{permissao.rendered('ALUNO_LISTAR_NOVO')}" />
-
-				<p:dataTable var="aluno" value="#{alunoListaBack.dataModel}"
-					border="1" cellpadding="2" cellspacing="0" paginator="true"
+			</div>
+			<div class="ui-g-12">
+				<p:dataTable var="aluno" value="#{alunoListaBack.dataModel}" paginator="true"
 					rows="#{alunoListaBack.nroRegistrosPorPagina}"
 					paginatorPosition="bottom"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
@@ -69,42 +79,42 @@
 					rowsPerPageTemplate="#{usuarioListaBack.opcoesRegistrosPorPagina}"
 					id="alunosTable" lazy="true" first="#{alunoListaBack.first}">
 
-					<p:column>
+					<p:column style="text-align: left;" priority="1">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.nome}" />
 						</f:facet>
 						<h:outputText value="#{aluno.nome}" />
 					</p:column>
 
-					<p:column>
+					<p:column style="text-align: left;" priority="3">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.email}" />
 						</f:facet>
 						<h:outputText value="#{aluno.email}" />
 					</p:column>
 
-					<p:column>
+					<p:column style="text-align: left;" priority="1">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.empresa}" />
 						</f:facet>
 						<h:outputText value="#{aluno.empresa.nome}" />
 					</p:column>
 
-					<p:column>
+					<p:column style="text-align: right;" priority="3">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.ramal}" />
 						</f:facet>
 						<h:outputText value="#{aluno.ramal}" />
 					</p:column>
 
-					<p:column style="width:5%;text-align:center">
+					<p:column style="width:40px; text-align:center" priority="3">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.ativo}" />
 						</f:facet>
 						<p:selectBooleanCheckbox value="#{aluno.ativo}" disabled="true" />
 					</p:column>
 
-					<p:column style="width:8%;text-align:center"
+					<p:column style="width:70px; text-align:center" priority="1"
 						rendered="#{permissao.rendered('ALUNO_LISTAR_EDITAR') or permissao.rendered('ALUNO_LISTAR_EXCLUIR') or permissao.rendered('ALUNO_LISTAR_TROCAR_SENHA')}">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.acoes}" />
@@ -120,8 +130,6 @@
 								value="#{alunoListaBack.nroRegistrosPorPagina}" />
 						</h:commandLink>
 
-						<h:outputText value=" " />
-
 						<p:commandLink update="@form"
 							actionListener="#{alunoListaBack.exclui}"
 							rendered="#{permissao.rendered('ALUNO_LISTAR_EXCLUIR')}">
@@ -132,8 +140,6 @@
 							<f:param name="id" value="#{aluno.id}" />
 						</p:commandLink>
 						
-						<h:outputText value=" " />
-						
 						<p:commandLink id="trocaSenha" update="usuarioSenhaForm" oncomplete="PF('alteraSenha').show();"
 							actionListener="#{dialogSenhaBack.trocaSenha}"
 							rendered="#{permissao.rendered('ALUNO_LISTAR_TROCAR_SENHA')}">
@@ -142,22 +148,11 @@
 							<f:param name="id" value="#{aluno.id}" />
 						</p:commandLink>
 						<p:tooltip for="trocaSenha" value="#{msgs.clique_para_trocar_senha}"/>
-						
 
 					</p:column>
 				</p:dataTable>
-
-				<p:confirmDialog global="true">
-					<p:commandButton value="#{msgs.sim}" type="button"
-						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-					<p:commandButton value="#{msgs.nao}" type="button"
-						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-				</p:confirmDialog>
-
-			</h:form>
-
-		</p:fieldset>
-
+			</div>
+		</h:form>
 	</ui:define>
 
 </ui:composition>

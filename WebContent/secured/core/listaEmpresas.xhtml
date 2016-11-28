@@ -7,37 +7,41 @@
 	template="/WEB-INF/templates/templateComMenu.xhtml">
 
 	<ui:define name="content">
-
-		<p:fieldset legend="#{msgs.empresas}" style="margin-bottom:20px">
-
-			<p:messages showDetail="true" closable="true" />
-
-			<h:form id="listaEmpresasForm">
-
-				<p:panelGrid columns="3">
-
-					<p:outputLabel class="control-label" for="nome"
-						value="#{msgs.nome}:" />
-					<p:inputText class="form-control input-sm input-xlarge" id="nome"
+		<p:messages showDetail="true" closable="true" />
+		<h:form id="listaEmpresasForm">
+			<div class="ui-g-6" >
+				<h2>
+					<h:outputText value="#{msgs.empresas}" />
+				</h2>
+			</div>
+			<div class="ui-g-6" style="text-align: right;">
+				<p:commandButton value="#{msgs.novo}" icon="fa fa-plus"
+					action="#{empresaListaBack.novo}" ajax="false"
+					rendered="#{permissao.rendered('EMPRESA_LISTAR_NOVO')}" />
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="nome" value="#{msgs.nome}:" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<p:inputText id="nome"
 						value="#{empresaListaBack.empresa.nome}" maxlength="60" />
-					<p:message for="nome" />
-
-					<p:outputLabel class="control-label" for="ativo"
-						value="#{msgs.ativo}:" />
-					<p:selectBooleanCheckbox id="ativo"
+				<p:message for="nome" />
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="ativo" value="#{msgs.ativo}:" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<p:selectBooleanCheckbox id="ativo"
 						value="#{empresaListaBack.empresa.ativo}" />
-					<p:message for="ativo" />
-				</p:panelGrid>
-
+				<p:message for="ativo" />
+			</div>
+			<div class="ui-g-12">
 				<p:commandButton value="#{msgs.pesquisar}"
 					actionListener="#{empresaListaBack.pesquisar}" ajax="true"
 					update="@form" />
-				<p:commandButton value="#{msgs.novo}"
-					action="#{empresaListaBack.novo}" ajax="false"
-					rendered="#{permissao.rendered('EMPRESA_LISTAR_NOVO')}" />
-
-				<p:dataTable var="empresa" value="#{empresaListaBack.dataModel}"
-					border="1" cellpadding="2" cellspacing="0" paginator="true"
+			</div>
+			<div class="ui-g-12">
+				<p:dataTable var="empresa" value="#{empresaListaBack.dataModel}" paginator="true"
 					rows="#{empresaListaBack.nroRegistrosPorPagina}"
 					paginatorPosition="bottom"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
@@ -45,21 +49,21 @@
 					rowsPerPageTemplate="#{empresaListaBack.opcoesRegistrosPorPagina}"
 					id="empresasTable" lazy="true" first="#{empresaListaBack.first}">
 
-					<p:column>
+					<p:column style="text-align: left;" priority="1">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.nome}" />
 						</f:facet>
 						<h:outputText value="#{empresa.nome}" />
 					</p:column>
 
-					<p:column>
+					<p:column style="text-align: left;" priority="3">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.acronimo}" />
 						</f:facet>
 						<h:outputText value="#{empresa.acronimo}" />
 					</p:column>
 
-					<p:column>
+					<p:column style="text-align: left;" priority="1">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.ramoAtividade}" />
 						</f:facet>
@@ -87,14 +91,14 @@
 <!-- 						<h:outputText value="#{empresa.idioma.nome}" /> -->
 <!-- 					</p:column> -->
 
-					<p:column style="width:5%;text-align:center">
+					<p:column style="width:40px; text-align:center" priority="3">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.ativo}" />
 						</f:facet>
 						<p:selectBooleanCheckbox value="#{empresa.ativo}" disabled="true" />
 					</p:column>
 
-					<p:column style="width:5%;text-align:center"
+					<p:column style="width:50px; text-align:center"  priority="1"
 						rendered="#{permissao.rendered('EMPRESA_LISTAR_EDITAR') or permissao.rendered('EMPRESA_LISTAR_EXCLUIR')}">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.acoes}" />
@@ -112,8 +116,6 @@
 						<p:tooltip id="editarToolTip" for="editar" value="#{msgs.editar}"
 							trackMouse="true" />
 
-						<h:outputText value=" " />
-
 						<p:commandLink update="@form" id="excluir"
 							actionListener="#{empresaListaBack.exclui}"
 							rendered="#{permissao.rendered('EMPRESA_LISTAR_EXCLUIR')}">
@@ -128,15 +130,7 @@
 
 					</p:column>
 				</p:dataTable>
-
-				<p:confirmDialog global="true">
-					<p:commandButton value="#{msgs.sim}" type="button"
-						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-					<p:commandButton value="#{msgs.nao}" type="button"
-						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-				</p:confirmDialog>
-
-			</h:form>
-		</p:fieldset>
+			</div>
+		</h:form>
 	</ui:define>
 </ui:composition>

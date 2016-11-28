@@ -7,171 +7,153 @@
 	template="/WEB-INF/templates/templateComMenu.xhtml">
 
 	<ui:define name="content">
+		<h:form id="rodadasForm">
+			<p:growl id="msgs" showDetail="true" sticky="true" />
+			<div class="ui-g-12">
+				<h2>
+					<h:outputText value="#{msgs.mantem} #{msgs.rodada}" />
+				</h2>
+			</div>
+			<div class="ui-g-12 ui-md-6" style="padding: 0">
+				<div class="ui-g-5 ui-md-6">
+					<p:outputLabel for="numero" value="#{msgs.rodada}:" />
+				</div>
+				<div class="ui-g-7 ui-md-6">
+					<p:inputText id="numero" value="#{rodadaFormBack.rodada.numero}"
+						maxlength="4" disabled="true" />
+					<p:message for="numero" />
+				</div>
+				<div class="ui-g-5 ui-md-6">
+					<p:outputLabel for="grupo" value="#{msgs.grupo}:" />
+				</div>
+				<div class="ui-g-7 ui-md-6">
+					<p:inputText id="grupo"
+						value="#{rodadaFormBack.rodada.grupo.nome}" disabled="true" />
+					<p:message for="grupo" />
+				</div>
+				<div class="ui-g-5 ui-md-6">
+					<p:outputLabel for="dataInicio" value="#{msgs.dataInicio}:" />
+				</div>
+				<div class="ui-g-7 ui-md-6">
+					<p:calendar id="dataInicio" disabled="true"
+						value="#{rodadaFormBack.rodada.dataInicio}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+							timeZone="#{rodadaFormBack.timeZone}" />
+					</p:calendar>
+					<p:message for="dataInicio" />
+				</div>
+				<div class="ui-g-5 ui-md-6">
+					<p:outputLabel for="valor" value="#{msgs.valor}:" />
+				</div>
+				<div class="ui-g-7 ui-md-6">
+					<p:inputText id="valor" value="#{rodadaFormBack.rodada.valor}"
+						maxlength="10" />
+					<p:message for="valor" />
+				</div>
+				<div class="ui-g-5 ui-md-6">
+					<p:outputLabel for="numeroMaximoInvestimentos"
+						value="#{msgs.numeroMaximoInvestimentos}:" />
+				</div>
+				<div class="ui-g-7 ui-md-6">
+					<p:inputText id="numeroMaximoInvestimentos"
+						value="#{rodadaFormBack.rodada.numeroMaximoInvestimentos}"
+						maxlength="10" />
+					<p:message for="numeroMaximoInvestimentos" />
+				</div>
+				<div class="ui-g-5 ui-md-6">
+					<p:outputLabel for="encerrada" value="#{msgs.encerrada}:" />
+				</div>
+				<div class="ui-g-7 ui-md-6">
+					<p:selectBooleanCheckbox id="encerrada"
+						value="#{rodadaFormBack.rodada.encerrada}">
+						<p:ajax update="dataFim" />
+					</p:selectBooleanCheckbox>
+					<p:message for="valor" />
+				</div>
+				<div class="ui-g-5 ui-md-6">
+					<p:outputLabel for="dataFim" value="#{msgs.dataFim}:" />
+				</div>
+				<div class="ui-g-7 ui-md-6">
+					<p:calendar id="dataFim"
+						value="#{rodadaFormBack.rodada.dataFim}" disabled="true">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+							timeZone="#{rodadaFormBack.timeZone}" />
+					</p:calendar>
+					<p:message for="dataFim" />
+				</div>
+			</div>
+			<div class="ui-g-12 ui-md-6">
+				<p:dataTable var="variacao" value="#{rodadaFormBack.variacoes}" styleClass="variacoes"
+					rowIndexVar="rowId" editable="true" 
+					editMode="cell" id="variacoesTable" >
 
-		<p:fieldset
-			legend="#{msgs.mantem} #{msgs.rodadas} : #{rodadaFormBack.rodada.numero}"
-			style="margin-bottom:20px">
+					<p:ajax event="cellEdit" listener="#{rodadaFormBack.onCellEdit}"
+						update=":rodadasForm:msgs" />
 
-			<h:form id="rodadasForm">
+					<p:column style="text-align: left;" priority="1">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.ramo_atividade}" />
+						</f:facet>
+						<h:outputText value="#{variacao.ramoAtividade.nome}" />
+					</p:column>
 
-				<p:growl id="msgs" showDetail="true" sticky="true" />
+					<p:column style="text-align: right; width:120px" priority="1">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.variacao}" />
+						</f:facet>
 
-				<p:tabView id="tab-view-rodadas" activeIndex="0" dynamic="false"
-					cache="false">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{variacao.variacao} %" />
+							</f:facet>
+							<f:facet name="input">
+								<h:inputText value="#{variacao.variacao}" />
+							</f:facet>
+						</p:cellEditor>
 
-					<p:tab id="tab0-rodada" title="#{msgs.rodada}"
-						disabled="#{permissao.disabled('RODADA_EDITAR_ABA_RODADA')}">
+						<!-- 									<p:cellEditor> -->
+						<!-- 										<f:facet name="output"> -->
+						<!-- 											<h:outputText id="output_#{rowId}" -->
+						<!-- 											value="#{variacao.variacao} %" /> -->
+						<!-- 										</f:facet> -->
+						<!-- 										<f:facet name="input"> -->
+						<!-- 											<h:inputHidden id="slid_#{rowId}" value="#{variacao.variacao}" /> -->
+						<!-- 										<p:slider for="slid_#{rowId}" display="output_#{rowId}" -->
+						<!-- 											style="width: 200px" displayTemplate="{value}%" -->
+						<!-- 											minValue="-10" maxValue="10" /> -->
+						<!-- 										</f:facet> -->
+						<!-- 									</p:cellEditor> -->
 
-						<p:panelGrid columns="2">
+						<!-- 									<h:panelGrid columns="1" style="margin-bottom: 10px"> -->
+						<!-- 										<h:outputText id="output_#{rowId}" -->
+						<!-- 											value="#{variacao.variacao} %" /> -->
+						<!-- 										<h:inputHidden id="slid_#{rowId}" value="#{variacao.variacao}" /> -->
+						<!-- 										<p:slider for="slid_#{rowId}" display="output_#{rowId}" -->
+						<!-- 											style="width: 200px" displayTemplate="{value}%" -->
+						<!-- 											minValue="-10" maxValue="10" /> -->
+						<!-- 									</h:panelGrid> -->
+					</p:column>
 
-							<p:panelGrid columns="3">
-
-								<p:outputLabel for="grupo" value="#{msgs.grupo}:" />
-								<p:inputText id="grupo"
-									value="#{rodadaFormBack.rodada.grupo.nome}" disabled="true" />
-								<p:message for="grupo" />
-
-								<p:outputLabel for="dataInicio" value="#{msgs.dataInicio}:" />
-								<p:calendar id="dataInicio" disabled="true"
-									value="#{rodadaFormBack.rodada.dataInicio}">
-									<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
-										timeZone="#{rodadaFormBack.timeZone}" />
-								</p:calendar>
-								<p:message for="dataInicio" />
-
-								<p:outputLabel for="numero" value="#{msgs.numero}:" />
-								<p:inputText id="numero" value="#{rodadaFormBack.rodada.numero}"
-									maxlength="4" disabled="true" />
-								<p:message for="numero" />
-
-								<p:outputLabel for="valor" value="#{msgs.valor}:" />
-								<p:inputText id="valor" value="#{rodadaFormBack.rodada.valor}"
-									maxlength="10" />
-								<p:message for="valor" />
-
-								<p:outputLabel for="numeroMaximoInvestimentos"
-									value="#{msgs.numeroMaximoInvestimentos}:" />
-								<p:inputText id="numeroMaximoInvestimentos"
-									value="#{rodadaFormBack.rodada.numeroMaximoInvestimentos}"
-									maxlength="10" />
-								<p:message for="numeroMaximoInvestimentos" />
-
-								<p:outputLabel for="encerrada" value="#{msgs.encerrada}:" />
-								<p:selectBooleanCheckbox id="encerrada"
-									value="#{rodadaFormBack.rodada.encerrada}">
-									<p:ajax update="dataFim" />
-								</p:selectBooleanCheckbox>
-								<p:message for="valor" />
-
-								<p:outputLabel for="dataFim" value="#{msgs.dataFim}:" />
-								<p:calendar id="dataFim"
-									value="#{rodadaFormBack.rodada.dataFim}" disabled="true">
-									<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
-										timeZone="#{rodadaFormBack.timeZone}" />
-								</p:calendar>
-								<p:message for="dataFim" />
-
-
-
-							</p:panelGrid>
-							
-							<p:dataTable var="variacao" value="#{rodadaFormBack.variacoes}" styleClass="variacoes"
-								rowIndexVar="rowId" editable="true" border="1" cellpadding="2"
-								editMode="cell" cellspacing="0" id="variacoesTable" >
-
-								<p:ajax event="cellEdit" listener="#{rodadaFormBack.onCellEdit}"
-									update=":rodadasForm:msgs" />
-
-								<p:column>
-									<f:facet name="header">
-										<h:outputText value="#{msgs.ramo_atividade}" />
-									</f:facet>
-									<h:outputText value="#{variacao.ramoAtividade.nome}" />
-								</p:column>
-
-								<p:column>
-									<f:facet name="header">
-										<h:outputText value="#{msgs.variacao}" />
-									</f:facet>
-
-									<p:cellEditor>
-										<f:facet name="output">
-											<h:outputText value="#{variacao.variacao} %" />
-										</f:facet>
-										<f:facet name="input">
-											<h:inputText value="#{variacao.variacao}" />
-										</f:facet>
-									</p:cellEditor>
-
-									<!-- 									<p:cellEditor> -->
-									<!-- 										<f:facet name="output"> -->
-									<!-- 											<h:outputText id="output_#{rowId}" -->
-									<!-- 											value="#{variacao.variacao} %" /> -->
-									<!-- 										</f:facet> -->
-									<!-- 										<f:facet name="input"> -->
-									<!-- 											<h:inputHidden id="slid_#{rowId}" value="#{variacao.variacao}" /> -->
-									<!-- 										<p:slider for="slid_#{rowId}" display="output_#{rowId}" -->
-									<!-- 											style="width: 200px" displayTemplate="{value}%" -->
-									<!-- 											minValue="-10" maxValue="10" /> -->
-									<!-- 										</f:facet> -->
-									<!-- 									</p:cellEditor> -->
-
-									<!-- 									<h:panelGrid columns="1" style="margin-bottom: 10px"> -->
-									<!-- 										<h:outputText id="output_#{rowId}" -->
-									<!-- 											value="#{variacao.variacao} %" /> -->
-									<!-- 										<h:inputHidden id="slid_#{rowId}" value="#{variacao.variacao}" /> -->
-									<!-- 										<p:slider for="slid_#{rowId}" display="output_#{rowId}" -->
-									<!-- 											style="width: 200px" displayTemplate="{value}%" -->
-									<!-- 											minValue="-10" maxValue="10" /> -->
-									<!-- 									</h:panelGrid> -->
-								</p:column>
-
-							</p:dataTable>
-
-						</p:panelGrid>
-					</p:tab>
-
-					<p:tab id="tab0-resultados" title="#{msgs.resultados}"
-						disabled="#{permissao.disabled('RODADA_EDITAR_ABA_RESULTADOS')}">
-
-						<p:dataTable var="resultado" value="#{rodadaFormBack.resultados}"
-							border="1" cellpadding="2" cellspacing="0" id="resultadosTable">
-
-							<p:column>
-								<f:facet name="header">
-									<h:outputText value="#{msgs.empresa}" />
-								</f:facet>
-								<h:outputText value="#{resultado.empresa.nome}" />
-							</p:column>
-
-							<p:column>
-								<f:facet name="header">
-									<h:outputText value="#{msgs.resultado}" />
-								</f:facet>
-								<h:outputText value="#{resultado.resultado}" />
-							</p:column>
-
-						</p:dataTable>
-
-					</p:tab>
-
-				</p:tabView>
-
-				<p:commandButton value="#{msgs.salvar}"
-					rendered="#{permissao.rendered('RODADA_EDITAR_SALVAR')}"
-					action="#{rodadaFormBack.salva}" ajax="false">
-					<f:param name="first" value="#{rodadaFormBack.first}" />
-					<f:param name="nro" value="#{rodadaFormBack.nroRegistrosPorPagina}" />
-				</p:commandButton>
-
-				<p:commandButton value="#{msgs.voltar}"
-					action="#{rodadaFormBack.listagem}" ajax="false">
-					<f:param name="first" value="#{rodadaFormBack.first}" />
-					<f:param name="nro" value="#{rodadaFormBack.nroRegistrosPorPagina}" />
-				</p:commandButton>
-
-			</h:form>
-		</p:fieldset>
+				</p:dataTable>
+			</div>
+			<div class="ui-g-12" style="padding: 0">
+				<div class="ui-g-5 ui-md-3">
+					<p:commandButton value="#{msgs.cancelar}" icon="fa fa-remove"
+						action="#{rodadaFormBack.listagem}" ajax="false">
+						<f:param name="first" value="#{rodadaFormBack.first}" />
+						<f:param name="nro" value="#{rodadaFormBack.nroRegistrosPorPagina}" />
+					</p:commandButton>
+				</div>
+				<div class="ui-g-7 ui-md-9">
+					<p:commandButton value="#{msgs.salvar}" icon="fa fa-save"
+						rendered="#{permissao.rendered('RODADA_EDITAR_SALVAR')}"
+						action="#{rodadaFormBack.salva}" ajax="false">
+						<f:param name="first" value="#{rodadaFormBack.first}" />
+						<f:param name="nro" value="#{rodadaFormBack.nroRegistrosPorPagina}" />
+					</p:commandButton>
+				</div>
+			</div>
+		</h:form>
 	</ui:define>
 
 </ui:composition>

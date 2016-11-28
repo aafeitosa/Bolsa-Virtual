@@ -19,10 +19,10 @@
 					action="#{ramoAtividadeListaBack.novo}" ajax="false"
 					rendered="#{permissao.rendered('RAMO_ATIVIDADE_LISTAR_NOVO')}" />
 			</div>
-			<div class="ui-g-3">
+			<div class="ui-g-5 ui-md-3">
 				<p:outputLabel for="nome" value="#{msgs.nome}:" />
 			</div>
-			<div class="ui-g-9">
+			<div class="ui-g-7 ui-md-9">
 				<p:inputText id="nome"
 						value="#{ramoAtividadeListaBack.nome}" maxlength="60" />
 				<p:message for="nome" />
@@ -63,7 +63,7 @@
 <!-- 						<h:outputText value="#{ramoAtividade.indice}" /> -->
 <!-- 					</p:column> -->
 
-					<p:column style="width:65px;text-align:center"
+					<p:column style="width:50px;text-align:center"
 						rendered="#{permissao.rendered('RAMO_ATIVIDADE_LISTAR_EDITAR') or permissao.rendered('RAMO_ATIVIDADE_LISTAR_EXCLUIR')}">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.acoes}" />
@@ -96,12 +96,6 @@
 					</p:column>
 				</p:dataTable>
 			</div>
-			<p:confirmDialog global="true">
-				<p:commandButton value="#{msgs.sim}" type="button"
-					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-				<p:commandButton value="#{msgs.nao}" type="button"
-					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-			</p:confirmDialog>
 		</h:form>
 	</ui:define>
 </ui:composition>

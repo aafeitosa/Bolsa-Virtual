@@ -16,12 +16,12 @@
 			</div>
 			
 			<h:panelGroup rendered="#{investimentoListaBack.trocaGrupo}">
-				<div class="ui-g-3">
+				<div class="ui-g-5 ui-md-3">
 					<p:outputLabel for="grupo1" value="#{msgs.grupo}:" />
 				</div>
-				<div class="ui-g-9">
+				<div class="ui-g-7 ui-md-9">
 					<h:selectOneMenu value="#{investimentoListaBack.grupo}" id="grupo1"
-							converter="omnifaces.SelectItemsConverter" >
+							converter="omnifaces.SelectItemsConverter" class="maxWidthSelect">
 						<f:selectItem noSelectionOption="true"
 								itemLabel="#{msgs.selecione}" />
 						<f:selectItems value="#{investimentoListaBack.grupos}" var="grupo"
@@ -35,19 +35,19 @@
 			</h:panelGroup>
 			
 			<h:panelGroup rendered="#{not investimentoListaBack.trocaGrupo}">
-				<div class="ui-g-3">
+				<div class="ui-g-5 ui-md-3">
 					<p:outputLabel for="grupo" value="#{msgs.grupo}:" />
 				</div>
-				<div class="ui-g-9">
+				<div class="ui-g-7 ui-md-9">
 					<h:outputText id="grupo"
 							value="#{investimentoListaBack.grupo.nome}" />
 					<p:message for="grupo"/>
 				</div>
 				
-				<div class="ui-g-3">
+				<div class="ui-g-5 ui-md-3">
 					<p:outputLabel for="empresa" value="#{msgs.empresa}:" />
 				</div>
-				<div class="ui-g-9">
+				<div class="ui-g-7 ui-md-9">
 					<h:outputText id="empresa"
 						value="#{investimentoListaBack.empresa.nome}" />
 					<p:message for="empresa" />
@@ -99,9 +99,6 @@
 						<f:facet name="header">
 							<h:outputText value="#{msgs.encerrada}" />
 						</f:facet>
-						<!-- <p:selectBooleanCheckbox id="encerrada" disabled="true"
-							value="#{rodada.encerrada}" />  
-						<h:outputText value="   " rendered="#{rodada.encerrada}" /> -->
 						<h:outputText value="#{rodada.dataFim}"
 							rendered="#{rodada.encerrada}">
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
@@ -109,7 +106,7 @@
 						</h:outputText>
 					</p:column>
 	
-					<p:column style="width:50px; text-align:center" priority="1"
+					<p:column style="width:40px; text-align:center" priority="1"
 						rendered="#{permissao.rendered('INVESTIMENTO_LISTAR_INVESTIR')}">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.acoes}" />
@@ -128,6 +125,7 @@
 						</h:commandLink>
 						<p:tooltip id="investirToolTip" for="investir"
 							value="#{msgs.investir}" trackMouse="true" />
+							
 						<h:commandLink action="#{investimentoListaBack.novo}"
 							id="visualizar"
 							rendered="#{permissao.rendered('INVESTIMENTO_LISTAR_INVESTIR') and rodada.encerrada}">

@@ -16,10 +16,10 @@
 			</div>			
 
 			<h:panelGroup rendered="#{investimentoFormBack.trocaEmpresas}">
-				<div class="ui-g-3">
+				<div class="ui-g-5 ui-md-3">
 					<p:outputLabel for="grupo1" value="#{msgs.grupo}:" />
 				</div>
-				<div class="ui-g-9">
+				<div class="ui-g-7 ui-md-9">
 					<h:selectOneMenu value="#{investimentoFormBack.grupo}" id="grupo1"
 							converter="omnifaces.SelectItemsConverter">
 						<f:selectItem noSelectionOption="true"
@@ -34,10 +34,10 @@
 					<p:message for="grupo1" />
 				</div>
 
-				<div class="ui-g-3">
+				<div class="ui-g-5 ui-md-3">
 					<p:outputLabel for="empresas" value="#{msgs.empresa}:" />
 				</div>
-				<div class="ui-g-9">
+				<div class="ui-g-7 ui-md-9">
 					<h:selectOneMenu id="empresas"
 						value="#{investimentoFormBack.empresa}"
 						converter="omnifaces.SelectItemsConverter">
@@ -54,36 +54,36 @@
 			</h:panelGroup>
 			
 			<h:panelGroup rendered="#{not investimentoFormBack.trocaEmpresas}">
-				<div class="ui-g-3">
+				<div class="ui-g-5 ui-md-3">
 					<p:outputLabel for="grupo" value="#{msgs.grupo}:" />
 				</div>
-				<div class="ui-g-9">
+				<div class="ui-g-7 ui-md-9">
 					<h:outputText id="grupo"
 						value="#{investimentoFormBack.rodada.grupo.nome}" />
 					<p:message for="grupo" />
 				</div>
-				<div class="ui-g-3">
+				<div class="ui-g-5 ui-md-3">
 					<p:outputLabel for="empresa" value="#{msgs.empresa}:" />
 				</div>
-				<div class="ui-g-9">
+				<div class="ui-g-7 ui-md-9">
 					<h:outputText id="empresa"
 						value="#{investimentoFormBack.empresa.nome}" />
 					<p:message for="empresa" />
 				</div>
 			</h:panelGroup>
 
-			<div class="ui-g-3">
+			<div class="ui-g-5 ui-md-3">
 				<p:outputLabel for="numero" value="#{msgs.rodada}:" />
 			</div>
-			<div class="ui-g-9">
+			<div class="ui-g-7 ui-md-9">
 				<h:outputText id="numero"
 					value="#{investimentoFormBack.rodada.numero}" />
 				<p:message for="numero" />
 			</div>
-			<div class="ui-g-3">
+			<div class="ui-g-5 ui-md-3">
 				<p:outputLabel for="valor1" value="#{msgs.valor}:" />
 			</div>
-			<div class="ui-g-9">
+			<div class="ui-g-7 ui-md-9">
 				<h:outputText id="valor1"
 					value="#{investimentoFormBack.valorInvestido}">
 					<f:convertNumber type="currency" currencySymbol="R$" />
@@ -94,30 +94,30 @@
 				</h:outputText>
 				<p:message for="valor1" />
 			</div>
-			<div class="ui-g-3">
+			<div class="ui-g-5 ui-md-3">
 				<p:outputLabel for="numeroMaximoInvestimentos"
 						value="#{msgs.investimentos}:" />
 			</div>
-			<div class="ui-g-9">
+			<div class="ui-g-7 ui-md-9">
 				<h:outputText id="numeroMaximoInvestimentos"
 					value="#{investimentoFormBack.nroInvestimentos} de #{investimentoFormBack.rodada.numeroMaximoInvestimentos}" />
 				<p:message for="numeroMaximoInvestimentos" />
 			</div>
-			<div class="ui-g-3">
+			<div class="ui-g-5 ui-md-3">
 				<p:outputLabel for="valorRodada" value="#{msgs.valorRodada}:" />
 			</div>
-			<div class="ui-g-9">
+			<div class="ui-g-7 ui-md-9">
 				<h:outputText id="valorRodada"
 					value="#{investimentoFormBack.valorRodada}">
 					<f:convertNumber type="currency" currencySymbol="R$" />
 				</h:outputText>
 				<p:message for="valorRodada" />
 			</div>
-			<div class="ui-g-3">
+			<div class="ui-g-5 ui-md-3">
 				<p:outputLabel for="resultadoAnterior"
 						value="#{msgs.resultado_anterior}:" />
 			</div>
-			<div class="ui-g-9">
+			<div class="ui-g-7 ui-md-9">
 				<h:outputText id="resultadoAnterior"
 					value="#{investimentoFormBack.resultadoAnterior}">
 					<f:convertNumber type="currency" currencySymbol="R$" />
