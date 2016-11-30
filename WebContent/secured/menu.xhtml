@@ -48,7 +48,7 @@
 			<p:submenu label="#{msgs.cadastros}" 
 				rendered="#{permissao.rendered('CADASTROS')}">
 				
-				<p:menuitem value="#{msgs.ramosAtividades}"
+				<p:menuitem value="#{msgs.ramosAtividades}" icon="fa fa-tasks menuBarIcons"
 					url="/secured/core/listaRamosAtividades.jsf"
 					rendered="#{permissao.rendered('RAMO_ATIVIDADE') and permissao.empresaPrincipal}" />
 				<p:menuitem value="#{msgs.empresas}"
@@ -60,7 +60,7 @@
 				<p:menuitem value="#{msgs.alunos}"
 					url="/secured/listaAlunos.jsf" icon="fa fa-user menuBarIcons"
 					rendered="#{permissao.rendered('ALUNO')}" />
-				<p:menuitem value="#{msgs.professores}"
+				<p:menuitem value="#{msgs.professores}" icon="fa fa-book menuBarIcons"
 					url="/secured/listaProfessores.jsf"
 					rendered="#{permissao.rendered('PROFESSOR')}" />
 				<p:menuitem value="#{msgs.grupos}"
@@ -69,7 +69,7 @@
 				<p:menuitem value="#{msgs.periodos}"
 					url="/secured/listaPeriodos.jsf"
 					rendered="#{permissao.rendered('PERIODO')}" />
-				<p:menuitem value="#{msgs.rodadas}"
+				<p:menuitem value="#{msgs.rodadas}" icon="fa fa-retweet menuBarIcons"
 					url="/secured/listaRodadas.jsf"
 					rendered="#{permissao.rendered('RODADA')}" />
 				

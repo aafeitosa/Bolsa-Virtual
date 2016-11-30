@@ -20,11 +20,10 @@
 
 <h:body>
 	<h:outputStylesheet library="css" name="conteudo.css" />
-	<h:outputStylesheet library="css" name="lasis-custom.css" />
 	
 	<ui:debug hotkey="M" />
 
-	<div class="ui-g" style="min-height:100%; position:relative;">
+	<div class="ui-g">
 		<ui:include src="/secured/core/dialogSenhaUsuario.xhtml" />
 		<div class="ui-g-12" style="padding-bottom: 0">
 			<h:form prependid="false">
@@ -60,9 +59,9 @@
 					</div>
 					<div class="ui-g-12" style="text-align: right; padding-top: 0">
 						<h:outputText value="#{msgs.periodo}:" 
-							style="text-align: right; padding-right: 5px" />
-						<h:selectOneMenu value="#{loginBack.periodo}"
-							style="width:80px;" onchange="submit()" valueChangeListener="#{loginBack.mudaPeriodo}"
+							style="text-align: right; padding-right: 5px; vertical-align: super" />
+						<h:selectOneMenu value="#{loginBack.periodo}" class="maxWidthSelect"
+							style="vertical-align: super" onchange="submit()" valueChangeListener="#{loginBack.mudaPeriodo}"
 							rendered="#{permissao.rendered('PERIODO_SELECIONAR_PERIODO')}"
 							id="periodos" converter="omnifaces.SelectItemsConverter">
 							<f:selectItems value="#{loginBack.periodos}" var="periodo"
@@ -70,7 +69,7 @@
 							</f:selectItems>
 						</h:selectOneMenu>
 						
-						<h:outputText value="#{loginBack.periodo}" 
+						<h:outputText value="#{loginBack.periodo}" style="vertical-align: super"
 							rendered="#{not permissao.rendered('PERIODO_SELECIONAR_PERIODO')}"/>
 						
 						<h:commandLink id="configuracoes" class="menuIcons">
@@ -101,9 +100,9 @@
 				</p:confirmDialog>
 			</h:form>
 		</div>
-		<div class="ui-g-12" id="footer">
-			<h:outputText value="#{msgs.copyrights}" />
-		</div>
+	</div>
+	<div class="ui-g-12" id="footer">
+		<h:outputText value="#{msgs.copyrights}" />
 	</div>
 </h:body>
 
