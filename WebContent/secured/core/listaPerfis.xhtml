@@ -7,21 +7,20 @@
 	template="/WEB-INF/templates/templateComMenu.xhtml">
 
 	<ui:define name="content">
-
-		<p:fieldset legend="#{msgs.perfis}" style="margin-bottom:20px">
-
-
-			<p:messages showDetail="true" closable="true" />
-
-			<h:form id="listaPerfisForm">
-
-				<p:commandButton value="#{msgs.novo}"
+		<p:messages showDetail="true" closable="true" />
+		<h:form id="listaPerfisForm">
+			<div class="ui-g-6" >
+				<h2>
+					<h:outputText value="#{msgs.perfis}" />
+				</h2>
+			</div>
+			<div class="ui-g-6" style="text-align: right;">
+				<p:commandButton value="#{msgs.novo}" icon="fa fa-plus"
 					action="#{perfilListaBack.novo}" ajax="false"
 					rendered="#{permissao.rendered('PERFIL_LISTAR_NOVO')}" />
-				<div style="padding: 5px 0px" class="row" />
-
-				<p:dataTable var="perfil" value="#{perfilListaBack.dataModel}"
-					border="1" cellpadding="2" cellspacing="0" paginator="true"
+			</div>
+			<div class="ui-g-12" >
+				<p:dataTable var="perfil" value="#{perfilListaBack.dataModel}" paginator="true"
 					rows="#{perfilListaBack.nroRegistrosPorPagina}"
 					paginatorPosition="bottom"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
@@ -29,35 +28,35 @@
 					rowsPerPageTemplate="#{perfilListaBack.opcoesRegistrosPorPagina}"
 					id="perfilsTable" lazy="true" first="#{perfilListaBack.first}">
 
-					<p:column>
+					<p:column style="text-align: left;" priority="1">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.nome}" />
 						</f:facet>
 						<h:outputText value="#{perfil.nome}" />
 					</p:column>
 
-					<p:column>
+					<p:column style="text-align: left;" priority="1">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.descricao}" />
 						</f:facet>
 						<h:outputText value="#{perfil.descricao}" />
 					</p:column>
 
-					<p:column style="width:5%;text-align:center">
+					<p:column style="width:50px;text-align:center" priority="3">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.interno}" />
 						</f:facet>
 						<p:selectBooleanCheckbox value="#{perfil.interno}" disabled="true" />
 					</p:column>
 
-					<p:column style="width:5%;text-align:center">
+					<p:column style="width:50px;text-align:center" priority="3">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.ativo}" />
 						</f:facet>
 						<p:selectBooleanCheckbox value="#{perfil.ativo}" disabled="true" />
 					</p:column>
 
-					<p:column style="width:5%;text-align:center"
+					<p:column style="width:50px;text-align:center" priority="1"
 						rendered="#{permissao.rendered('PERFIL_LISTAR_EDITAR') or permissao.rendered('PERFIL_LISTAR_EXCLUIR')}">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.acoes}" />
@@ -73,8 +72,6 @@
 								value="#{perfilListaBack.nroRegistrosPorPagina}" />
 						</h:commandLink>
 
-						<h:outputText value=" " />
-
 						<h:commandLink action="#{perfilListaBack.listagem}"
 							actionListener="#{perfilListaBack.exclui}"
 							onclick="return confirm('#{msgs.confirma_exclusao}')"
@@ -86,8 +83,7 @@
 
 					</p:column>
 				</p:dataTable>
-
-			</h:form>
-		</p:fieldset>
+			</div>
+		</h:form>
 	</ui:define>
 </ui:composition>

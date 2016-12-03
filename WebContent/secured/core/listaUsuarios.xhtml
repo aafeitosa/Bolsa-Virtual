@@ -7,51 +7,54 @@
 	template="/WEB-INF/templates/templateComMenu.xhtml">
 
 	<ui:define name="content">
-
-		<p:fieldset legend="#{msgs.usuarios}" style="margin-bottom:20px">
-
-			<p:messages showDetail="true" closable="true" />
-
-			<h:form id="listaUsuariosForm">
-
-				<p:panelGrid columns="3">
-
-					<p:outputLabel class="control-label" for="empresa"
-						value="#{msgs.empresa}:" />
-					<h:selectOneMenu class="form-control input-sm input-xlarge"
-						id="empresa" value="#{usuarioListaBack.usuario.empresa}"
-						converter="omnifaces.SelectItemsConverter">
-						<f:selectItem itemLabel="#{msgs.selecione}"
-							noSelectionOption="true" />
-						<f:selectItems value="#{empresasBack.todasEmpresasAtivas}"
-							var="empresa" itemLabel="#{empresa.nome}" itemValue="#{empresa}" />
-					</h:selectOneMenu>
-					<p:message for="empresa" />
-
-
-					<p:outputLabel class="control-label" for="nome"
-						value="#{msgs.nome}:" />
-					<p:inputText class="form-control input-sm input-xlarge" id="nome"
-						value="#{usuarioListaBack.usuario.nome}" maxlength="60" />
-					<p:message for="nome" />
-
-					<p:outputLabel class="control-label" for="ativo"
-						value="#{msgs.ativo}:" />
-					<p:selectBooleanCheckbox id="ativo"
-						value="#{usuarioListaBack.usuario.ativo}" />
-					<p:message for="ativo" />
-
-				</p:panelGrid>
-
+		<p:messages showDetail="true" closable="true" />
+		<h:form id="listaUsuariosForm">
+			<div class="ui-g-6" >
+				<h2>
+					<h:outputText value="#{msgs.usuarios}" />
+				</h2>
+			</div>
+			<div class="ui-g-6" style="text-align: right;">
+				<p:commandButton value="#{msgs.novo}" icon="fa fa-plus"
+					action="#{usuarioListaBack.novo}" ajax="false"
+					rendered="#{permissao.rendered('USUARIO_LISTAR_NOVO')}" />
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="empresa" value="#{msgs.empresa}:" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<h:selectOneMenu id="empresa" value="#{usuarioListaBack.usuario.empresa}"
+					converter="omnifaces.SelectItemsConverter" class="maxWidthSelect">
+					<f:selectItem itemLabel="#{msgs.selecione}"
+						noSelectionOption="true" />
+					<f:selectItems value="#{empresasBack.todasEmpresasAtivas}"
+						var="empresa" itemLabel="#{empresa.nome}" itemValue="#{empresa}" />
+				</h:selectOneMenu>
+				<p:message for="empresa" />
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="nome" value="#{msgs.nome}:" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<p:inputText id="nome"
+					value="#{usuarioListaBack.usuario.nome}" maxlength="60" />
+				<p:message for="nome" />
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="ativo" value="#{msgs.ativo}:" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<p:selectBooleanCheckbox id="ativo"
+					value="#{usuarioListaBack.usuario.ativo}" />
+				<p:message for="ativo" />
+			</div>
+			<div class="ui-g-12">
 				<p:commandButton value="#{msgs.pesquisar}"
 					actionListener="#{usuarioListaBack.pesquisar}" ajax="true"
 					update="@form" />
-				<p:commandButton value="#{msgs.novo}"
-					action="#{usuarioListaBack.novo}" ajax="false"
-					rendered="#{permissao.rendered('USUARIO_LISTAR_NOVO')}" />
-
-				<p:dataTable var="usuario" value="#{usuarioListaBack.dataModel}"
-					border="1" cellpadding="2" cellspacing="0" paginator="true"
+			</div>
+			<div class="ui-g-12">
+				<p:dataTable var="usuario" value="#{usuarioListaBack.dataModel}" paginator="true"
 					rows="#{usuarioListaBack.nroRegistrosPorPagina}"
 					paginatorPosition="bottom"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
@@ -59,42 +62,43 @@
 					rowsPerPageTemplate="#{usuarioListaBack.opcoesRegistrosPorPagina}"
 					id="usuariosTable" lazy="true" first="#{usuarioListaBack.first}">
 
-					<p:column rendered="#{usuarioListaBack.isEmpresaPrincipal()}">
+					<p:column style="text-align: left;" rendered="#{usuarioListaBack.isEmpresaPrincipal()}"
+							 priority="1">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.empresa}" />
 						</f:facet>
 						<h:outputText value="#{usuario.empresa.nome}" />
 					</p:column>
 
-					<p:column>
+					<p:column style="text-align: left;" priority="1">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.nome}" />
 						</f:facet>
 						<h:outputText value="#{usuario.nome}" />
 					</p:column>
 
-					<p:column>
+					<p:column style="text-align: left;" priority="3">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.email}" />
 						</f:facet>
 						<h:outputText value="#{usuario.email}" />
 					</p:column>
 
-					<p:column>
+					<p:column style="text-align: left;" priority="3">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.ramal}" />
 						</f:facet>
 						<h:outputText value="#{usuario.ramal}" />
 					</p:column>
 
-					<p:column style="width:5%;text-align:center">
+					<p:column style="width:40px;text-align:center" priority="3">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.ativo}" />
 						</f:facet>
 						<p:selectBooleanCheckbox value="#{usuario.ativo}" disabled="true" />
 					</p:column>
 
-					<p:column style="width:8%;text-align:center"
+					<p:column style="width:65px;text-align:center" priority="1"
 						rendered="#{permissao.rendered('USUARIO_LISTAR_EDITAR') or permissao.rendered('USUARIO_LISTAR_EXCLUIR') or permissao.rendered('USUARIO_LISTAR_TROCAR_SENHA')}">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.acoes}" />
@@ -110,8 +114,6 @@
 								value="#{usuarioListaBack.nroRegistrosPorPagina}" />
 						</h:commandLink>
 
-						<h:outputText value=" " />
-
 						<p:commandLink update="@form"
 							actionListener="#{usuarioListaBack.exclui}"
 							rendered="#{permissao.rendered('USUARIO_LISTAR_EXCLUIR')}">
@@ -121,8 +123,6 @@
 								alt="#{msgs.excluir}" />
 							<f:param name="id" value="#{usuario.id}" />
 						</p:commandLink>
-
-						<h:outputText value=" " />
 
 						<p:commandLink id="trocaSenha" update="usuarioSenhaForm"
 							oncomplete="PF('alteraSenha').show();"
@@ -137,11 +137,8 @@
 
 					</p:column>
 				</p:dataTable>
-
-			</h:form>
-
-		</p:fieldset>
-
+			</div>
+		</h:form>
 	</ui:define>
 
 </ui:composition>

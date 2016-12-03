@@ -23,83 +23,79 @@
 	
 	<ui:debug hotkey="M" />
 
-	<div class="ui-g">
-		<ui:include src="/secured/core/dialogSenhaUsuario.xhtml" />
-		<div class="ui-g-12" style="padding-bottom: 0">
-			<h:form prependid="false">
-				<div class="ui-g-3 ">
-					<h:commandLink action="#{loginBack.home}"
-						title="#{msgs.pagina_inicial}">
-						<p:graphicImage library="imagens" name="logo_ucs.png"
-							alt="#{msgs.nome_cliente_software}" style="max-width: 100%" />
+	<ui:include src="/secured/core/dialogSenhaUsuario.xhtml" />
+	<div class="ui-g-12" style="padding-bottom: 0">
+		<h:form prependid="false">
+			<div class="ui-g-3 ">
+				<h:commandLink action="#{loginBack.home}"
+					title="#{msgs.pagina_inicial}">
+					<p:graphicImage library="imagens" name="logo_ucs.png"
+						alt="#{msgs.nome_cliente_software}" style="max-width: 100%" />
+				</h:commandLink>
+			</div>
+			<div class="ui-g-6" style="text-align: center">
+				<h1>
+					<h:outputText value="#{msgs.nome_software}" />
+				</h1>
+				<h:outputText value="#{msgs.administrador}"
+							rendered="#{loginBack.usuarioLogado.administrador}"
+							style="color:red;" />
+			</div>
+			<div class="ui-g-3">
+				<div class="ui-g-12" style="text-align: right; padding-bottom: 0">
+					<h5>
+						<h:outputText value="#{loginBack.nomeEmpresaUsuarioLogado} - #{loginBack.nomeUsuarioLogado}" />
+					</h5>
+					 <p:commandLink id="nomeUsuario"
+								update="usuarioSenhaForm"
+								oncomplete="PF('alteraSenha').show();"
+								value="#{loginBack.nomeUsuarioLogado}"
+								actionListener="#{dialogSenhaBack.trocaSenha}">
+								<f:param name="id" value="#{loginBack.idUsuarioLogado}" />
+					</p:commandLink> 
+					<p:tooltip for="nomeUsuario"
+								value="#{msgs.clique_para_trocar_senha}" />  
+				</div>
+				<div class="ui-g-12" style="text-align: right; padding-top: 0">
+					<h:outputText value="#{msgs.periodo}:" 
+						style="text-align: right; padding-right: 5px; vertical-align: super" />
+					<h:selectOneMenu value="#{loginBack.periodo}" class="maxWidthSelect"
+						style="vertical-align: super" onchange="submit()" valueChangeListener="#{loginBack.mudaPeriodo}"
+						rendered="#{permissao.rendered('PERIODO_SELECIONAR_PERIODO')}"
+						id="periodos" converter="omnifaces.SelectItemsConverter">
+						<f:selectItems value="#{loginBack.periodos}" var="periodo"
+							itemLabel="#{periodo.nome}" itemValue="#{periodo}">
+						</f:selectItems>
+					</h:selectOneMenu>
+					
+					<h:outputText value="#{loginBack.periodo}" style="vertical-align: super"
+						rendered="#{not permissao.rendered('PERIODO_SELECIONAR_PERIODO')}"/>
+					
+					<h:commandLink id="configuracoes" class="menuIcons">
+					  <i class="fa fa-gear fa-fw" />
 					</h:commandLink>
+					<p:tooltip for="configuracoes" value="#{msgs.configuracoes}" />
+					<p:commandLink id="logout" action="#{loginBack.logout}" ajax="false" class="menuIcons">
+						<i class="fa fa-power-off fa-fw" />
+					</p:commandLink>
+					<p:tooltip for="logout" value="#{msgs.sair}" />
 				</div>
-				<div class="ui-g-6" style="text-align: center">
-					<h1>
-						<h:outputText value="#{msgs.nome_software}" />
-					</h1>
-					<h:outputText value="#{msgs.administrador}"
-								rendered="#{loginBack.usuarioLogado.administrador}"
-								style="color:red;" />
-				</div>
-				<div class="ui-g-3">
-					<div class="ui-g-12" style="text-align: right; padding-bottom: 0">
-						<h5>
-							<h:outputText value="#{loginBack.nomeEmpresaUsuarioLogado} - #{loginBack.nomeUsuarioLogado}" />
-						</h5>
-						<!-- <p:commandLink id="nomeUsuario"
-									update="usuarioSenhaForm"
-									oncomplete="PF('alteraSenha').show();"
-									value="#{loginBack.nomeUsuarioLogado}"
-									actionListener="#{dialogSenhaBack.trocaSenha}">
-									<f:param name="id" value="#{loginBack.idUsuarioLogado}" />
-						</p:commandLink> 
-						<p:tooltip for="nomeUsuario"
-									value="#{msgs.clique_para_trocar_senha}" />  -->
-					</div>
-					<div class="ui-g-12" style="text-align: right; padding-top: 0">
-						<h:outputText value="#{msgs.periodo}:" 
-							style="text-align: right; padding-right: 5px; vertical-align: super" />
-						<h:selectOneMenu value="#{loginBack.periodo}" class="maxWidthSelect"
-							style="vertical-align: super" onchange="submit()" valueChangeListener="#{loginBack.mudaPeriodo}"
-							rendered="#{permissao.rendered('PERIODO_SELECIONAR_PERIODO')}"
-							id="periodos" converter="omnifaces.SelectItemsConverter">
-							<f:selectItems value="#{loginBack.periodos}" var="periodo"
-								itemLabel="#{periodo.nome}" itemValue="#{periodo}">
-							</f:selectItems>
-						</h:selectOneMenu>
-						
-						<h:outputText value="#{loginBack.periodo}" style="vertical-align: super"
-							rendered="#{not permissao.rendered('PERIODO_SELECIONAR_PERIODO')}"/>
-						
-						<h:commandLink id="configuracoes" class="menuIcons">
-						  <i class="fa fa-gear fa-fw" />
-						</h:commandLink>
-						<p:tooltip for="configuracoes"
-									value="#{msgs.configuracoes}" />
-						<p:commandLink id="logout" action="#{loginBack.logout}" ajax="false" class="menuIcons">
-							<i class="fa fa-power-off fa-fw" />
-						</p:commandLink>
-						<p:tooltip for="logout"
-									value="#{msgs.sair}" />
-					</div>
-				</div>
-			</h:form>
-		</div>
+			</div>
+		</h:form>
+	</div>
 	
-		<div class="ui-g-12" style="padding-bottom: 60px">
-			<ui:include src="/secured/menu.xhtml" />
-			<ui:insert name="content">[main content to be replaced]</ui:insert>
-			
-			<h:form >
-				<p:confirmDialog global="true">
-					<p:commandButton value="#{msgs.sim}" type="button"
-						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-					<p:commandButton value="#{msgs.nao}" type="button"
-						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-				</p:confirmDialog>
-			</h:form>
-		</div>
+	<div class="ui-g-12" style="padding-bottom: 60px; padding-top: 0;">
+		<ui:include src="/secured/menu.xhtml" />
+		<ui:insert name="content">[main content to be replaced]</ui:insert>
+		
+		<h:form >
+			<p:confirmDialog global="true">
+				<p:commandButton value="#{msgs.sim}" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="#{msgs.nao}" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		</h:form>
 	</div>
 	<div class="ui-g-12" id="footer">
 		<h:outputText value="#{msgs.copyrights}" />

@@ -16,52 +16,58 @@
 	</ui:define>
 
 	<ui:define name="content">
-
-		<p:fieldset legend="#{msgs.traducoes}" style="margin-bottom:20px">
-
-			<p:messages showDetail="true" closable="true" />
-
-			<h:form id="listaTraducoesForm">
-				<p:growl id="msgs" showDetail="true" />
-
-				<p:panelGrid columns="3">
-
-					<p:outputLabel class="control-label" for="idioma"
-						value="#{msgs.idioma}:" />
-					<h:selectOneMenu class="form-control input-sm input-xlarge"
-						id="idioma" value="#{traducaoListaBack.idioma}"
-						converter="omnifaces.SelectItemsConverter">
-						<f:selectItem itemLabel="#{msgs.selecione}"
-							noSelectionOption="true" />
-						<f:selectItems value="#{traducaoListaBack.idiomas}" var="idioma"
-							itemLabel="#{idioma.nome}" itemValue="#{idioma}" />
-					</h:selectOneMenu>
-					<p:message for="idioma" />
-
-
-					<p:outputLabel class="control-label" for="nome"
-						value="#{msgs.nome}:" />
-					<p:inputText class="form-control input-sm input-xlarge" id="nome"
-						value="#{traducaoListaBack.codigo}" maxlength="60" />
-					<p:message for="nome" />
-
-					<p:outputLabel class="control-label" for="traduzido"
-						value="#{msgs.traduzido}:" />
-					<p:selectBooleanCheckbox id="traduzido"
-						value="#{traducaoListaBack.jaTraduzido}" />
-					<p:message for="traduzido" />
-
-				</p:panelGrid>
-
+		<h:form id="listaTraducoesForm">
+			<p:growl id="msgs" showDetail="true" />
+			
+			<div class="ui-g-12" >
+				<h2>
+					<h:outputText value="#{msgs.traducoes}" />
+				</h2>
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="idioma" value="#{msgs.idioma}:" />
+			</div>				
+			<div class="ui-g-7 ui-md-9">
+				<h:selectOneMenu class="maxWidthSelect"
+					id="idioma" value="#{traducaoListaBack.idioma}"
+					converter="omnifaces.SelectItemsConverter">
+					<f:selectItem itemLabel="#{msgs.selecione}"
+						noSelectionOption="true" />
+					<f:selectItems value="#{traducaoListaBack.idiomas}" var="idioma"
+						itemLabel="#{idioma.nome}" itemValue="#{idioma}" />
+				</h:selectOneMenu>
+				<p:message for="idioma" />
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="nome" value="#{msgs.codigo}:" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<p:inputText id="nome"
+					value="#{traducaoListaBack.codigo}" maxlength="60" />
+				<p:message for="nome" />
+			</div>
+			<div class="ui-g-5 ui-md-3">
+				<p:outputLabel for="traduzido" value="#{msgs.traduzido}:" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
+				<p:selectBooleanCheckbox id="traduzido"
+					value="#{traducaoListaBack.jaTraduzido}" />
+				<p:message for="traduzido" />
+			</div>
+			
+			<div class="ui-g-5 ui-md-3">
 				<p:commandButton value="#{msgs.pesquisar}"
 					actionListener="#{traducaoListaBack.pesquisar}" ajax="true"
 					update="@form" />
+			</div>
+			<div class="ui-g-7 ui-md-9">
 				<p:commandButton value="#{msgs.imprimir}"
 					action="#{traducaoListaBack.print}"
 					onclick="this.form.target='_blank'" ajax="false" />
-
+			</div>
+			<div class="ui-g-12">
 				<p:dataTable var="traducao" value="#{traducaoListaBack.dataModel}"
-					editable="true" border="1" cellpadding="2" cellspacing="0"
+					editable="true" 
 					paginator="true" rows="#{traducaoListaBack.nroRegistrosPorPagina}"
 					paginatorPosition="bottom"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
@@ -75,28 +81,28 @@
 						listener="#{traducaoListaBack.onRowCancel}"
 						update=":listaTraducoesForm:msgs" />
 
-					<p:column>
+					<p:column style="text-align: left;" priority="1">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.codigo}" />
 						</f:facet>
 						<h:outputText value="#{traducao.codigo}" />
 					</p:column>
 
-					<p:column>
+					<p:column style="text-align: left;" priority="1">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.idioma}" />
 						</f:facet>
 						<h:outputText value="#{traducao.idioma.nome}" />
 					</p:column>
 
-					<p:column>
+					<p:column style="text-align: left;"  priority="3">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.descricao}" />
 						</f:facet>
 						<h:outputText value="#{traducao.descricao}" />
 					</p:column>
 
-					<p:column style="width:6%;text-align:center">
+					<p:column style="width:60px; text-align:center" priority="3">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.traduzido}" />
 						</f:facet>
@@ -104,7 +110,7 @@
 							disabled="true" />
 					</p:column>
 
-					<p:column>
+					<p:column style="text-align: left;" priority="1">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.traducao}" />
 						</f:facet>
@@ -119,13 +125,15 @@
 						</p:cellEditor>
 					</p:column>
 
-					<p:column style="width:3%;text-align:center">
+					<p:column style="width:40px;text-align:center" priority="1">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.editar}" />
+						</f:facet>
 						<p:rowEditor />
 					</p:column>
 
 				</p:dataTable>
-			</h:form>
-		</p:fieldset>
-
+			</div>
+		</h:form>
 	</ui:define>
 </ui:composition>

@@ -6,52 +6,63 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <p:dialog header="#{msgs.password_alteracao}" widgetVar="alteraSenha"
-	closable="false" resizable="false" modal="true"
-	style="background-color: #e1e1e1;">
+	closable="false" resizable="false" modal="true" style="max-width: 400px">
 
 	<h:form id="usuarioSenhaForm">
-
-		<p:messages id="messages" showDetail="true" closable="true" />
-
-		<p:panelGrid columns="3">
-
+		<div class="ui-g-5">
 			<p:outputLabel for="empresa" value="#{msgs.empresa}:" />
-			<h:outputLabel id="empresa"
+		</div>
+		<div class="ui-g-7">
+			<h:outputText id="empresa"
 				value="#{dialogSenhaBack.usuario.empresa.nome}" />
-			<p:message for="empresa" />
-
+		</div>
+		<div class="ui-g-5">
 			<p:outputLabel for="nome" value="#{msgs.nome}:" />
-			<p:outputLabel id="nome" value="#{dialogSenhaBack.usuario.nome}" />
-			<p:message for="nome" />
-
+		</div>
+		<div class="ui-g-7">
+			<h:outputText id="nome" value="#{dialogSenhaBack.usuario.nome}" />
+		</div>
+		<div class="ui-g-5">
 			<p:outputLabel for="login" value="#{msgs.login}:" />
-			<p:outputLabel id="login" value="#{dialogSenhaBack.usuario.login}" />
-			<p:message for="login" />
-
+		</div>
+		<div class="ui-g-7">
+			<h:outputText id="login" value="#{dialogSenhaBack.usuario.login}" />
+		</div>
+		<div class="ui-g-5">
 			<p:outputLabel for="pwd0" value="#{msgs.password_atual}:" rendered="#{not dialogSenhaBack.usuarioDiferenteLogado}"/>
+		</div>
+		<div class="ui-g-7">
 			<p:inputText id="pwd0" value="#{dialogSenhaBack.senhaAtual}"
 				label="#{msgs.password_atual}" type="password" autocomplete="off"
 				name="password" rendered="#{not dialogSenhaBack.usuarioDiferenteLogado}"/>
 			<p:message for="pwd0" rendered="#{not dialogSenhaBack.usuarioDiferenteLogado}"/>
-			
+		</div>
+		<div class="ui-g-5">
 			<p:outputLabel for="pwd1" value="#{msgs.password_nova}:" />
+		</div>
+		<div class="ui-g-7">
 			<p:password id="pwd1" value="#{dialogSenhaBack.novaSenha}"
 				match="pwd2" label="#{msgs.password}" name="password"
 				required="true" />
 			<p:message for="pwd1" />
-
+		</div>
+		<div class="ui-g-5">
 			<p:outputLabel for="pwd2" value="#{msgs.password_confirm}:" />
+		</div>
+		<div class="ui-g-7">
 			<p:password id="pwd2" value="#{dialogSenhaBack.novaSenha}"
 				label="#{msgs.password_confirm}" name="password" required="true" />
 			<p:message for="pwd2" />
-
-		</p:panelGrid>
-
-		<p:commandButton value="#{msgs.salvar}"
-			actionListener="#{dialogSenhaBack.alteraSenha}" ajax="true"
-			update="@form" />
-		<p:commandButton value="#{msgs.cancelar}"
-			oncomplete="PF('alteraSenha').hide();" />
+		</div>
+		<div class="ui-g-5">
+			<p:commandButton value="#{msgs.cancelar}" icon="fa fa-remove"
+				oncomplete="PF('alteraSenha').hide();" />
+		</div>
+		<div class="ui-g-7">
+			<p:commandButton value="#{msgs.salvar}" icon="fa fa-save"
+				actionListener="#{dialogSenhaBack.alteraSenha}" ajax="true"
+				update="@form" />
+		</div>
 
 	</h:form>
 

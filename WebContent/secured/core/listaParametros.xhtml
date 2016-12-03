@@ -31,28 +31,28 @@
 						listener="#{parametroListaBack.onRowCancel}"
 						update=":listaParametrosForm:msgs" />
 
-					<p:column style="text-align: left;">
+					<p:column style="text-align: left;" priority="3">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.modulo}" />
 						</f:facet>
 						<h:outputText value="#{parametro.modulo}" />
 					</p:column>
 
-					<p:column style="text-align: left;">
+					<p:column style="text-align: left;" priority="1">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.parametro}" />
 						</f:facet>
 						<h:outputText value="#{parametro.tipo}" />
 					</p:column>
 
-					<p:column style="text-align: left;">
+					<p:column style="text-align: left;" priority="3">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.tipo_dado}" />
 						</f:facet>
 						<h:outputText value="#{parametro.tipoDado}" />
 					</p:column>
 
-					<p:column style="text-align: left;">
+					<p:column style="text-align: left;" priority="1">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.valor}" />
 						</f:facet>
@@ -67,9 +67,9 @@
 						</p:cellEditor>
 					</p:column>
 
-					<p:column style="width:45px;text-align:center">
+					<p:column style="width:40px;text-align:center" priority="1">
 						<f:facet name="header">
-							<h:outputText value="#{msgs.acoes}" />
+							<h:outputText value="#{msgs.editar}" />
 						</f:facet>
 						<p:rowEditor/>
 					</p:column>
