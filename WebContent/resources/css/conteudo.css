@@ -15,6 +15,16 @@ span {
 }
 
 @media only screen and (max-width: 640px) {
+	
+	
+	#desktopMenu, #userInfoDesktop {
+		display: none
+	}
+	
+	#mobileMenu {
+		text-align: right;
+	}
+	
 	h1 {
 		color: #0073BB;
 		font-size: 18px;
@@ -47,6 +57,10 @@ span {
 }
 
 @media only screen and (min-width: 641px) {
+	#mobileMenu {
+		display: none
+	}
+	
 	h1 {
 		color: #0073BB;
 		font-size: 42px;
@@ -115,7 +129,9 @@ label::before{
 }
 
 
-
+.ui-overlaypanel-content {
+	padding: 0;
+}
 
 /*
 .ui-g,

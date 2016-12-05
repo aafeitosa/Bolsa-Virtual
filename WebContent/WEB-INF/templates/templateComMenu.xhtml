@@ -25,23 +25,135 @@
 
 	<ui:include src="/secured/core/dialogSenhaUsuario.xhtml" />
 	<div class="ui-g-12" style="padding-bottom: 0">
-		<h:form prependid="false">
-			<div class="ui-g-3 ">
+		
+		<div class="ui-g-3 ">
+			<h:form prependid="false">
 				<h:commandLink action="#{loginBack.home}"
 					title="#{msgs.pagina_inicial}">
 					<p:graphicImage library="imagens" name="logo_ucs.png"
 						alt="#{msgs.nome_cliente_software}" style="max-width: 100%" />
 				</h:commandLink>
-			</div>
-			<div class="ui-g-6" style="text-align: center">
-				<h1>
-					<h:outputText value="#{msgs.nome_software}" />
-				</h1>
-				<h:outputText value="#{msgs.administrador}"
-							rendered="#{loginBack.usuarioLogado.administrador}"
-							style="color:red;" />
-			</div>
-			<div class="ui-g-3">
+			</h:form>
+		</div>
+		<div class="ui-g-6" style="text-align: center">
+			<h1>
+				<h:outputText value="#{msgs.nome_software}" />
+			</h1>
+			<h:outputText value="#{msgs.administrador}"
+						rendered="#{loginBack.usuarioLogado.administrador}"
+						style="color:red;" />
+		</div>
+		<div id="mobileMenu" class="ui-g-3">
+			<h:form id="mobileMenuButton">
+				<h:commandLink ajax="false" class="menuIcons">
+					<f:ajax execute="@form" render="@none" />
+				  	<i class="fa fa-align-justify fa-fw" />
+				</h:commandLink>
+			</h:form>
+			<p:overlayPanel for="mobileMenuButton" hideEffect="fade" my="right top"
+					at="right bottom">
+				<h:form>
+					<div class="ui-g-6">
+						<h5>
+							<h:outputText value="#{loginBack.nomeEmpresaUsuarioLogado}" />
+						</h5>
+						<h5>
+							<h:outputText value="#{loginBack.nomeUsuarioLogado}" />
+						</h5>
+					</div>
+					<div class="ui-g-6">
+						<h:commandLink>
+						  <i class="fa fa-question fa-fw menuIcons" />
+						</h:commandLink>
+						<h:commandLink>
+						  <i class="fa fa-power-off fa-fw menuIcons" />
+						</h:commandLink>
+					</div>
+					<div class="ui-g-12">
+					    <p:menubar>
+							<p:submenu label="#{msgs.administracao}"
+								rendered="#{permissao.rendered('ADMINISTRATIVO')}">
+					<!-- 			<p:menuitem value="#{msgs.empresas}" -->
+					<!-- 				url="/secured/core/listaEmpresas.jsf" -->
+					<!-- 				rendered="#{permissao.rendered('EMPRESA') and permissao.empresaPrincipal}" /> -->
+					<!-- 			<p:menuitem value="#{msgs.empresas}" -->
+					<!-- 				url="/secured/core/formEmpresas.jsf" -->
+					<!-- 				rendered="#{permissao.rendered('EMPRESA') and not permissao.empresaPrincipal}"/> -->
+					 			<p:menuitem value="#{msgs.parametros}" 
+					 				url="/secured/core/listaParametros.jsf" 
+					 				rendered="#{permissao.rendered('PARAMETRO')}" /> 
+					<!-- 			<p:menuitem value="#{msgs.idiomas}" -->
+					<!-- 				url="/secured/core/listaIdiomas.jsf" -->
+					<!-- 				rendered="#{permissao.rendered('IDIOMA')}" /> -->
+								<p:menuitem value="#{msgs.traducoes}"
+									url="/secured/core/listaTraducoes.jsf"
+									rendered="#{permissao.rendered('TRADUCAO')}" />
+								<p:menuitem value="#{msgs.perfis}"
+									url="/secured/core/listaPerfis.jsf"
+									rendered="#{permissao.rendered('PERFIL')}" />
+								<p:menuitem value="#{msgs.usuarios}"
+									url="/secured/core/listaUsuarios.jsf"
+									rendered="#{permissao.rendered('USUARIO')}" />
+								<!-- <p:menuitem value="Bootsfaces"
+									url="/secured/responsive.jsf"
+									rendered="#{permissao.rendered('USUARIO')}" />  -->
+							</p:submenu>
+							
+							<p:menuitem value="#{msgs.dashboard}"
+									url="/secured/dashboard.jsf" icon="fa fa-dashboard menuBarIcons"
+									rendered="#{permissao.rendered('DASHBOARD')}" />
+							<p:menuitem value="#{msgs.resultados}"
+									url="/secured/listaResultados.jsf" icon="fa fa-file-o menuBarIcons"
+									rendered="#{permissao.rendered('RESULTADO')}" />
+							<p:menuitem value="#{msgs.investimentos}"
+									url="/secured/listaInvestimentos.jsf" icon="fa fa-dollar menuBarIcons"
+									rendered="#{permissao.rendered('INVESTIMENTO')}" />
+							
+							<p:submenu label="#{msgs.cadastros}" 
+								rendered="#{permissao.rendered('CADASTROS')}">
+								
+								<p:menuitem value="#{msgs.ramosAtividades}" icon="fa fa-tasks menuBarIcons"
+									url="/secured/core/listaRamosAtividades.jsf"
+									rendered="#{permissao.rendered('RAMO_ATIVIDADE') and permissao.empresaPrincipal}" />
+								<p:menuitem value="#{msgs.empresas}"
+									url="/secured/core/listaEmpresas.jsf" icon="fa fa-building-o menuBarIcons"
+									rendered="#{permissao.rendered('EMPRESA') and permissao.empresaPrincipal}" />
+								<p:menuitem value="#{msgs.empresas}"
+									url="/secured/core/formEmpresas.jsf" icon="fa fa-building-o menuBarIcons"
+									rendered="#{permissao.rendered('EMPRESA') and not permissao.empresaPrincipal}"/>
+								<p:menuitem value="#{msgs.alunos}"
+									url="/secured/listaAlunos.jsf" icon="fa fa-user menuBarIcons"
+									rendered="#{permissao.rendered('ALUNO')}" />
+								<p:menuitem value="#{msgs.professores}" icon="fa fa-book menuBarIcons"
+									url="/secured/listaProfessores.jsf"
+									rendered="#{permissao.rendered('PROFESSOR')}" />
+								<p:menuitem value="#{msgs.grupos}"
+									url="/secured/listaGrupos.jsf" icon="fa fa-users menuBarIcons"
+									rendered="#{permissao.rendered('GRUPO')}" />
+								<p:menuitem value="#{msgs.periodos}"
+									url="/secured/listaPeriodos.jsf"
+									rendered="#{permissao.rendered('PERIODO')}" />
+								<p:menuitem value="#{msgs.rodadas}" icon="fa fa-retweet menuBarIcons"
+									url="/secured/listaRodadas.jsf"
+									rendered="#{permissao.rendered('RODADA')}" />
+								
+								
+					
+					
+					<!-- 			<p:menuitem value="#{msgs.equipamentos}" url="/secured/listaEquipamentos.jsf" -->
+					<!-- 				rendered="#{permissao.rendered('EQUIPAMENTO')}" /> -->
+					<!-- 			<p:menuitem value="#{msgs.operadores}" url="/secured/listaOperadores.jsf" -->
+					<!-- 				rendered="#{permissao.rendered('OPERADOR')}" /> -->
+							</p:submenu>
+					<!--		<p:menuitem value="#{msgs.home}" url="/secured/home.jsf" /> -->
+						</p:menubar>
+			    	</div>
+				    	
+				</h:form>
+			</p:overlayPanel>
+		</div>
+		<div class="ui-g-3" id="userInfoDesktop">
+			<h:form prependid="false">
 				<div class="ui-g-12" style="text-align: right; padding-bottom: 0">
 					<h5>
 						<h:outputText value="#{loginBack.nomeEmpresaUsuarioLogado} - #{loginBack.nomeUsuarioLogado}" />
@@ -80,8 +192,8 @@
 					</p:commandLink>
 					<p:tooltip for="logout" value="#{msgs.sair}" />
 				</div>
-			</div>
-		</h:form>
+			</h:form>
+		</div>
 	</div>
 	
 	<div class="ui-g-12" style="padding-bottom: 60px; padding-top: 0;">
