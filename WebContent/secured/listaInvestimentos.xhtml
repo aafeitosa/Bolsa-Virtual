@@ -40,7 +40,7 @@
 				</div>
 				<div class="ui-g-7 ui-md-9">
 					<h:outputText id="grupo"
-							value="#{investimentoListaBack.grupo.nome}" />
+							value="#{investimentoListaBack.grupo.nome}&#160;" />
 					<p:message for="grupo"/>
 				</div>
 				
@@ -71,11 +71,13 @@
 					id="rodadasTable" lazy="true"
 					first="#{investimentoListaBack.first}">
 	
-					<p:column  style="text-align: right; width:50px;" priority="1">
+					<p:column style="width:60px;" priority="1">
 						<f:facet name="header">
-							<h:outputText value="#{msgs.rodada}" />
+							<h:panelGroup align="left">
+								<h:outputText value="#{msgs.rodada}" />
+							</h:panelGroup >
 						</f:facet>
-						<h:outputText value="#{rodada.numero}" />
+						<h:outputText value="#{rodada.numero}" style="float:right"/>
 					</p:column>
 	
 					<p:column style="text-align: left;" rendered="#{investimentoListaBack.trocaGrupo}" priority="1">
@@ -106,7 +108,7 @@
 						</h:outputText>
 					</p:column>
 	
-					<p:column style="width:40px; text-align:center" priority="1"
+					<p:column style="width:60px; text-align:center" priority="1"
 						rendered="#{permissao.rendered('INVESTIMENTO_LISTAR_INVESTIR')}">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.acoes}" />

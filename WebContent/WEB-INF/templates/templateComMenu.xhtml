@@ -170,7 +170,8 @@
 				</div>
 				<div class="ui-g-12" style="text-align: right; padding-top: 0">
 					<h:outputText value="#{msgs.periodo}:" 
-						style="text-align: right; padding-right: 5px; vertical-align: super" />
+						style="text-align: right; padding-right: 5px; vertical-align: super" 
+						rendered="#{permissao.rendered('PERIODO_SELECIONAR_PERIODO')}"/>
 					<h:selectOneMenu value="#{loginBack.periodo}" class="maxWidthSelect"
 						style="vertical-align: super" onchange="submit()" valueChangeListener="#{loginBack.mudaPeriodo}"
 						rendered="#{permissao.rendered('PERIODO_SELECIONAR_PERIODO')}"

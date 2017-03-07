@@ -136,26 +136,35 @@
 						listener="#{investimentoFormBack.onCellEdit}"
 						update=":rodadasForm:msgs :rodadasForm:valor1 :rodadasForm:valor3 :rodadasForm:numeroMaximoInvestimentos" />
 
-					<p:column style="text-align: left;">
+					<p:column>
 						<f:facet name="header">
 							<h:outputText value="#{msgs.empresa}" />
 						</f:facet>
-						<h:outputText value="#{investimento.investida.nome}" />
+						<h:outputText value="#{investimento.investida.nome}" style="float: left"/>
 					</p:column>
 
-					<p:column id="editar_valor" style="text-align: right;">
+					<p:column id="editar_valor">
 						<f:facet name="header">
 							<h:outputText value="#{msgs.valor}" />
 						</f:facet>
 						<p:cellEditor>
 							<f:facet name="output">
-								<h:outputText value="#{investimento.valor}">
+								<h:commandLink id="investir" ajax="false"
+									rendered="#{empty investimento.valor}">
+									<p:graphicImage library="imagens" name="money.png"
+										alt="#{msgs.investir}" style="float: right"/>
+									<f:ajax execute="@form" render="@none" />
+								</h:commandLink>
+								<p:tooltip id="investirToolTip" for="investir"
+									value="#{msgs.investir}" trackMouse="true" />
+
+
+								<h:outputText value="#{investimento.valor}" rendered="#{not empty investimento.valor}" style="float: right">
 									<f:convertNumber type="currency" currencySymbol="R$" />
 								</h:outputText>
 							</f:facet>
 							<f:facet name="input">
-								<p:inputText id="modelInput" value="#{investimento.valor}"
-									style="width:100%" />
+								<p:inputText id="modelInput" value="#{investimento.valor}" style="float: right"/>
 							</f:facet>
 						</p:cellEditor>
 					</p:column>

@@ -138,7 +138,7 @@ public enum PermissionEnum implements Permission, Serializable {
 	ALUNO_EDITAR_ACESSAR("ALUNO_EDITAR_ACESSAR", "Aluno Acessar Listagem", ALUNO_EDITAR, PermissionTypeEnum.ACESSO),
 	ALUNO_EDITAR_SALVAR("ALUNO_EDITAR_SALVAR", "Aluno Salvar", ALUNO_EDITAR, PermissionTypeEnum.BOTAO),
 	
-	INVESTIMENTO("INVESTIMENTO", "Investimento", CADASTROS, PermissionTypeEnum.MODULO),
+	INVESTIMENTO("INVESTIMENTO", "Investimento", null, PermissionTypeEnum.MODULO),
 	INVESTIMENTO_LISTAR("INVESTIMENTO_LISTAR", "Investimento Listagem", INVESTIMENTO, PermissionTypeEnum.PAGINA),
 	INVESTIMENTO_LISTAR_ACESSAR("INVESTIMENTO_LISTAR_ACESSAR", "Investimento Acessar Listagem", INVESTIMENTO_LISTAR, PermissionTypeEnum.ACESSO),
 	INVESTIMENTO_LISTAR_INVESTIR("INVESTIMENTO_LISTAR_INVESTIR", "Investimento Investir", INVESTIMENTO_LISTAR, PermissionTypeEnum.BOTAO),
@@ -155,7 +155,8 @@ public enum PermissionEnum implements Permission, Serializable {
 	RESULTADO_VISUALIZAR_ACESSAR_ABA_VARIACOES("RESULTADO_VISUALIZAR_ACESSAR_ABA_VARIACOES", "Resultado Acessar Visualização Aba Variações", RESULTADO_VISUALIZAR, PermissionTypeEnum.ABA),
 	RESULTADO_VISUALIZAR_ACESSAR_ABA_VARIACOES_GRAFICO("RESULTADO_VISUALIZAR_ACESSAR_ABA_VARIACOES_GRAFICO", "Resultado Acessar Visualização Aba Variações(Gráfico)", RESULTADO_VISUALIZAR, PermissionTypeEnum.ABA),
 	RESULTADO_VISUALIZAR_ACESSAR_ABA_GRAFICO("RESULTADO_VISUALIZAR_ACESSAR_ABA_GRAFICO", "Resultado Acessar Visualização Aba Gráficos", RESULTADO_VISUALIZAR, PermissionTypeEnum.ABA),
-	DASHBOARD("DASHBOARD", "Dashboard", CADASTROS, PermissionTypeEnum.MODULO),
+	
+	DASHBOARD("DASHBOARD", "Dashboard", null, PermissionTypeEnum.MODULO),
 	DASHBOARD_LISTAR_ACESSAR("DASHBOARD_LISTAR_ACESSAR", "Acessar DashBoard", DASHBOARD, PermissionTypeEnum.ACESSO);
 
 	private final String id;
