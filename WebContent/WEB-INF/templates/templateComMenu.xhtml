@@ -153,22 +153,22 @@
 			</p:overlayPanel>
 		</div>
 		<div class="ui-g-3" id="userInfoDesktop">
-			<h:form prependid="false">
-				<div class="ui-g-12" style="text-align: right; padding-bottom: 0">
-					<h5>
-						<h:outputText value="#{loginBack.nomeEmpresaUsuarioLogado} - #{loginBack.nomeUsuarioLogado}" />
-					</h5>
-					 <p:commandLink id="nomeUsuario"
-								update="usuarioSenhaForm"
-								oncomplete="PF('alteraSenha').show();"
-								value="#{loginBack.nomeUsuarioLogado}"
-								actionListener="#{dialogSenhaBack.trocaSenha}">
-								<f:param name="id" value="#{loginBack.idUsuarioLogado}" />
-					</p:commandLink> 
-					<p:tooltip for="nomeUsuario"
-								value="#{msgs.clique_para_trocar_senha}" />  
-				</div>
-				<div class="ui-g-12" style="text-align: right; padding-top: 0">
+			<div class="ui-g-12" style="text-align: right; padding-bottom: 0">
+				<h5>
+					<h:outputText value="#{loginBack.nomeEmpresaUsuarioLogado} - #{loginBack.nomeUsuarioLogado}" />
+				</h5>
+				 <!-- <p:commandLink id="nomeUsuario"
+							update="usuarioSenhaForm"
+							oncomplete="PF('alteraSenha').show();"
+							value="#{loginBack.nomeUsuarioLogado}"
+							actionListener="#{dialogSenhaBack.trocaSenha}">
+							<f:param name="id" value="#{loginBack.idUsuarioLogado}" />
+				</p:commandLink> 
+				<p:tooltip for="nomeUsuario"
+							value="#{msgs.clique_para_trocar_senha}" />  -->
+			</div>
+			<div class="ui-g-12" style="text-align: right; padding-top: 0">
+				<h:form id="buttonConfig">
 					<h:outputText value="#{msgs.periodo}:" 
 						style="text-align: right; padding-right: 5px; vertical-align: super" 
 						rendered="#{permissao.rendered('PERIODO_SELECIONAR_PERIODO')}"/>
@@ -183,17 +183,26 @@
 					
 					<h:outputText value="#{loginBack.periodo}" style="vertical-align: super"
 						rendered="#{not permissao.rendered('PERIODO_SELECIONAR_PERIODO')}"/>
-					
 					<h:commandLink id="configuracoes" class="menuIcons">
-					  <i class="fa fa-gear fa-fw" />
+						<f:ajax execute="@form" render="@none" />
+					  	<i class="fa fa-gear fa-fw" />
 					</h:commandLink>
 					<p:tooltip for="configuracoes" value="#{msgs.configuracoes}" />
+
 					<p:commandLink id="logout" action="#{loginBack.logout}" ajax="false" class="menuIcons">
 						<i class="fa fa-power-off fa-fw" />
 					</p:commandLink>
 					<p:tooltip for="logout" value="#{msgs.sair}" />
-				</div>
-			</h:form>
+				</h:form>
+				<h:form>
+					<p:overlayPanel for="buttonConfig" hideEffect="fade" my="right top"
+						at="right bottom">
+						<p:menubar>
+			 				<p:menuitem value="#{msgs.clique_para_trocar_senha}"  /> 
+		 				</p:menubar>
+					</p:overlayPanel>
+				</h:form>
+			</div>
 		</div>
 	</div>
 	

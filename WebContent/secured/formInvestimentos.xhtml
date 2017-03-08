@@ -174,22 +174,25 @@
 				</p:dataTable>
 			</div>
 			<div class="ui-g-12">
-				<p:commandButton value="#{msgs.salvar}"
-					rendered="#{permissao.rendered('INVESTIMENTO_EDITAR_SALVAR') and not investimentoFormBack.rodada.encerrada}"
-					action="#{investimentoFormBack.salva}" ajax="false">
-					<f:param name="grupo_id" value="#{investimentoFormBack.grupo.id}" />
-					<f:param name="first" value="#{investimentoFormBack.first}" />
-					<f:param name="nro"
-						value="#{investimentoFormBack.nroRegistrosPorPagina}" />
-				</p:commandButton>
-
-				<p:commandButton value="#{msgs.voltar}"
-					action="#{investimentoFormBack.listagem}" ajax="false">
-					<f:param name="grupo_id" value="#{investimentoFormBack.grupo.id}" />
-					<f:param name="first" value="#{investimentoFormBack.first}" />
-					<f:param name="nro"
-						value="#{investimentoFormBack.nroRegistrosPorPagina}" />
-				</p:commandButton>
+				<div class="ui-g-5 ui-md-3">
+					<p:commandButton value="#{msgs.cancelar}" icon="fa fa-remove"
+						action="#{investimentoFormBack.listagem}" ajax="false">
+						<f:param name="grupo_id" value="#{investimentoFormBack.grupo.id}" />
+						<f:param name="first" value="#{investimentoFormBack.first}" />
+						<f:param name="nro"
+							value="#{investimentoFormBack.nroRegistrosPorPagina}" />
+					</p:commandButton>
+				</div>
+				<div class="ui-g-7 ui-md-9">
+					<p:commandButton value="#{msgs.salvar}" icon="fa fa-save"
+						rendered="#{permissao.rendered('INVESTIMENTO_EDITAR_SALVAR') and not investimentoFormBack.rodada.encerrada}"
+						action="#{investimentoFormBack.salva}" ajax="false">
+						<f:param name="grupo_id" value="#{investimentoFormBack.grupo.id}" />
+						<f:param name="first" value="#{investimentoFormBack.first}" />
+						<f:param name="nro"
+							value="#{investimentoFormBack.nroRegistrosPorPagina}" />
+					</p:commandButton>
+				</div>
 			</div>
 		</h:form>
 	</ui:define>
