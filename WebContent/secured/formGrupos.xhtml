@@ -13,10 +13,10 @@
 					<h:outputText value="#{msgs.mantem} #{msgs.grupos}" />
 				</h2>
 			</div>
-			<div class="ui-g-5 ui-md-3">
+			<div class="ui-g-5 ui-md-3 ui-lg-2">
 				<p:outputLabel for="periodo" value="#{msgs.periodo}:" />
 			</div>
-			<div class="ui-g-7 ui-md-9">
+			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<h:outputText id="periodo"
 					value="#{grupoFormBack.grupo.periodo.nome}"
 					rendered="#{not grupoFormBack.isEmpresaPrincipal()}" />
@@ -30,18 +30,18 @@
 				</h:selectOneMenu>
 				<p:message for="periodo" />
 			</div>
-			<div class="ui-g-5 ui-md-3">
+			<div class="ui-g-5 ui-md-3 ui-lg-2">
 				<p:outputLabel for="nome" value="#{msgs.nome}:" />
 			</div>
-			<div class="ui-g-7 ui-md-9">
+			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<p:inputText id="nome" value="#{grupoFormBack.grupo.nome}"
 					maxlength="30" />
 				<p:message for="nome" />
 			</div>
-			<div class="ui-g-5 ui-md-3">
+			<div class="ui-g-5 ui-md-3 ui-lg-2">
 				<p:outputLabel for="descricao" value="#{msgs.descricao}:" />
 			</div>
-			<div class="ui-g-7 ui-md-9">
+			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<p:inputTextarea id="descricao" cols="50" rows="2" style="max-width:100%"
 					value="#{grupoFormBack.grupo.descricao}" maxlength="255" />
 				<p:message for="descricao" />
@@ -79,14 +79,14 @@
 					</p:tab>
 				</p:tabView>
 			</div>
-			<div class="ui-g-5 ui-md-3">
+			<div class="ui-g-5 ui-md-3 ui-lg-2">
 				<p:commandButton value="#{msgs.cancelar}" icon="fa fa-remove"
 					action="#{grupoFormBack.listagem}" ajax="false">
 					<f:param name="first" value="#{grupoFormBack.first}" />
 					<f:param name="nro" value="#{grupoFormBack.nroRegistrosPorPagina}" />
 				</p:commandButton>
 			</div>
-			<div class="ui-g-7 ui-md-9">
+			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<p:commandButton value="#{msgs.salvar}" icon="fa fa-save"
 					rendered="#{permissao.rendered('GRUPO_EDITAR_SALVAR')}"
 					action="#{grupoFormBack.salva}" ajax="false">

@@ -14,26 +14,26 @@
 					<h:outputText value="#{msgs.mantem} #{msgs.empresas}" />
 				</h2>
 			</div>
-			<div class="ui-g-5 ui-md-3">
+			<div class="ui-g-5 ui-md-3 ui-lg-2">
 				<p:outputLabel for="nome" value="#{msgs.nome}:" />
 			</div>
-			<div class="ui-g-7 ui-md-9">
+			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<p:inputText id="nome" value="#{empresaFormBack.empresa.nome}"
 						maxlength="60" />
 				<p:message for="nome" />
 			</div>
-			<div class="ui-g-5 ui-md-3">
+			<div class="ui-g-5 ui-md-3 ui-lg-2">
 				<p:outputLabel for="acronimo" value="#{msgs.acronimo}:" />
 			</div>
-			<div class="ui-g-7 ui-md-9">
+			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<p:inputText id="acronimo"
 					value="#{empresaFormBack.empresa.acronimo}" maxlength="10" />
 				<p:message for="acronimo" />
 			</div>
-			<div class="ui-g-5 ui-md-3">
+			<div class="ui-g-5 ui-md-3 ui-lg-2">
 				<p:outputLabel for="descricao" value="#{msgs.descricao}:" />
 			</div>
-			<div class="ui-g-7 ui-md-9">
+			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<p:inputText id="descricao"
 					value="#{empresaFormBack.empresa.descricao}" maxlength="255" />
 				<p:message for="descricao" />
@@ -44,10 +44,10 @@
 <!-- 					<p:inputText class="form-control input-sm input-xlarge" id="cnpj" -->
 <!-- 						value="#{empresaFormBack.empresa.cnpj}" maxlength="14" /> -->
 <!-- 					<p:message for="cnpj" /> -->
-			<div class="ui-g-5 ui-md-3">
+			<div class="ui-g-5 ui-md-3 ui-lg-2">
 				<p:outputLabel for="ramoAtividade" value="#{msgs.ramoAtividade}:" />
 			</div>
-			<div class="ui-g-7 ui-md-9">
+			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<h:selectOneMenu id="ramoAtividade" value="#{empresaFormBack.empresa.ramoAtividade}"
 						converter="omnifaces.SelectItemsConverter" disabled="#{not empresaFormBack.mostrarIndice}"
 						class="maxWidthSelect">
@@ -58,11 +58,11 @@
 				</h:selectOneMenu>
 				<p:message for="ramoAtividade" />
 			</div>
-			<div class="ui-g-5 ui-md-3">
+			<div class="ui-g-5 ui-md-3 ui-lg-2">
 				<p:outputLabel for="indice" value="#{msgs.indice}:"
 						rendered="#{empresaFormBack.mostrarIndice}" />
 			</div>
-			<div class="ui-g-7 ui-md-9">
+			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<p:inputText id="indice"
 					rendered="#{empresaFormBack.mostrarIndice}"
 					value="#{empresaFormBack.empresa.indice}" maxlength="10" validatorMessage="#{msgs.indice_fora_dos_limites}">
@@ -71,10 +71,10 @@
 				</p:inputText>
 				<p:message for="indice" rendered="#{empresaFormBack.mostrarIndice}" />
 			</div>
-			<div class="ui-g-5 ui-md-3">
+			<div class="ui-g-5 ui-md-3 ui-lg-2">
 				<p:outputLabel for="ativo" value="#{msgs.ativo}:" />
 			</div>
-			<div class="ui-g-7 ui-md-9">
+			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<p:selectBooleanCheckbox id="ativo"
 					value="#{empresaFormBack.empresa.ativo}"
 					disabled="#{not empresaFormBack.empresaPrincipal}" />
@@ -100,7 +100,7 @@
 <!-- 					</h:selectOneMenu> -->
 <!-- 					<p:message for="idioma" /> -->
 			
-			<div class="ui-g-5 ui-md-3">
+			<div class="ui-g-5 ui-md-3 ui-lg-2">
 				<p:commandButton value="#{msgs.cancelar}" icon="fa fa-remove"
 					rendered="#{empresaFormBack.empresaPrincipal}"
 					action="#{empresaFormBack.listagem}" ajax="false">
@@ -112,7 +112,7 @@
 					rendered="#{not empresaFormBack.empresaPrincipal}"
 					action="/secured/home" ajax="false" />
 			</div>
-			<div class="ui-g-7 ui-md-9">
+			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<p:commandButton value="#{msgs.salvar}" icon="fa fa-save"
 					rendered="#{permissao.rendered('EMPRESA_EDITAR_SALVAR')}"
 					action="#{empresaFormBack.salva}" ajax="false">

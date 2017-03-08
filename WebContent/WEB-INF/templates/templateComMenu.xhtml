@@ -157,15 +157,6 @@
 				<h5>
 					<h:outputText value="#{loginBack.nomeEmpresaUsuarioLogado} - #{loginBack.nomeUsuarioLogado}" />
 				</h5>
-				 <!-- <p:commandLink id="nomeUsuario"
-							update="usuarioSenhaForm"
-							oncomplete="PF('alteraSenha').show();"
-							value="#{loginBack.nomeUsuarioLogado}"
-							actionListener="#{dialogSenhaBack.trocaSenha}">
-							<f:param name="id" value="#{loginBack.idUsuarioLogado}" />
-				</p:commandLink> 
-				<p:tooltip for="nomeUsuario"
-							value="#{msgs.clique_para_trocar_senha}" />  -->
 			</div>
 			<div class="ui-g-12" style="text-align: right; padding-top: 0">
 				<h:form id="buttonConfig">
@@ -181,8 +172,9 @@
 						</f:selectItems>
 					</h:selectOneMenu>
 					
-					<h:outputText value="#{loginBack.periodo}" style="vertical-align: super"
+					<h:outputText id="textPeriodo" value="#{loginBack.periodo}" style="vertical-align: super"
 						rendered="#{not permissao.rendered('PERIODO_SELECIONAR_PERIODO')}"/>
+					<p:tooltip for="textPeriodo" value="#{msgs.periodo}" />
 					<h:commandLink id="configuracoes" class="menuIcons">
 						<f:ajax execute="@form" render="@none" />
 					  	<i class="fa fa-gear fa-fw" />
@@ -198,7 +190,10 @@
 					<p:overlayPanel for="buttonConfig" hideEffect="fade" my="right top"
 						at="right bottom">
 						<p:menubar>
-			 				<p:menuitem value="#{msgs.clique_para_trocar_senha}"  /> 
+			 				<p:menuitem value="#{msgs.clique_para_trocar_senha}" actionListener="#{dialogSenhaBack.trocaSenha}" 
+			 						update="usuarioSenhaForm" oncomplete="PF('alteraSenha').show();"> 
+			 					<f:param name="id" value="#{loginBack.idUsuarioLogado}" />
+		 					</p:menuitem>
 		 				</p:menubar>
 					</p:overlayPanel>
 				</h:form>

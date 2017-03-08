@@ -13,42 +13,42 @@
 					<h:outputText value="#{msgs.mantem} #{msgs.periodos}" />
 				</h2>
 			</div>
-			<div class="ui-g-5 ui-md-3">
+			<div class="ui-g-5 ui-md-3 ui-lg-2">
 				<p:outputLabel for="nome" value="#{msgs.nome}:" />
 			</div>
-			<div class="ui-g-7 ui-md-9">
+			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<p:inputText id="nome" value="#{periodoFormBack.periodo.nome}"
 					maxlength="30" />
 				<p:message for="nome" />
 			</div>
-			<div class="ui-g-5 ui-md-3">
+			<div class="ui-g-5 ui-md-3 ui-lg-2">
 				<p:outputLabel for="descricao" value="#{msgs.descricao}:" />
 			</div>
-			<div class="ui-g-7 ui-md-9">
+			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<p:inputTextarea id="descricao" cols="50" rows="2" style="max-width:100%"
 					value="#{periodoFormBack.periodo.descricao}" maxlength="255" />
 				<p:message for="descricao" />
 			</div>
-			<div class="ui-g-5 ui-md-3">
+			<div class="ui-g-5 ui-md-3 ui-lg-2">
 				<p:outputLabel for="dataInicio" value="#{msgs.dataInicio}:" />
 			</div>
-			<div class="ui-g-7 ui-md-9">
+			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<p:calendar id="dataInicio"
 					value="#{periodoFormBack.periodo.dataInicio}" pattern="dd/MM/yyyy">
 					<f:convertDateTime pattern="dd/MM/yyyy" />
 				</p:calendar>
 				<p:message for="dataInicio" />
 			</div>
-			<div class="ui-g-5 ui-md-3">
+			<div class="ui-g-5 ui-md-3 ui-lg-2">
 				<p:outputLabel for="dataFim" value="#{msgs.dataFom}:" />
 			</div>
-			<div class="ui-g-7 ui-md-9">
+			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<p:calendar id="dataFim" value="#{periodoFormBack.periodo.dataFim}" pattern="dd/MM/yyyy">
 					<f:convertDateTime pattern="dd/MM/yyyy" />
 				</p:calendar>
 				<p:message for="dataFim" />
 			</div>
-			<div class="ui-g-5 ui-md-3">
+			<div class="ui-g-5 ui-md-3 ui-lg-2">
 				<p:commandButton value="#{msgs.cancelar}" icon="fa fa-remove"
 					action="#{periodoFormBack.listagem}" ajax="false">
 					<f:param name="first" value="#{periodoFormBack.first}" />
@@ -56,7 +56,7 @@
 						value="#{periodoFormBack.nroRegistrosPorPagina}" />
 				</p:commandButton>
 			</div>
-			<div class="ui-g-7 ui-md-9">
+			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<p:commandButton value="#{msgs.salvar}" icon="fa fa-save"
 					rendered="#{permissao.rendered('PERIODO_EDITAR_SALVAR')}"
 					action="#{periodoFormBack.salva}" ajax="false">
