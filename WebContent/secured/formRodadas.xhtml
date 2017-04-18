@@ -15,26 +15,26 @@
 				</h2>
 			</div>
 			<div class="ui-g-12 ui-md-6" style="padding: 0">
-				<div class="ui-g-5 ui-md-6">
+				<div class="ui-g-5 ui-md-6 ui-lg-4">
 					<p:outputLabel for="numero" value="#{msgs.rodada}:" />
 				</div>
-				<div class="ui-g-7 ui-md-6">
+				<div class="ui-g-7 ui-md-6 ui-lg-8">
 					<p:inputText id="numero" value="#{rodadaFormBack.rodada.numero}"
 						maxlength="4" disabled="true" />
 					<p:message for="numero" />
 				</div>
-				<div class="ui-g-5 ui-md-6">
+				<div class="ui-g-5 ui-md-6 ui-lg-4">
 					<p:outputLabel for="grupo" value="#{msgs.grupo}:" />
 				</div>
-				<div class="ui-g-7 ui-md-6">
+				<div class="ui-g-7 ui-md-6 ui-lg-8">
 					<p:inputText id="grupo"
 						value="#{rodadaFormBack.rodada.grupo.nome}" disabled="true" />
 					<p:message for="grupo" />
 				</div>
-				<div class="ui-g-5 ui-md-6">
+				<div class="ui-g-5 ui-md-6 ui-lg-4">
 					<p:outputLabel for="dataInicio" value="#{msgs.dataInicio}:" />
 				</div>
-				<div class="ui-g-7 ui-md-6">
+				<div class="ui-g-7 ui-md-6 ui-lg-8">
 					<p:calendar id="dataInicio" disabled="true"
 						value="#{rodadaFormBack.rodada.dataInicio}">
 						<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
@@ -42,38 +42,39 @@
 					</p:calendar>
 					<p:message for="dataInicio" />
 				</div>
-				<div class="ui-g-5 ui-md-6">
+				<div class="ui-g-5 ui-md-6 ui-lg-4">
 					<p:outputLabel for="valor" value="#{msgs.valor}:" />
 				</div>
-				<div class="ui-g-7 ui-md-6">
+				<div class="ui-g-7 ui-md-6 ui-lg-8">
 					<p:inputText id="valor" value="#{rodadaFormBack.rodada.valor}"
 						maxlength="10" />
 					<p:message for="valor" />
 				</div>
-				<div class="ui-g-5 ui-md-6">
+				<div class="ui-g-5 ui-md-6 ui-lg-4">
 					<p:outputLabel for="numeroMaximoInvestimentos"
 						value="#{msgs.numeroMaximoInvestimentos}:" />
 				</div>
-				<div class="ui-g-7 ui-md-6">
+				<div class="ui-g-7 ui-md-6 ui-lg-8">
 					<p:inputText id="numeroMaximoInvestimentos"
 						value="#{rodadaFormBack.rodada.numeroMaximoInvestimentos}"
 						maxlength="10" />
 					<p:message for="numeroMaximoInvestimentos" />
+					<h:outputText value="&#160;" />
 				</div>
-				<div class="ui-g-5 ui-md-6">
+				<div class="ui-g-5 ui-md-6 ui-lg-4">
 					<p:outputLabel for="encerrada" value="#{msgs.encerrada}:" />
 				</div>
-				<div class="ui-g-7 ui-md-6">
+				<div class="ui-g-7 ui-md-6 ui-lg-8">
 					<p:selectBooleanCheckbox id="encerrada"
 						value="#{rodadaFormBack.rodada.encerrada}">
 						<p:ajax update="dataFim" />
 					</p:selectBooleanCheckbox>
 					<p:message for="valor" />
 				</div>
-				<div class="ui-g-5 ui-md-6">
+				<div class="ui-g-5 ui-md-6 ui-lg-4">
 					<p:outputLabel for="dataFim" value="#{msgs.dataFim}:" />
 				</div>
-				<div class="ui-g-7 ui-md-6">
+				<div class="ui-g-7 ui-md-6 ui-lg-8">
 					<p:calendar id="dataFim"
 						value="#{rodadaFormBack.rodada.dataFim}" disabled="true">
 						<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
@@ -83,68 +84,71 @@
 				</div>
 			</div>
 			<div class="ui-g-12 ui-md-6">
-				<p:dataTable var="variacao" value="#{rodadaFormBack.variacoes}" styleClass="variacoes"
-					rowIndexVar="rowId" editable="true" 
-					editMode="cell" id="variacoesTable" >
-
-					<p:ajax event="cellEdit" listener="#{rodadaFormBack.onCellEdit}"
-						update=":rodadasForm:msgs" />
-
-					<p:column style="text-align: left;" priority="1">
-						<f:facet name="header">
-							<h:outputText value="#{msgs.ramo_atividade}" />
-						</f:facet>
-						<h:outputText value="#{variacao.ramoAtividade.nome}" />
-					</p:column>
-
-					<p:column style="text-align: right; width:120px" priority="1">
-						<f:facet name="header">
-							<h:outputText value="#{msgs.variacao}" />
-						</f:facet>
-
-						<p:cellEditor>
-							<f:facet name="output">
-								<h:outputText value="#{variacao.variacao} %" />
+				<div class="ui-g-1" />
+				<div class="ui-g-11">
+					<p:dataTable var="variacao" value="#{rodadaFormBack.variacoes}" styleClass="variacoes"
+						rowIndexVar="rowId" editable="true" 
+						editMode="cell" id="variacoesTable" >
+	
+						<p:ajax event="cellEdit" listener="#{rodadaFormBack.onCellEdit}"
+							update=":rodadasForm:msgs" />
+	
+						<p:column style="text-align: left;" priority="1">
+							<f:facet name="header">
+								<h:outputText value="#{msgs.ramo_atividade}" />
 							</f:facet>
-							<f:facet name="input">
-								<h:inputText value="#{variacao.variacao}" />
+							<h:outputText value="#{variacao.ramoAtividade.nome}" />
+						</p:column>
+	
+						<p:column style="text-align: right; width:120px" priority="1">
+							<f:facet name="header">
+								<h:outputText value="#{msgs.variacao}" />
 							</f:facet>
-						</p:cellEditor>
-
-						<!-- 									<p:cellEditor> -->
-						<!-- 										<f:facet name="output"> -->
-						<!-- 											<h:outputText id="output_#{rowId}" -->
-						<!-- 											value="#{variacao.variacao} %" /> -->
-						<!-- 										</f:facet> -->
-						<!-- 										<f:facet name="input"> -->
-						<!-- 											<h:inputHidden id="slid_#{rowId}" value="#{variacao.variacao}" /> -->
-						<!-- 										<p:slider for="slid_#{rowId}" display="output_#{rowId}" -->
-						<!-- 											style="width: 200px" displayTemplate="{value}%" -->
-						<!-- 											minValue="-10" maxValue="10" /> -->
-						<!-- 										</f:facet> -->
-						<!-- 									</p:cellEditor> -->
-
-						<!-- 									<h:panelGrid columns="1" style="margin-bottom: 10px"> -->
-						<!-- 										<h:outputText id="output_#{rowId}" -->
-						<!-- 											value="#{variacao.variacao} %" /> -->
-						<!-- 										<h:inputHidden id="slid_#{rowId}" value="#{variacao.variacao}" /> -->
-						<!-- 										<p:slider for="slid_#{rowId}" display="output_#{rowId}" -->
-						<!-- 											style="width: 200px" displayTemplate="{value}%" -->
-						<!-- 											minValue="-10" maxValue="10" /> -->
-						<!-- 									</h:panelGrid> -->
-					</p:column>
-
-				</p:dataTable>
+	
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{variacao.variacao} %" />
+								</f:facet>
+								<f:facet name="input">
+									<h:inputText value="#{variacao.variacao}" />
+								</f:facet>
+							</p:cellEditor>
+	
+							<!-- 									<p:cellEditor> -->
+							<!-- 										<f:facet name="output"> -->
+							<!-- 											<h:outputText id="output_#{rowId}" -->
+							<!-- 											value="#{variacao.variacao} %" /> -->
+							<!-- 										</f:facet> -->
+							<!-- 										<f:facet name="input"> -->
+							<!-- 											<h:inputHidden id="slid_#{rowId}" value="#{variacao.variacao}" /> -->
+							<!-- 										<p:slider for="slid_#{rowId}" display="output_#{rowId}" -->
+							<!-- 											style="width: 200px" displayTemplate="{value}%" -->
+							<!-- 											minValue="-10" maxValue="10" /> -->
+							<!-- 										</f:facet> -->
+							<!-- 									</p:cellEditor> -->
+	
+							<!-- 									<h:panelGrid columns="1" style="margin-bottom: 10px"> -->
+							<!-- 										<h:outputText id="output_#{rowId}" -->
+							<!-- 											value="#{variacao.variacao} %" /> -->
+							<!-- 										<h:inputHidden id="slid_#{rowId}" value="#{variacao.variacao}" /> -->
+							<!-- 										<p:slider for="slid_#{rowId}" display="output_#{rowId}" -->
+							<!-- 											style="width: 200px" displayTemplate="{value}%" -->
+							<!-- 											minValue="-10" maxValue="10" /> -->
+							<!-- 									</h:panelGrid> -->
+						</p:column>
+	
+					</p:dataTable>
+				</div>
 			</div>
 			<div class="ui-g-12" style="padding: 0">
-				<div class="ui-g-5 ui-md-3">
+				<div class="ui-g-5 ui-md-3 ui-lg-2">
 					<p:commandButton value="#{msgs.cancelar}" icon="fa fa-remove"
 						action="#{rodadaFormBack.listagem}" ajax="false">
 						<f:param name="first" value="#{rodadaFormBack.first}" />
 						<f:param name="nro" value="#{rodadaFormBack.nroRegistrosPorPagina}" />
 					</p:commandButton>
 				</div>
-				<div class="ui-g-7 ui-md-9">
+				<div class="ui-g-7 ui-md-9 ui-lg-10">
 					<p:commandButton value="#{msgs.salvar}" icon="fa fa-save"
 						rendered="#{permissao.rendered('RODADA_EDITAR_SALVAR')}"
 						action="#{rodadaFormBack.salva}" ajax="false">
