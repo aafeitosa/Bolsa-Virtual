@@ -8,7 +8,6 @@
 
 	<ui:define name="content">
 		<h:form id="professorsForm">
-			<p:growl id="msgs" showDetail="true" sticky="true" />
 			<div class="ui-g-12" >
 				<h2>
 					<h:outputText value="#{msgs.mantem} #{msgs.professores}" />
@@ -37,7 +36,7 @@
 					<p:outputLabel for="pwd1" value="#{msgs.password}:" />
 				</div>
 				<div class="ui-g-7 ui-md-9 ui-lg-10">
-					<p:password id="pwd1"
+					<p:password id="pwd1" required="true"
 						value="#{professorFormBack.professor.password}" match="pwd2"
 						label="#{msgs.password}" />
 					<p:message for="pwd1" />
@@ -46,7 +45,7 @@
 					<p:outputLabel for="pwd2" value="#{msgs.password_confirm}:" />
 				</div>
 				<div class="ui-g-7 ui-md-9 ui-lg-10">
-					<p:password id="pwd2"
+					<p:password id="pwd2" required="true"
 						value="#{professorFormBack.professor.password}"
 						label="#{msgs.password_confirm}" />
 					<p:message for="pwd2" />

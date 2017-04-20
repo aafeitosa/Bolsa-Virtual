@@ -8,7 +8,6 @@
 
 	<ui:define name="content">
 		<h:form id="alunosForm">
-			<p:growl id="msgs" showDetail="true" sticky="true" />
 			<div class="ui-g-12" >
 				<h2>
 					<h:outputText value="#{msgs.mantem} #{msgs.alunos}" />
@@ -20,7 +19,7 @@
 			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<h:selectOneMenu value="#{alunoFormBack.grupo}" id="grupo"
 					class="maxWidthSelect" converter="omnifaces.SelectItemsConverter"
-					disabled="#{alunoFormBack.grupoUnico}">
+					disabled="#{alunoFormBack.grupoUnico}" required="true">
 					<p:ajax listener="#{alunoFormBack.onGrupoChange}" update="empresa" />
 					<f:selectItem noSelectionOption="true"
 						itemLabel="#{msgs.selecione}" />
@@ -34,7 +33,7 @@
 				<p:outputLabel for="empresa" value="#{msgs.empresa}:" />
 			</div>
 			<div class="ui-g-7 ui-md-9 ui-lg-10">
-				<h:selectOneMenu id="empresa"
+				<h:selectOneMenu id="empresa" required="true"
 					value="#{alunoFormBack.aluno.empresa}" class="maxWidthSelect"
 					converter="omnifaces.SelectItemsConverter">
 					<!-- 						<f:selectItem noSelectionOption="true" -->
@@ -68,7 +67,7 @@
 				</div>
 				<div class="ui-g-7 ui-md-9 ui-lg-10">
 					<p:password id="pwd1" value="#{alunoFormBack.aluno.password}"
-						match="pwd2" label="#{msgs.password}" />
+						match="pwd2" label="#{msgs.password}" required="true"/>
 					<p:message for="pwd1" rendered="#{alunoFormBack.insercao}" />
 				</div>
 				<div class="ui-g-5 ui-md-3 ui-lg-2">
@@ -76,7 +75,7 @@
 				</div>
 				<div class="ui-g-7 ui-md-9 ui-lg-10">
 					<p:password id="pwd2" value="#{alunoFormBack.aluno.password}"
-						label="#{msgs.password_confirm}" />
+						label="#{msgs.password_confirm}" required="true"/>
 					<p:message for="pwd2" rendered="#{alunoFormBack.insercao}" />
 				</div>
 			</h:panelGroup>

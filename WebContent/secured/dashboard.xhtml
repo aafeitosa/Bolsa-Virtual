@@ -31,7 +31,7 @@
 				<p:outputLabel for="descricao" value="#{msgs.descricao}:" />
 			</div>
 			<div class="ui-g-7 ui-md-9 ui-lg-10">
-				<h:inputTextarea id="descricao" cols="50" rows="2" style="max-width:100%"
+				<h:inputTextarea id="descricao" cols="50" rows="2"
 						readonly="true" value="#{dashboardBack.empresa.descricao}" />
 			</div>
 			
@@ -68,7 +68,7 @@
 			</div>
 			<div class="ui-g-12 ui-md-6" >
 				<p:dataList value="#{dashboardBack.alunos}" var="aluno"
-						type="ordered" rows="#{dashboardBack.nroRegistrosPorPagina}" paginator="true"
+						type="unordered" rows="#{dashboardBack.nroRegistrosPorPagina}" paginator="true"
 						paginatorPosition="bottom" 
 						paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 						currentPageReportTemplate="({startRecord} - {endRecord} de {totalRecords})" 

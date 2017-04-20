@@ -17,11 +17,11 @@
 				<p:outputLabel for="periodo" value="#{msgs.periodo}:" />
 			</div>
 			<div class="ui-g-7 ui-md-9 ui-lg-10">
-				<h:outputText id="periodo"
+				<h:outputText  
 					value="#{grupoFormBack.grupo.periodo.nome}"
 					rendered="#{not grupoFormBack.isEmpresaPrincipal()}" />
-				<h:selectOneMenu value="#{grupoFormBack.grupo.periodo}"
-					rendered="#{grupoFormBack.isEmpresaPrincipal()}" 
+				<h:selectOneMenu value="#{grupoFormBack.grupo.periodo}" id="periodo"
+					rendered="#{grupoFormBack.isEmpresaPrincipal()}" required="true"
 					class="maxWidthSelect" converter="omnifaces.SelectItemsConverter">
 					<f:selectItem noSelectionOption="true"
 						itemLabel="#{msgs.selecione}" />
@@ -35,7 +35,7 @@
 			</div>
 			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<p:inputText id="nome" value="#{grupoFormBack.grupo.nome}"
-					maxlength="30" />
+					maxlength="30" required="true"/>
 				<p:message for="nome" />
 			</div>
 			<div class="ui-g-5 ui-md-3 ui-lg-2">
@@ -53,7 +53,7 @@
 					<p:tab id="tab0-empresa" title="#{msgs.empresas}"
 						disabled="#{permissao.disabled('GRUPO_EDITAR_ABA_EMPRESA')}">
 
-						<p:pickList id="empresaPickList"
+						<p:pickList id="empresaPickList" required="true"
 							disabled="#{permissao.disabled('GRUPO_EDITAR_ABA_EMPRESA')}"
 							value="#{grupoFormBack.empresaDualList}" var="empresa"
 							itemLabel="#{empresa.nome}" itemValue="#{empresa}"
@@ -62,12 +62,13 @@
 							<f:facet name="sourceCaption">#{msgs.disponiveis}</f:facet>
 							<f:facet name="targetCaption">#{msgs.selecionados}</f:facet>
 						</p:pickList>
+						<p:message for="empresaPickList" />
 
 					</p:tab>
 					<p:tab id="tab0-usuario" title="#{msgs.professores}"
 						disabled="#{permissao.disabled('GRUPO_EDITAR_ABA_USUARIO')}">
 
-						<p:pickList id="professoresPickList"
+						<p:pickList id="professoresPickList" required="true"
 							disabled="#{permissao.disabled('GRUPO_EDITAR_ABA_USUARIO')}"
 							value="#{grupoFormBack.professorDualList}" var="professor"
 							itemLabel="#{professor.nome}" itemValue="#{professor}"
@@ -76,11 +77,12 @@
 							<f:facet name="sourceCaption">#{msgs.disponiveis}</f:facet>
 							<f:facet name="targetCaption">#{msgs.selecionados}</f:facet>
 						</p:pickList>
+						<p:message for="professoresPickList" />
 					</p:tab>
 				</p:tabView>
 			</div>
 			<div class="ui-g-5 ui-md-3 ui-lg-2">
-				<p:commandButton value="#{msgs.cancelar}" icon="fa fa-remove"
+				<p:commandButton value="#{msgs.cancelar}" icon="fa fa-remove" immediate="true"
 					action="#{grupoFormBack.listagem}" ajax="false">
 					<f:param name="first" value="#{grupoFormBack.first}" />
 					<f:param name="nro" value="#{grupoFormBack.nroRegistrosPorPagina}" />

@@ -8,7 +8,6 @@
 
 	<ui:define name="content">
 		<h:form id="empresasForm">
-			<p:growl id="msgs" showDetail="true" sticky="true" />	
 			<div class="ui-g-12" >
 				<h2>
 					<h:outputText value="#{msgs.mantem} #{msgs.empresas}" />
@@ -19,14 +18,14 @@
 			</div>
 			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<p:inputText id="nome" value="#{empresaFormBack.empresa.nome}"
-						maxlength="60" />
+						required="true" maxlength="60" />
 				<p:message for="nome" />
 			</div>
 			<div class="ui-g-5 ui-md-3 ui-lg-2">
 				<p:outputLabel for="acronimo" value="#{msgs.acronimo}:" />
 			</div>
 			<div class="ui-g-7 ui-md-9 ui-lg-10">
-				<p:inputText id="acronimo"
+				<p:inputText id="acronimo" required="true"
 					value="#{empresaFormBack.empresa.acronimo}" maxlength="10" />
 				<p:message for="acronimo" />
 			</div>
@@ -50,7 +49,7 @@
 			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<h:selectOneMenu id="ramoAtividade" value="#{empresaFormBack.empresa.ramoAtividade}"
 						converter="omnifaces.SelectItemsConverter" disabled="#{not empresaFormBack.mostrarIndice}"
-						class="maxWidthSelect">
+						class="maxWidthSelect" required="true">
 					<f:selectItem noSelectionOption="true"
 						itemLabel="#{msgs.selecione}" />
 					<f:selectItems value="#{ramosAtividadesBack.todosRamosAtividades}" var="ramoAtividade"
@@ -63,7 +62,7 @@
 						rendered="#{empresaFormBack.mostrarIndice}" />
 			</div>
 			<div class="ui-g-7 ui-md-9 ui-lg-10">
-				<p:inputText id="indice"
+				<p:inputText id="indice" required="true"
 					rendered="#{empresaFormBack.mostrarIndice}"
 					value="#{empresaFormBack.empresa.indice}" maxlength="10" validatorMessage="#{msgs.indice_fora_dos_limites}">
 					<f:validateDoubleRange minimum="-2" maximum="1.75"
@@ -101,7 +100,7 @@
 <!-- 					<p:message for="idioma" /> -->
 			
 			<div class="ui-g-5 ui-md-3 ui-lg-2">
-				<p:commandButton value="#{msgs.cancelar}" icon="fa fa-remove"
+				<p:commandButton value="#{msgs.cancelar}" icon="fa fa-remove" immediate="true"
 					rendered="#{empresaFormBack.empresaPrincipal}"
 					action="#{empresaFormBack.listagem}" ajax="false">
 					<f:param name="first" value="#{empresaFormBack.first}" />

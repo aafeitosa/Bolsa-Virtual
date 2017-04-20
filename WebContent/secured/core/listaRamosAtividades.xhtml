@@ -8,7 +8,7 @@
 
 	<ui:define name="content">
 		<p:messages showDetail="true" closable="true" />
-		<h:form id="listaRamosAtividadesForm">
+		<h:form>
 			<div class="ui-g-6" >
 				<h2>
 					<h:outputText value="#{msgs.ramosAtividades}" />
@@ -19,6 +19,8 @@
 					action="#{ramoAtividadeListaBack.novo}" ajax="false"
 					rendered="#{permissao.rendered('RAMO_ATIVIDADE_LISTAR_NOVO')}" />
 			</div>
+		</h:form>
+		<h:form id="listaRamosAtividadesForm">
 			<div class="ui-g-5 ui-md-3 ui-lg-2">
 				<p:outputLabel for="nome" value="#{msgs.nome}:" />
 			</div>
