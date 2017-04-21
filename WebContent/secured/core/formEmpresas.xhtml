@@ -49,7 +49,7 @@
 			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<h:selectOneMenu id="ramoAtividade" value="#{empresaFormBack.empresa.ramoAtividade}"
 						converter="omnifaces.SelectItemsConverter" disabled="#{not empresaFormBack.mostrarIndice}"
-						class="maxWidthSelect" required="true">
+						required="true">
 					<f:selectItem noSelectionOption="true"
 						itemLabel="#{msgs.selecione}" />
 					<f:selectItems value="#{ramosAtividadesBack.todosRamosAtividades}" var="ramoAtividade"

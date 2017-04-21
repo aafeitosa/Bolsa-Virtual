@@ -15,8 +15,27 @@ label {
 	font-size: 14px !important;
 }
 
+h1 {
+	color: #0073BB;
+	margin: 0;
+}
+
+h2 {
+	color: #0073BB;
+	margin: 0;
+}
+
+h5 {
+	margin: 0;
+}
+
 .ui-icon {
 	background-image: url("icons.png?ln=imagens") !important
+}
+
+.ui-menuitem-icon {
+	color:#fff !important;
+	padding-right: 5px !important;
 }
 
 @media only screen and (max-width: 640px) {
@@ -31,32 +50,13 @@ label {
 	}
 	
 	h1 {
-		color: #0073BB;
 		font-size: 18px;
-		margin: 0;
 	}
 	
 	h2 {
 		font-size: 16px;
-		color: #0073BB;
-		margin: 0;
 	}
 	
-	h3 {
-		color: #fff;
-	}
-	
-	#footer {
-		border-top: 5px #1D2858 solid;
-		background-color: #0074BC;
-		text-align: center;
-		color: #fff;
-		padding: 10px;
-		font-weight: bold;
-		position:fixed;
-		bottom:0;
-		z-index: 99;
-	}
 }
 
 @media only screen and (min-width: 641px) {
@@ -72,55 +72,43 @@ label {
 	
 	h2 {
 		font-size: 21px;
-		color: #0073BB;
-		margin: 0;
 	}
 	
 	#footer {
-		border-top: 5px #1D2858 solid;
-		background-color: #0074BC;
-		text-align: center;
 		font-size: 20px;
-		color: #fff;
-		padding: 15px;
-		font-weight: bold;
-		position:fixed;
-		bottom:0;
-		z-index: 99;
 	}
 }
 
-h5 {
-	margin: 0;
+#footer {
+	border-top: 5px #1D2858 solid;
+	background-color: #0074BC;
+	text-align: center;
+	color: #fff;
+	padding: 10px;
+	font-weight: bold;
+	position:fixed;
+	bottom:0;
+	z-index: 99;
 }
 
-.menuBarIcons {
-	color:#fff;
-	padding-right: 5px;
-}
-
-.maxWidthSelect {
-	max-width: 200px;
-}
-
-.menuIcons {
-	font-size:32px;
-	color:#2185d0;
-	text-decoration: none;
+.ui-commandlink, .menuIcons {
+	font-size:28px !important;
+	color:#2185d0 !important;
+	text-decoration: none !important;
 }
 
 .ui-menu {
-	background-color: #0074BC;
-	border: 0;
-	border-bottom: 5px #1D2858 solid;
-	padding: 0;
-	background-image: inherit;
+	background-color: #0074BC !important;
+	border: 0 !important;
+	border-bottom: 5px #1D2858 solid !important;
+	padding: 0 !important;
+	background-image: inherit !important;
 }
 
 .ui-menuitem {
-	background-color: #0074BC;
+	background-color: #0074BC !important;
 }
 
 .ui-menuitem-text {
-	color: #fff;
+	color: #fff !important;
 }

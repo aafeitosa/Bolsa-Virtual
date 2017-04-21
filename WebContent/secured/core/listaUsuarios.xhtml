@@ -24,7 +24,7 @@
 			</div>
 			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<h:selectOneMenu id="empresa" value="#{usuarioListaBack.usuario.empresa}"
-					converter="omnifaces.SelectItemsConverter" class="maxWidthSelect">
+					converter="omnifaces.SelectItemsConverter" >
 					<f:selectItem itemLabel="#{msgs.selecione}"
 						noSelectionOption="true" />
 					<f:selectItems value="#{empresasBack.todasEmpresasAtivas}"

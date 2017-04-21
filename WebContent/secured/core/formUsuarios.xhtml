@@ -29,7 +29,7 @@
 					<h:selectOneMenu 
 						value="#{usuarioFormBack.usuario.empresa}"
 						rendered="#{usuarioFormBack.isEmpresaPrincipal()}"
-						class="maxWidthSelect" converter="omnifaces.SelectItemsConverter">
+						converter="omnifaces.SelectItemsConverter">
 						<f:selectItems value="#{empresasBack.todasEmpresasAtivas}"
 							var="empresa" itemLabel="#{empresa.nome}"
 							itemValue="#{empresa}" />

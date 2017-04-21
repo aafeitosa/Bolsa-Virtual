@@ -7,7 +7,7 @@
 	
 	<h:form id="desktopMenu">
 		<p:menubar>
-			<p:submenu icon="fa fa-user-secret menuBarIcons" label="#{msgs.administracao}"
+			<p:submenu icon="fa fa-user-secret" label="#{msgs.administracao}"
 				rendered="#{permissao.rendered('ADMINISTRATIVO')}">
 	<!-- 			<p:menuitem value="#{msgs.empresas}" -->
 	<!-- 				url="/secured/core/listaEmpresas.jsf" -->
@@ -36,40 +36,40 @@
 			</p:submenu>
 			
 			<p:menuitem value="#{msgs.dashboard}"
-					url="/secured/dashboard.jsf" icon="fa fa-dashboard menuBarIcons"
+					url="/secured/dashboard.jsf" icon="fa fa-dashboard"
 					rendered="#{permissao.rendered('DASHBOARD')}" />
 			<p:menuitem value="#{msgs.resultados}"
-					url="/secured/listaResultados.jsf" icon="fa fa-file-o menuBarIcons"
+					url="/secured/listaResultados.jsf" icon="fa fa-file-o"
 					rendered="#{permissao.rendered('RESULTADO')}" />
 			<p:menuitem value="#{msgs.investimentos}"
-					url="/secured/listaInvestimentos.jsf" icon="fa fa-dollar menuBarIcons"
+					url="/secured/listaInvestimentos.jsf" icon="fa fa-dollar"
 					rendered="#{permissao.rendered('INVESTIMENTO')}" />
 			
 			<p:submenu label="#{msgs.cadastros}" 
 				rendered="#{permissao.rendered('CADASTROS')}">
 				
-				<p:menuitem value="#{msgs.ramosAtividades}" icon="fa fa-tasks menuBarIcons"
+				<p:menuitem value="#{msgs.ramosAtividades}" icon="fa fa-tasks"
 					url="/secured/core/listaRamosAtividades.jsf"
 					rendered="#{permissao.rendered('RAMO_ATIVIDADE') and permissao.empresaPrincipal}" />
 				<p:menuitem value="#{msgs.empresas}"
-					url="/secured/core/listaEmpresas.jsf" icon="fa fa-building-o menuBarIcons"
+					url="/secured/core/listaEmpresas.jsf" icon="fa fa-building-o"
 					rendered="#{permissao.rendered('EMPRESA') and permissao.empresaPrincipal}" />
 				<p:menuitem value="#{msgs.empresas}"
-					url="/secured/core/formEmpresas.jsf" icon="fa fa-building-o menuBarIcons"
+					url="/secured/core/formEmpresas.jsf" icon="fa fa-building-o"
 					rendered="#{permissao.rendered('EMPRESA') and not permissao.empresaPrincipal}"/>
 				<p:menuitem value="#{msgs.alunos}"
-					url="/secured/listaAlunos.jsf" icon="fa fa-user menuBarIcons"
+					url="/secured/listaAlunos.jsf" icon="fa fa-user"
 					rendered="#{permissao.rendered('ALUNO')}" />
-				<p:menuitem value="#{msgs.professores}" icon="fa fa-book menuBarIcons"
+				<p:menuitem value="#{msgs.professores}" icon="fa fa-book"
 					url="/secured/listaProfessores.jsf"
 					rendered="#{permissao.rendered('PROFESSOR')}" />
 				<p:menuitem value="#{msgs.grupos}"
-					url="/secured/listaGrupos.jsf" icon="fa fa-users menuBarIcons"
+					url="/secured/listaGrupos.jsf" icon="fa fa-users"
 					rendered="#{permissao.rendered('GRUPO')}" />
 				<p:menuitem value="#{msgs.periodos}"
 					url="/secured/listaPeriodos.jsf"
 					rendered="#{permissao.rendered('PERIODO')}" />
-				<p:menuitem value="#{msgs.rodadas}" icon="fa fa-retweet menuBarIcons"
+				<p:menuitem value="#{msgs.rodadas}" icon="fa fa-retweet"
 					url="/secured/listaRodadas.jsf"
 					rendered="#{permissao.rendered('RODADA')}" />
 				

@@ -26,7 +26,7 @@
 			</div>
 			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<h:selectOneMenu value="#{alunoListaBack.grupo}" id="grupo"
-					class="maxWidthSelect" converter="omnifaces.SelectItemsConverter" disabled="#{alunoListaBack.grupoUnico}">
+					converter="omnifaces.SelectItemsConverter" disabled="#{alunoListaBack.grupoUnico}">
 							<p:ajax listener="#{alunoListaBack.onGrupoChange}" update="empresa" />
 <!-- 						<f:selectItem noSelectionOption="true" -->
 <!-- 							itemLabel="#{msgs.selecione}" /> -->
@@ -41,7 +41,7 @@
 			</div>
 			<div class="ui-g-7 ui-md-9 ui-lg-10">
 				<h:selectOneMenu id="empresa"
-					value="#{alunoListaBack.empresa}" class="maxWidthSelect"
+					value="#{alunoListaBack.empresa}"
 					converter="omnifaces.SelectItemsConverter">
 					<f:selectItem noSelectionOption="true"
 						itemLabel="#{msgs.selecione}" />

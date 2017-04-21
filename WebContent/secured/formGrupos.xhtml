@@ -22,7 +22,7 @@
 					rendered="#{not grupoFormBack.isEmpresaPrincipal()}" />
 				<h:selectOneMenu value="#{grupoFormBack.grupo.periodo}" id="periodo"
 					rendered="#{grupoFormBack.isEmpresaPrincipal()}" required="true"
-					class="maxWidthSelect" converter="omnifaces.SelectItemsConverter">
+					converter="omnifaces.SelectItemsConverter">
 					<f:selectItem noSelectionOption="true"
 						itemLabel="#{msgs.selecione}" />
 					<f:selectItems value="#{periodosBack.todosPeriodos}" var="periodo"

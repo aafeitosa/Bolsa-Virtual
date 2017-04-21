@@ -24,7 +24,7 @@
 						<p:outputLabel class="control-label" for="idioma" value="#{msgs.idioma}:" />
 					</div>
 					<div class="col-md-10">
-						<p:selectOneMenu style="width:100%" id="idioma" value="#{loginBack.idioma}" converter="omnifaces.SelectItemsConverter" var="i">
+						<p:selectOneMenu id="idioma" value="#{loginBack.idioma}" converter="omnifaces.SelectItemsConverter" var="i">
 							<f:selectItems value="#{dialogIdiomaBack.idiomas}" var="idioma" itemLabel="#{idioma.nome}" itemValue="#{idioma}" />
 							<p:column>
 								<p:graphicImage value="/images/#{i.arquivo.nomeInterno}" width="48" height="48" />
