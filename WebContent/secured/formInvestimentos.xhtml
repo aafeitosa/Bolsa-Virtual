@@ -151,7 +151,7 @@
 						<p:cellEditor>
 							<f:facet name="output">
 								<h:commandLink id="investir" ajax="false"
-									rendered="#{empty investimento.valor}">
+									rendered="#{empty investimento.valor and investimentoFormBack.nroInvestimentos lt investimentoFormBack.rodada.numeroMaximoInvestimentos}">
 									<p:graphicImage library="imagens" name="money.png"
 										alt="#{msgs.investir}" style="float: right"/>
 									<f:ajax execute="@form" render="@none" />

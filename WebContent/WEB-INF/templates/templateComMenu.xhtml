@@ -191,7 +191,7 @@
 				<h:form>
 					<p:overlayPanel for="buttonConfig" hideEffect="fade" my="right top"
 						at="right bottom">
-						<p:menubar>
+						<p:menubar styleClass="ui-menu-config" >
 			 				<p:menuitem value="#{msgs.alterar_senha}" actionListener="#{dialogSenhaBack.trocaSenha}" 
 			 						update="usuarioSenhaForm" oncomplete="PF('alteraSenha').show();"> 
 			 					<f:param name="id" value="#{loginBack.idUsuarioLogado}" />
