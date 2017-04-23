@@ -7,7 +7,7 @@
 	
 	<h:form id="desktopMenu">
 		<p:menubar>
-			<p:submenu icon="fa fa-user-secret" label="#{msgs.administracao}"
+			<p:submenu icon="fa fa-wrench" label="#{msgs.administracao}"
 				rendered="#{permissao.rendered('ADMINISTRATIVO')}">
 	<!-- 			<p:menuitem value="#{msgs.empresas}" -->
 	<!-- 				url="/secured/core/listaEmpresas.jsf" -->
@@ -15,19 +15,19 @@
 	<!-- 			<p:menuitem value="#{msgs.empresas}" -->
 	<!-- 				url="/secured/core/formEmpresas.jsf" -->
 	<!-- 				rendered="#{permissao.rendered('EMPRESA') and not permissao.empresaPrincipal}"/> -->
-	 			<p:menuitem value="#{msgs.parametros}" 
+	 			<p:menuitem value="#{msgs.parametros}" icon="fa fa-gears"
 	 				url="/secured/core/listaParametros.jsf" 
 	 				rendered="#{permissao.rendered('PARAMETRO')}" /> 
 	<!-- 			<p:menuitem value="#{msgs.idiomas}" -->
 	<!-- 				url="/secured/core/listaIdiomas.jsf" -->
 	<!-- 				rendered="#{permissao.rendered('IDIOMA')}" /> -->
-				<p:menuitem value="#{msgs.traducoes}"
+				<p:menuitem value="#{msgs.traducoes}" icon="fa fa-language"
 					url="/secured/core/listaTraducoes.jsf"
 					rendered="#{permissao.rendered('TRADUCAO')}" />
-				<p:menuitem value="#{msgs.perfis}"
+				<p:menuitem value="#{msgs.perfis}" icon="fa fa-file-archive-o"
 					url="/secured/core/listaPerfis.jsf"
 					rendered="#{permissao.rendered('PERFIL')}" />
-				<p:menuitem value="#{msgs.usuarios}"
+				<p:menuitem value="#{msgs.usuarios}" icon="fa fa-user"
 					url="/secured/core/listaUsuarios.jsf"
 					rendered="#{permissao.rendered('USUARIO')}" />
 				<!-- <p:menuitem value="Bootsfaces"
@@ -45,7 +45,7 @@
 					url="/secured/listaInvestimentos.jsf" icon="fa fa-dollar"
 					rendered="#{permissao.rendered('INVESTIMENTO')}" />
 			
-			<p:submenu label="#{msgs.cadastros}" 
+			<p:submenu label="#{msgs.cadastros}" icon="fa fa-plus-square"
 				rendered="#{permissao.rendered('CADASTROS')}">
 				
 				<p:menuitem value="#{msgs.ramosAtividades}" icon="fa fa-tasks"
@@ -58,7 +58,7 @@
 					url="/secured/core/formEmpresas.jsf" icon="fa fa-building-o"
 					rendered="#{permissao.rendered('EMPRESA') and not permissao.empresaPrincipal}"/>
 				<p:menuitem value="#{msgs.alunos}"
-					url="/secured/listaAlunos.jsf" icon="fa fa-user"
+					url="/secured/listaAlunos.jsf" icon="fa fa-graduation-cap"
 					rendered="#{permissao.rendered('ALUNO')}" />
 				<p:menuitem value="#{msgs.professores}" icon="fa fa-book"
 					url="/secured/listaProfessores.jsf"
@@ -66,7 +66,7 @@
 				<p:menuitem value="#{msgs.grupos}"
 					url="/secured/listaGrupos.jsf" icon="fa fa-users"
 					rendered="#{permissao.rendered('GRUPO')}" />
-				<p:menuitem value="#{msgs.periodos}"
+				<p:menuitem value="#{msgs.periodos}" icon="fa fa-calendar"
 					url="/secured/listaPeriodos.jsf"
 					rendered="#{permissao.rendered('PERIODO')}" />
 				<p:menuitem value="#{msgs.rodadas}" icon="fa fa-retweet"

@@ -43,7 +43,7 @@
 						rendered="#{loginBack.usuarioLogado.administrador}"
 						style="color:red;" />
 		</div>
-		<div id="mobileMenu" class="ui-g-3">
+		<div id="mobileMenu" class="ui-g-3" style="text-align: right;">
 			<h:form id="mobileMenuButton">
 				<h:commandLink ajax="false" class="menuIcons">
 					<f:ajax execute="@form" render="@none" />
@@ -153,13 +153,13 @@
 			</p:overlayPanel>
 		</div>
 		<div class="ui-g-3" id="userInfoDesktop">
-			<div class="ui-g-12" style="text-align: right; padding-bottom: 0">
+			<div class="ui-g-12" style="text-align: right;">
 				<h5>
 					<h:outputText value="#{loginBack.nomeEmpresaUsuarioLogado} - #{loginBack.nomeUsuarioLogado}" />
 				</h5>
 			</div>
-			<div class="ui-g-12" style="text-align: right; padding-top: 0">
-				<h:form id="buttonConfig">
+			<div class="ui-g-12" style="text-align: right;">
+				<h:form style="display: inline-block">
 					<h:outputText value="#{msgs.periodo}:" 
 						style="text-align: right; padding-right: 5px; vertical-align: super" 
 						rendered="#{permissao.rendered('PERIODO_SELECIONAR_PERIODO')}"/>
@@ -171,7 +171,8 @@
 							itemLabel="#{periodo.nome}" itemValue="#{periodo}">
 						</f:selectItems>
 					</h:selectOneMenu>
-					
+				</h:form>
+				<h:form id="buttonConfig" style="display: inline-block">
 					<h:outputText id="textPeriodo" value="#{loginBack.periodo}" style="vertical-align: super"
 						rendered="#{not permissao.rendered('PERIODO_SELECIONAR_PERIODO')}"/>
 					<p:tooltip for="textPeriodo" value="#{msgs.periodo}" />
@@ -180,7 +181,8 @@
 					  	<i class="fa fa-gear fa-fw" />
 					</h:commandLink>
 					<p:tooltip for="configuracoes" value="#{msgs.configuracoes}" />
-
+				</h:form>
+				<h:form style="display: inline-block">
 					<p:commandLink id="logout" action="#{loginBack.logout}" ajax="false" class="menuIcons">
 						<i class="fa fa-power-off fa-fw" />
 					</p:commandLink>
@@ -190,7 +192,7 @@
 					<p:overlayPanel for="buttonConfig" hideEffect="fade" my="right top"
 						at="right bottom">
 						<p:menubar>
-			 				<p:menuitem value="#{msgs.clique_para_trocar_senha}" actionListener="#{dialogSenhaBack.trocaSenha}" 
+			 				<p:menuitem value="#{msgs.alterar_senha}" actionListener="#{dialogSenhaBack.trocaSenha}" 
 			 						update="usuarioSenhaForm" oncomplete="PF('alteraSenha').show();"> 
 			 					<f:param name="id" value="#{loginBack.idUsuarioLogado}" />
 		 					</p:menuitem>

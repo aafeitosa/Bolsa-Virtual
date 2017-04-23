@@ -53,14 +53,6 @@
 					<p:message for="empresa" />
 				</div>
 			</h:panelGroup>
-			<!-- 
-			<h:panelGroup rendered="#{investimentoListaBack.trocaGrupo}">
-				<div class="ui-g-12">
-					<p:commandButton value="#{msgs.pesquisar}"
-						actionListener="#{investimentoListaBack.pesquisar}" ajax="true"
-						update="@form" />
-				</div>
-			</h:panelGroup>  -->
 			<div class="ui-g-12">
 				<p:dataTable var="rodada" value="#{investimentoListaBack.dataModel}"
 					paginator="true" rows="#{investimentoListaBack.nroRegistrosPorPagina}"

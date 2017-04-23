@@ -16,12 +16,12 @@ label {
 }
 
 h1 {
-	color: #0073BB;
+	color: #03609a;
 	margin: 0;
 }
 
 h2 {
-	color: #0073BB;
+	color: #03609a;
 	margin: 0;
 }
 
@@ -29,13 +29,10 @@ h5 {
 	margin: 0;
 }
 
-.ui-icon {
-	background-image: url("icons.png?ln=imagens") !important
-}
-
-.ui-menuitem-icon {
-	color:#fff !important;
-	padding-right: 5px !important;
+select {
+	padding: 4px 0 4px !important;
+    -webkit-border-radius: 3px !important;
+    border-radius: 3px !important;
 }
 
 @media only screen and (max-width: 640px) {
@@ -43,10 +40,6 @@ h5 {
 	
 	#desktopMenu, #userInfoDesktop {
 		display: none !important
-	}
-	
-	#mobileMenu {
-		text-align: right;
 	}
 	
 	h1 {
@@ -65,9 +58,7 @@ h5 {
 	}
 	
 	h1 {
-		color: #0073BB;
 		font-size: 42px;
-		margin: 0;
 	}
 	
 	h2 {
@@ -81,7 +72,7 @@ h5 {
 
 #footer {
 	border-top: 5px #1D2858 solid;
-	background-color: #0074BC;
+	background-color: #03609a;
 	text-align: center;
 	color: #fff;
 	padding: 10px;
@@ -91,14 +82,44 @@ h5 {
 	z-index: 99;
 }
 
+.ui-state-default {
+	background-color: #fff !important;
+	box-shadow: none !important;
+}
+
+.ui-paginator-first, .ui-paginator-prev, .ui-paginator-next, .ui-paginator-last {
+    padding: 4px 6px !important;
+}
+
+.ui-button {
+	background: #fff !important;
+	color: #03609a !important;
+}
+
+.ui-icon-triangle-1-s {
+	background-image: url("icons.png?ln=imagens") !important;
+}
+
+.ui-menuitem-icon {
+	color:#fff !important;
+	padding-right: 5px !important;
+	border-radius: 0 !important;
+}
+
 .ui-commandlink, .menuIcons {
 	font-size:28px !important;
-	color:#2185d0 !important;
+	color:#0073BB !important;
 	text-decoration: none !important;
 }
 
+.ui-widget-header, .ui-datatable thead th {
+    color: #fff !important;
+    background: #0073BB !important;
+    text-shadow: none !important;
+}
+
 .ui-menu {
-	background-color: #0074BC !important;
+	background-color: #03609a !important;
 	border: 0 !important;
 	border-bottom: 5px #1D2858 solid !important;
 	padding: 0 !important;
@@ -106,7 +127,7 @@ h5 {
 }
 
 .ui-menuitem {
-	background-color: #0074BC !important;
+	background-color: #03609a !important;
 }
 
 .ui-menuitem-text {
