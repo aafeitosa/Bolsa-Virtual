@@ -248,7 +248,9 @@ public class ResultadoFormBacking extends AbstractBacking {
 	}
 
 	public void onRodadaSelect(AjaxBehaviorEvent event) {
-
+		if(rodada == null) {
+			return;
+		}
 		this.resultadosDtos = filtraResultados(rodada);
 
 		// System.out.println("rodada " + rodada);

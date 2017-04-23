@@ -15,46 +15,53 @@
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 </h:head>
 
-<h:body styleClass="login">
-
-	<div class="centralizada">
-		<div class="logo">
-			<a href="index.html"> 
-				<h:graphicImage library="imagens" name="logo_ucs.png" alt="#{msgs.nome_cliente_software}" />
-			</a>
-		</div>
-
-		<div class="mensagens">
-			<p:messages id="messages" styleClass="mensagens" showDetail="true" autoUpdate="true"
-				closable="true" />
-		</div>
-
-		<p:fieldset legend="#{msgs.identifiquese}">
-
-			<!-- BEGIN LOGIN FORM -->
-			<h:form class="login-form">
-
-				<p:panelGrid columns="2">
-
-					<p:outputLabel>#{msgs.login_user}:</p:outputLabel>
-					<p:inputText value="#{loginBack.user}" type="text"
-						style="width:440px" autocomplete="off" placeholder="Usuário"
-						name="username" />
-
-					<p:outputLabel>#{msgs.login_pass}:</p:outputLabel>
-					<p:inputText value="#{loginBack.password}" type="password"
-						style="width:440px" autocomplete="off" placeholder="Senha"
-						name="password" />
-
-				</p:panelGrid>
-
-				<p:spacer height="30" />
-
-				<p:commandButton type="submit" value="#{msgs.entrar}"
-					action="#{loginBack.login()}" ajax="false" />
-
-			</h:form>
-		</p:fieldset>
+<h:body>
+	<h:outputStylesheet library="css" name="conteudo.css" />
+	<div class="ui-g-3"/>
+	<div class="ui-g-1">
+			<p:graphicImage library="imagens" name="logo_ucs.png"
+					alt="#{msgs.nome_cliente_software}" style="max-width: 100%" />
 	</div>
+	<div class="ui-g-4">
+		<h1>
+			<h:outputText value="#{msgs.nome_software}" />
+		</h1>
+	</div>
+	<div class="ui-g-4" />
+	<div class="ui-g-12">
+		<p:messages id="messages" styleClass="mensagens" showDetail="true" autoUpdate="true"
+			closable="true" />
+	</div>
+	<!-- BEGIN LOGIN FORM -->
+	<h:form class="login-form">
+		<div class="ui-g-3" />
+		<div class="ui-g-2">
+			<p:outputLabel for="usuario" value="#{msgs.login_user}:" />
+			<br />
+		</div>
+		<div class="ui-g-3">
+			<p:inputText value="#{loginBack.user}" type="text" id="usuario"
+				autocomplete="off" placeholder="Usuário" name="username" />
+		</div>
+		<div class="ui-g-4" />
+		
+		<div class="ui-g-3" />
+		<div class="ui-g-2">
+			<p:outputLabel for="senha" value="#{msgs.login_pass}:" />
+		</div>
+		<div class="ui-g-3">
+			<p:inputText value="#{loginBack.password}" type="password" id="senha"
+				autocomplete="off" placeholder="Senha" name="password" />
+		</div>
+		<div class="ui-g-4" />
+		
+		<div class="ui-g-3" />
+		<div class="ui-g-5">
+			<p:commandButton type="submit" value="#{msgs.entrar}"
+				action="#{loginBack.login()}" ajax="false" />
+		</div>
+		<div class="ui-g-4" />
+
+	</h:form>
 </h:body>
 </html>

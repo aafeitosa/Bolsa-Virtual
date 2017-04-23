@@ -45,7 +45,7 @@
 							itemLabel="#{msgs.selecione}" />
 						<f:selectItems value="#{investimentoFormBack.empresas}"
 							var="empresa" itemLabel="#{empresa.nome}" itemValue="#{empresa}" />
-						<p:ajax update="investimentosTable resultadoAnterior valor1 valor3"
+						<p:ajax update="investimentosTable resultadoAnterior valor1 valor3 numeroMaximoInvestimentos"
 							listener="#{investimentoFormBack.onEmpresaSelect}"
 							process="@this" />
 					</h:selectOneMenu>
@@ -150,15 +150,14 @@
 						</f:facet>
 						<p:cellEditor>
 							<f:facet name="output">
-								<h:commandLink id="investir" ajax="false"
-									rendered="#{empty investimento.valor and investimentoFormBack.nroInvestimentos lt investimentoFormBack.rodada.numeroMaximoInvestimentos}">
+								<h:commandLink id="investir"
+									rendered="#{empty investimento.valor}">
 									<p:graphicImage library="imagens" name="money.png"
 										alt="#{msgs.investir}" style="float: right"/>
-									<f:ajax execute="@form" render="@none" />
+									<f:ajax execute="@form" process="@this" update="investimentosTable"/>
 								</h:commandLink>
 								<p:tooltip id="investirToolTip" for="investir"
 									value="#{msgs.investir}" trackMouse="true" />
-
 
 								<h:outputText value="#{investimento.valor}" rendered="#{not empty investimento.valor}" style="float: right">
 									<f:convertNumber type="currency" currencySymbol="R$" />
